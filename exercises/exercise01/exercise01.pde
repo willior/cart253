@@ -1,24 +1,25 @@
-final int CIRCLE_SPEED = 7; // creates the variable from which the circle's speed is initialized (7 pixels/frame?)
-final color NO_CLICK_FILL_COLOR = color(250, 100, 100); // creates a variable for the circles' colour (pale red)
-final color CLICK_FILL_COLOR = color(100, 100, 250); // creates a variable for the circles' colour (pale blue)
-final color BACKGROUND_COLOR = color(250, 150, 150); // sets the variable for the background colour (an even paler red)
-final color STROKE_COLOR = color(250, 150, 150); // sets the variable for the lines' colour (same pale red as background)
-final int CIRCLE_SIZE = 50; // sets a variable from which the circles' size is initialized
+final int CIRCLE_SPEED = 7; // creates the constant from which the circle's speed is initialized (7 pixels/frame?)
+final color NO_CLICK_FILL_COLOR = color(250, 100, 100); // creates a constant for the circles' colour (pale red)
+final color CLICK_FILL_COLOR = color(100, 100, 250); // creates a constant for the circles' colour (pale blue)
+final color BACKGROUND_COLOR = color(250, 150, 150); // sets the constant for the background colour (an even paler red)
+final color STROKE_COLOR = color(250, 150, 150); // sets the constant for the lines' colour (same pale red as background)
+final int CIRCLE_SIZE = 50; // sets a constant from which the circles' size is initialized
 
-int circleX; // creates the variable circleX
-int circleY; // creates the variable circleY
-int circleVX; // creates the variable circleVX
-int circleVY; // creates the variable circleVY
+int circleX; // creates the variable circleX, which will be used as its position on the X axis
+int circleY; // creates the variable circleY, which will be used as its position on the Y axis
+int circleVX; // creates the variable circleVX, which will be used as its velocity along the X axis
+int circleVY; // creates the variable circleVY, which will be used as its velocity along the Y axis
+int currentCircleSize;
 
 void setup() { // setup function; initializes settings for our program
   size(640, 480); // sets the size (X, Y) of the window in pixels
   circleX = width/2; // sets the value for the variable circleX
   circleY = height/2; // sets the value for the variable circleY
-  circleVX = CIRCLE_SPEED; // sets the value for the variable circleVX, which had been initialized as 7 in the CIRCLE_SPEED variable
+  circleVX = CIRCLE_SPEED; // sets the value for the variable circleVX, which had been initialized as 7 in the constant CIRCLE_SPEED
   circleVY = CIRCLE_SPEED; // sets the value for the variable circleVY ...
-  stroke(STROKE_COLOR); // fetches the colour of the circles' lines from the initialized variable STROKE_COLOR
-  fill(NO_CLICK_FILL_COLOR); // fetches the colour of the circles' fill colour from the initialized variable NO_CLICK_FILL_COLOR
-  background(BACKGROUND_COLOR); // fetches the colour of the background from the initialized variable BACKGROUND_COLOR
+  stroke(STROKE_COLOR); // fetches the colour of the circles' lines from the initialized constant STROKE_COLOR
+  fill(NO_CLICK_FILL_COLOR); // fetches the colour of the circles' fill colour from the initialized constant NO_CLICK_FILL_COLOR
+  background(BACKGROUND_COLOR); // fetches the colour of the background from the initialized constant BACKGROUND_COLOR
 }
 
 void draw() { // initializes our draw loop
@@ -27,15 +28,15 @@ void draw() { // initializes our draw loop
       // if statement that calculates the distance between the moving circle and the mouse cursor...
       // ... to determine whether the cursor is within the area occupied by a circle in the current draw loop
       
-    fill(CLICK_FILL_COLOR); // if it is, fetches the fill colour of the circle from variable CLICK_FILL_COLOR (pale blue)
+    fill(CLICK_FILL_COLOR); // if it is, fetches the fill colour of the circle from constant CLICK_FILL_COLOR (pale blue)
   }
 
   else {
-    fill(NO_CLICK_FILL_COLOR); // if it is not, fetches the fill colour of the circle from variable NO_CLICK_FILL_COLOR (pale red)
+    fill(NO_CLICK_FILL_COLOR); // if it is not, fetches the fill colour of the circle from constant NO_CLICK_FILL_COLOR (pale red)
   }
   ellipse(circleX, circleY, CIRCLE_SIZE, CIRCLE_SIZE); // draws the circle
                                                        // its position (X,Y coordinates) set by the variables circleX and circleY 
-                                                       // its size in pixels (width, height) by the variable CIRCLE_SIZE
+                                                       // its size in pixels (width, height) by the constant CIRCLE_SIZE
                                                        
   circleX += circleVX; // adds the value of the variable circleVX to the variable circleX, effectively changing its position on the X axis
   circleY += circleVY; // adds the value of the variable circleVY to the variable circleY, effectively changing its position on the Y axis
