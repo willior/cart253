@@ -3,13 +3,13 @@ final color NO_CLICK_FILL_COLOR = color(250, 100, 100); // creates a constant fo
 final color CLICK_FILL_COLOR = color(100, 100, 250); // creates a constant for the circles' colour (pale blue)
 final color BACKGROUND_COLOR = color(250, 150, 150); // sets the constant for the background colour (an even paler red)
 final color STROKE_COLOR = color(250, 150, 150); // sets the constant for the lines' colour (same pale red as background)
-final int CIRCLE_SIZE = 50; // sets a constant from which the circles' size is initialized
+int CIRCLE_SIZE = 50; // sets a constant from which the circles' size is initialized
 
 int circleX; // creates the variable circleX, which will be used as its position on the X axis
 int circleY; // creates the variable circleY, which will be used as its position on the Y axis
 int circleVX; // creates the variable circleVX, which will be used as its velocity along the X axis
 int circleVY; // creates the variable circleVY, which will be used as its velocity along the Y axis
-int currentCircleSize;
+int CIRCLE_SIZEmodulator = 1;
 
 void setup() { // setup function; initializes settings for our program
   size(640, 480); // sets the size (X, Y) of the window in pixels
@@ -23,6 +23,18 @@ void setup() { // setup function; initializes settings for our program
 }
 
 void draw() { // initializes our draw loop
+
+if (CIRCLE_SIZEmodulator <= 50 && CIRCLE_SIZE < 50){
+  CIRCLE_SIZE -= CIRCLE_SIZEmodulator;
+}
+
+if (CIRCLE_SIZEmodulator >= 1 && CIRCLE_SIZE >= 50){
+  CIRCLE_SIZE += CIRCLE_SIZEmodulator;
+}
+else {CIRCLE_SIZE -= CIRCLE_SIZEmodulator;
+}
+
+
     if (dist(mouseX, mouseY, circleX, circleY) < CIRCLE_SIZE/2) {
       
       // if statement that calculates the distance between the moving circle and the mouse cursor...
