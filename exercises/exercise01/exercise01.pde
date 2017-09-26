@@ -1,5 +1,5 @@
-int CIRCLE_SPEED = 5;
-color NO_CLICK_FILL_COLOR = color(0, 0, 0, 64); // creates a variable for the circles' colour
+int CIRCLE_SPEED = 4;
+color NO_CLICK_FILL_COLOR = color(0, 0, 0, 32); // creates a variable for the circles' colour
 color CLICK_FILL_COLOR = color(64, 0, 0); // creates a variable for the circles' colour
 color BACKGROUND_COLOR = color(0, 0, 0); // sets the variable for the background colour
 color STROKE_COLOR = color(250, 250, 250); // sets the variable for the lines' colour
@@ -8,7 +8,7 @@ int circleX; // creates the variable circleX, which will be used as its position
 int circleY; // creates the variable circleY, which will be used as its position on the Y axis
 int circleVX; // creates the variable circleVX, which will be used as its velocity along the X axis
 int circleVY; // creates the variable circleVY, which will be used as its velocity along the Y axis
-int CIRCLE_SIZEmodulator = 3; // creates a number from which CIRCLE_SIZE can be modulated
+int CIRCLE_SIZEmodulator = 2; // creates a number from which CIRCLE_SIZE can be modulated
                               // *** change this from anything from 1 - 50 to create unique & interesting visuals
 int CIRCLE_SIZEmax = 100; // sets maximum size in pixels for the circle
 int CIRCLE_SIZEmin = 5; // sets minimum size in pixels for the circle
