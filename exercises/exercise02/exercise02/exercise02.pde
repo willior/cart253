@@ -1,5 +1,5 @@
 // initializes all the colours and integer variables that will be used in the program
-color backgroundColor = color(64,0,0,1);
+color backgroundColor = color(0,0,0,1);
 
 int numStatic = 1000;          
 int staticSizeMin = 1;
@@ -48,6 +48,7 @@ void setupBall() {
   ballVX = ballSpeed;
   ballVY = ballSpeed;
   ballSpeedMod = 0;
+  scoreMod = 0;
 }
 
 // initializes the draw loop: draws background, noise
@@ -116,17 +117,17 @@ void handleBallHitPaddle() {
   if (ballOverlapsPaddle()) {
     ballY = paddleY - paddleHeight/2 - ballSize/2;
     
-    // added code to increase the ball speed modulator each time the ball is successfully deflected
-    ballSpeedMod++;
+    // added code to increase the ball speed by 1 each time the ball is successfully deflected
+    ballSpeedMod = 1;
     ballVY += ballSpeedMod;
     ballVX += ballSpeedMod;
     ballVY = -ballVY;
     
     // added scoring system:
     // the faster the ball gets, the more points the player receives for successfully deflections
-    // prints current score on successful deflection;
-    scoreMod = ballSpeedMod;
-    score += ballSpeedMod;
+    // prints current score on successful deflection
+    scoreMod += ballSpeedMod;
+    score += scoreMod;
     println (score);
   }
 }
