@@ -23,7 +23,7 @@ int ballSize = 16;
 int ballSpeedMod;
 color ballColor = color(255);
 int score = 0;
-int scoreMod = 0;
+int scoreMod;
 int highScore;
 
 // setup function to initialize the window size and paddle/ball function behaviours
@@ -62,7 +62,6 @@ void draw() {
 
   drawPaddle();
   drawBall();
-  println (score);
 }
 
 // function that draws the visual noise effect using a variety of random functions
@@ -122,9 +121,13 @@ void handleBallHitPaddle() {
     ballVY += ballSpeedMod;
     ballVX += ballSpeedMod;
     ballVY = -ballVY;
-    if (ballSpeedMod >= 3){
-      score++;
-    } 
+    
+    // added scoring system:
+    // the faster the ball gets, the more points the player receives for successfully deflections
+    // prints current score on successful deflection;
+    scoreMod = ballSpeedMod;
+    score += ballSpeedMod;
+    println (score);
   }
 }
 
@@ -150,6 +153,15 @@ void handleBallOffBottom() {
     ballSpeedMod = 0;
     ballVX = ballSpeed;
     ballVY = ballSpeed;
+    
+    // sets high score
+    if (score > highScore){
+      highScore = score;
+    }
+    
+    // prints current high score when loss
+    println(highScore);
+    score = 0;
   }
 }
 
