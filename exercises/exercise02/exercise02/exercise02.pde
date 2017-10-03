@@ -1,10 +1,10 @@
 // initializes all the colours and integer variables that will be used in the program
-color backgroundColor = color(0);    
+color backgroundColor = color(64,0,0,1);
 
 int numStatic = 1000;          
 int staticSizeMin = 1;
 int staticSizeMax = 3;
-color staticColor = color(200);
+color staticColor = color(128);
 
 int paddleX;
 int paddleY;
@@ -22,6 +22,9 @@ int ballSpeed = 5;
 int ballSize = 16;
 int ballSpeedMod;
 color ballColor = color(255);
+int score = 0;
+int scoreMod = 0;
+int highScore;
 
 // setup function to initialize the window size and paddle/ball function behaviours
 void setup() {
@@ -48,7 +51,7 @@ void setupBall() {
 }
 
 // initializes the draw loop: draws background, noise
-// UPDATES the positions of the Paddle and Ball, then draws them
+// UPDATES the positions of the Paddle and Ball (by way of the update functions), then draws them
 void draw() {
   background(backgroundColor);
 
@@ -59,6 +62,7 @@ void draw() {
 
   drawPaddle();
   drawBall();
+  println (score);
 }
 
 // function that draws the visual noise effect using a variety of random functions
@@ -118,6 +122,9 @@ void handleBallHitPaddle() {
     ballVY += ballSpeedMod;
     ballVX += ballSpeedMod;
     ballVY = -ballVY;
+    if (ballSpeedMod >= 3){
+      score++;
+    } 
   }
 }
 
