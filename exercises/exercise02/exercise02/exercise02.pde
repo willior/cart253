@@ -25,7 +25,8 @@ int maxVX = 20;
 int maxVY = 20;
 int ballSpeed = 5;
 int ballSize = 16;
-int ballSpeedMod;
+float ballSpeedModX;
+float ballSpeedModY;
 color ballColor = color(255);
 color ballColorDanger = color(255,0,0);
 int score = 0;
@@ -54,7 +55,8 @@ void setupBall() {
   ballY = height/2;
   ballVX = ballSpeed;
   ballVY = ballSpeed;
-  ballSpeedMod = 0;
+  ballSpeedModX = 0;
+  ballSpeedModY = 0;
   scoreMod = 0;
 }
 
@@ -137,21 +139,26 @@ void handleBallHitPaddle() {
     ballY = paddleY - paddleHeight/2 - ballSize/2;
     
     // added code to increase the ball speed by 1 each time the ball is successfully deflected
-    ballSpeedMod = 1;
-    ballVY += ballSpeedMod;
+    
+    float ballSpeedRandX = random (-3, 3);
+       ballSpeedModX = (ballSpeedRandX + 1);
+    float ballSpeedRandY = random (-3, 3);
+       ballSpeedModY = (ballSpeedRandY + 1);
+    ballVY += ballSpeedModY;
     if (ballVX > 0 ){
-      ballVX += ballSpeedMod;
+      ballVX += ballSpeedModX;
     }
     else{
-      ballVX -= ballSpeedMod;
+      ballVX -= ballSpeedModX;
     }
+
     ballVY = -ballVY;
     
     // added scoring system:
     // the faster the ball gets, the more points the player receives for successfully deflections
     // prints current score on successful deflection
     // made the score into a factor of 1000 because bigger numbers = more fun
-    scoreMod += (ballSpeedMod * 1000);
+    scoreMod += (counter * 1000);
     score += scoreMod;
     println (score);
     
@@ -187,7 +194,8 @@ void handleBallOffBottom() {
     
     // CHANGED:
     // resets the ball speed to default
-    ballSpeedMod = 0;
+    ballSpeedModX = 0;
+    ballSpeedModY = 0;
     ballVX = ballSpeed;
     ballVY = ballSpeed;
     
