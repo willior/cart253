@@ -12,7 +12,7 @@ int staticMod = 10;
 int paddleX;
 int paddleY;
 int paddleVX;
-int paddleSpeed = 10;
+int paddleSpeed = 17;
 int paddleWidth = 128;
 int paddleHeight = 16;
 color paddleColor = color(255);
@@ -136,7 +136,13 @@ void handleBallHitPaddle() {
     println (score);
     
     // static modulation
+    if (staticWhite <= 246){
     staticWhite += staticMod;
+    numStatic += 1000;
+    }
+    else {
+      numStatic += 1000;
+    }
   }
 }
 
@@ -172,8 +178,9 @@ void handleBallOffBottom() {
     score = 0;
     scoreMod = 0;
     
-    //resets staticWhite;
+    //resets static;
     staticWhite = 125;
+    numStatic = 1000;
   }
 }
 
