@@ -1,10 +1,13 @@
 // initializes all the colours and integer variables that will be used in the program
-color backgroundColor = color(0,0,0,1);
+color backgroundColor = color(0,0,0,0);
+int backgroundColorMod = 5;
 
 int numStatic = 1000;          
 int staticSizeMin = 1;
-int staticSizeMax = 3;
-color staticColor = color(128);
+int staticSizeMax = 5;
+int staticWhite = 125;
+color staticColor = color(staticWhite);
+int staticMod = 10;
 
 int paddleX;
 int paddleY;
@@ -115,6 +118,7 @@ void drawBall() {
 // function that determines the behaviour of the ball when it hits the paddle
 void handleBallHitPaddle() {
   if (ballOverlapsPaddle()) {
+
     ballY = paddleY - paddleHeight/2 - ballSize/2;
     
     // added code to increase the ball speed by 1 each time the ball is successfully deflected
@@ -126,9 +130,12 @@ void handleBallHitPaddle() {
     // added scoring system:
     // the faster the ball gets, the more points the player receives for successfully deflections
     // prints current score on successful deflection
-    scoreMod += ballSpeedMod;
+    scoreMod += (ballSpeedMod * 1000);
     score += scoreMod;
     println (score);
+    
+    // static modulation
+    staticWhite += staticMod;
   }
 }
 
@@ -142,8 +149,7 @@ boolean ballOverlapsPaddle() {
   return false;
 }
 
-
-// function that resets the position of the ball to the center of the window when it hits the bottom
+// function that resets the position of the ball to the center of the window when it hits the bottom (failure)
 void handleBallOffBottom() {
   if (ballOffBottom()) {
     ballX = width/2;
@@ -156,13 +162,17 @@ void handleBallOffBottom() {
     ballVY = ballSpeed;
     
     // sets high score
-    if (score > highScore){
+    if (score >= highScore){
       highScore = score;
     }
     
     // prints current high score when loss
     println(highScore);
     score = 0;
+    scoreMod = 0;
+    
+    //resets staticMod;
+    staticMod = 0;
   }
 }
 
