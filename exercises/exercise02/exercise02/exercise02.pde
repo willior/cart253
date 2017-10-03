@@ -21,13 +21,17 @@ int ballX;
 int ballY;
 int ballVX;
 int ballVY;
+int maxVX = 20;
+int maxVY = 20;
 int ballSpeed = 5;
 int ballSize = 16;
 int ballSpeedMod;
 color ballColor = color(255);
+color ballColorDanger = color(255,0,0);
 int score = 0;
 int scoreMod;
 int highScore;
+int counter = 0;
 
 // setup function to initialize the window size and paddle/ball function behaviours
 void setup() {
@@ -54,8 +58,8 @@ void setupBall() {
   scoreMod = 0;
 }
 
-// initializes the draw loop: draws background, noise
-// UPDATES the positions of the Paddle and Ball (by way of the update functions), then draws them
+// initializes the draw loop: draws background, noise, paddle and ball
+// UPDATES the positions of the Paddle and Ball (by way of the update functions) before drawing them
 void draw() {
   background(backgroundColor);
 
@@ -92,6 +96,7 @@ void updatePaddle() {
 void updateBall() {
   ballX += ballVX;
   ballY += ballVY;
+  }
   
   handleBallHitPaddle();
   handleBallHitWall();
@@ -108,10 +113,20 @@ void drawPaddle() {
 
 // function that draws the ball
 void drawBall() {
+  
+  // added feature where the ball turns a bright red when in the lower most quartile
+    if (ballY >= (height * 0.75)){
+      rectMode(CENTER);
+      noStroke();
+      fill(ballColorDanger);
+      rect(ballX, ballY, ballSize, ballSize);
+    }
+    else{
   rectMode(CENTER);
   noStroke();
   fill(ballColor);
   rect(ballX, ballY, ballSize, ballSize);
+    }
 }
 
 //CHANGED:
@@ -136,13 +151,16 @@ void handleBallHitPaddle() {
     println (score);
     
     // static modulation
-    if (staticWhite <= 246){
+    if (staticWhite <= 245){
     staticWhite += staticMod;
     numStatic += 1000;
     }
+    
+    //prevents staticWhite from exceeding 255
     else {
       numStatic += 1000;
     }
+    counter++;
   }
 }
 
@@ -181,6 +199,9 @@ void handleBallOffBottom() {
     //resets static;
     staticWhite = 125;
     numStatic = 1000;
+    
+    //resets counter;
+    counter = 0;
   }
 }
 
@@ -204,6 +225,7 @@ void handleBallHitWall() {
     ballVY = -ballVY;
   }
 }
+  
 
 // function initializing controls, ie. when the left or right arrows are pressed
 void keyPressed() {
