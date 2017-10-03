@@ -4,7 +4,7 @@ int backgroundColorMod = 5;
 
 int numStatic = 1000;          
 int staticSizeMin = 1;
-int staticSizeMax = 5;
+int staticSizeMax = 3;
 int staticWhite = 125;
 color staticColor = color(staticWhite);
 int staticMod = 10;
@@ -96,7 +96,7 @@ void updatePaddle() {
 void updateBall() {
   ballX += ballVX;
   ballY += ballVY;
-  }
+  
   
   handleBallHitPaddle();
   handleBallHitWall();
@@ -139,7 +139,12 @@ void handleBallHitPaddle() {
     // added code to increase the ball speed by 1 each time the ball is successfully deflected
     ballSpeedMod = 1;
     ballVY += ballSpeedMod;
-    ballVX += ballSpeedMod;
+    if (ballVX > 0 ){
+      ballVX += ballSpeedMod;
+    }
+    else{
+      ballVX -= ballSpeedMod;
+    }
     ballVY = -ballVY;
     
     // added scoring system:
@@ -211,6 +216,7 @@ boolean ballOffBottom() {
 }
 
 // function that declares the behaviour of how the ball bounces off the boundaries
+// inverts VX or VY values when colliding with boundaries
 void handleBallHitWall() {
   if (ballX - ballSize/2 < 0) {
     ballX = 0 + ballSize/2;
