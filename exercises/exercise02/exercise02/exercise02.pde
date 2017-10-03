@@ -44,6 +44,7 @@ void setupBall() {
   ballY = height/2;
   ballVX = ballSpeed;
   ballVY = ballSpeed;
+  ballSpeedMod = 0;
 }
 
 // initializes the draw loop: draws background, noise
@@ -112,17 +113,11 @@ void handleBallHitPaddle() {
   if (ballOverlapsPaddle()) {
     ballY = paddleY - paddleHeight/2 - ballSize/2;
     
-    // added code to increase the vertical speed by 1 each time the ball is successfully deflected
-    ballVY++;
+    // added code to increase the ball speed modulator each time the ball is successfully deflected
+    ballSpeedMod++;
+    ballVY += ballSpeedMod;
+    ballVX += ballSpeedMod;
     ballVY = -ballVY;
-    
-    // added code to increase the horizontal speed by 1 each time the ball is successfully deflected
-    if (ballVX < 0){
-      ballVX--;
-    }
-    else{
-      ballVX++;
-    }
   }
 }
 
@@ -136,11 +131,18 @@ boolean ballOverlapsPaddle() {
   return false;
 }
 
+
 // function that resets the position of the ball to the center of the window when it hits the bottom
 void handleBallOffBottom() {
   if (ballOffBottom()) {
     ballX = width/2;
     ballY = height/2;
+    
+    // CHANGED:
+    // resets the ball speed to default
+    ballSpeedMod = 0;
+    ballVX = ballSpeed;
+    ballVY = ballSpeed;
   }
 }
 
@@ -149,7 +151,7 @@ boolean ballOffBottom() {
   return (ballY - ballSize/2 > height);
 }
 
-// function that declares the behaviour of how the ball bounces off the right and left sides
+// function that declares the behaviour of how the ball bounces off the boundaries
 void handleBallHitWall() {
   if (ballX - ballSize/2 < 0) {
     ballX = 0 + ballSize/2;
