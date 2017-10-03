@@ -160,7 +160,7 @@ void handleBallHitPaddle() {
     // the faster the ball gets, the more points the player receives for successfully deflections
     // prints current score on successful deflection
     // made the score into a factor of 1000 because bigger numbers = more fun
-    scoreMod += (counter * 1000);
+    scoreMod = (counter * 1000);
     score += scoreMod;
     println (score);
     
@@ -206,7 +206,7 @@ void handleBallOffBottom() {
       highScore = score;
     }
     
-    // prints current high score when loss
+    // prints current high score when loss, resets score and scoreMod
     println(highScore);
     score = 0;
     scoreMod = 0;
