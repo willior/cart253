@@ -20,6 +20,7 @@ int ballVX;
 int ballVY;
 int ballSpeed = 5;
 int ballSize = 16;
+int ballSpeedMod;
 color ballColor = color(255);
 
 // setup function to initialize the window size and paddle/ball function behaviours
