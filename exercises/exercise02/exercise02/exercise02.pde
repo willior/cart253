@@ -74,7 +74,7 @@ void drawStatic() {
    float x = random(0,width);
    float y = random(0,height);
    float staticSize = random(staticSizeMin,staticSizeMax);
-   fill(staticColor);
+   fill(staticWhite);
    rect(x,y,staticSize,staticSize);
   }
 }
@@ -130,6 +130,7 @@ void handleBallHitPaddle() {
     // added scoring system:
     // the faster the ball gets, the more points the player receives for successfully deflections
     // prints current score on successful deflection
+    // made the score into a factor of 1000 because bigger numbers = more fun
     scoreMod += (ballSpeedMod * 1000);
     score += scoreMod;
     println (score);
@@ -171,8 +172,8 @@ void handleBallOffBottom() {
     score = 0;
     scoreMod = 0;
     
-    //resets staticMod;
-    staticMod = 0;
+    //resets staticWhite;
+    staticWhite = 125;
   }
 }
 
