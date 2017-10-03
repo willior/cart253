@@ -138,11 +138,11 @@ void handleBallHitPaddle() {
 
     ballY = paddleY - paddleHeight/2 - ballSize/2;
     
-    // added code to increase the ball speed by 1 each time the ball is successfully deflected
-    
-    float ballSpeedRandX = random (-3, 3);
+    // CHANGED: added randomness factors to both X and Y axes
+    // the ball has a chance to diminish in speed, however most of the time it will increase
+    float ballSpeedRandX = random (-2, 2);
        ballSpeedModX = (ballSpeedRandX + 1);
-    float ballSpeedRandY = random (-3, 3);
+    float ballSpeedRandY = random (-2, 2);
        ballSpeedModY = (ballSpeedRandY + 1);
     ballVY += ballSpeedModY;
     if (ballVX > 0 ){
