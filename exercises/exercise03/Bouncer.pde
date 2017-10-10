@@ -4,12 +4,16 @@ class Bouncer {
   
  int x;
  int y;
- int vx;
- int vy;
+ //CHANGED: vx and vy to floats in order to be modulated via a random() function
+ float vx;
+ float vy;
  int size;
  color fillColor;
  color defaultColor;
  color hoverColor;
+ 
+ //added variable randomBounce which will be the factor from which vx and vx are changed
+ float randomBounce;
  
  // declares the properties of the class Bouncer by fetching the values entered when the new objects are created (in exercise03)
  // and putting them in temp... variables, from which the variables declared above (x,y,vx,vy etc.) are given values
@@ -38,13 +42,24 @@ class Bouncer {
  // CONSTRAINS the values of x & y (ie. the ball's current position) to a MINIMUM of half its size
  // and a MAXIMUM of the window's length/height minus half its size
  void handleBounce() {
+   
+   // CHANGED: added a random function to apply a degree of randomness to vx and vy when the ball "bounces"
+   randomBounce=random(2);
+   
    if (x - size/2 < 0 || x + size/2 > width) {
+     
+    // adds randomBounce to vx
+    vx += randomBounce;
     vx = -vx; 
    }
    
    if (y - size/2 < 0 || y + size/2 > height) {
+     // adds randomBounce to vy
+     vy += randomBounce;
      vy = -vy;
    }
+
+   
    
    x = constrain(x,size/2,width-size/2);
    y = constrain(y,size/2,height-size/2);
