@@ -21,7 +21,7 @@ class Bouncer {
  
  // declares the properties of the class Bouncer by fetching the values entered when the new objects are created (in exercise03)
  // and putting them in temp... variables, from which the variables declared above (x,y,vx,vy etc.) are given values
- // CHANGED: added properties for sizeMax and sizeMin
+ // CHANGED: added properties for sizeMax, sizeMin and sizeMod
  Bouncer(int tempX, int tempY, int tempVX, int tempVY, int tempSize, int tempSizeMax, int tempSizeMin, int tempSizeMod, color tempDefaultColor, color tempHoverColor) {
    x = tempX;
    y = tempY;
@@ -37,8 +37,8 @@ class Bouncer {
  }
  
  // CHANGED: added method that modifies the size of the balls by the variable sizeMod each each time it is run (ie. by mouse clicked)
+ // sizeMod is used to either add or subtract a value (10) from size depending on whether sizeMin or sizeMax has been reached/exceeded
  // first checks to see if the size is less than sizeMin; inverts sizeMod if it is
- // sizeMod is used to either add or subtract 10 from size depending on whether sizeMin or sizeMax has been reached
  // second checks to see if size is less than sizeMax; adds sizeMod to size if true
  // else it inverts sizeMod, then adds sizeMod to size
  void click(){
