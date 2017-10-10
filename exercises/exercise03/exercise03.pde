@@ -22,12 +22,14 @@ color backgroundColor = color(0);
 
 Bouncer bouncer;
 Bouncer bouncer2;
+Mover mover;
 
 void setup() {
   size(640,480);
   background(backgroundColor);
-  bouncer = new Bouncer(width/2,height/2,2,2,50,100,11,10,color(150,0,0,50),color(255,0,0,50));
+   bouncer = new Bouncer(width/2,height/2,2,2,50,100,11,10,color(150,0,0,50),color(255,0,0,50));
   bouncer2 = new Bouncer(width/2,height/2,-2,2,50,100,11,10,color(0,0,150,50),color(0,0,255,50));
+       mover = new Mover(width/2,height/2,4,4,50,50,11,-10,color(127,127,127,127),color(255,255,255,127));
 }
 
 // objects' functions, such as update(), are called methods
@@ -35,12 +37,16 @@ void setup() {
 void draw() {
   bouncer.update();
   bouncer2.update();
+  mover.update();
+  mover.draw();
   bouncer.draw();
   bouncer2.draw();
+  
 }
 
 // runs the click() method for both bouncer objects when the mouse is clicked
 void mouseClicked(){
   bouncer.click();
   bouncer2.click();
+  mover.click();
 }
