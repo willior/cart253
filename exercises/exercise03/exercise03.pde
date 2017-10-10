@@ -1,7 +1,23 @@
+// generates 2 "snakes" of infinite length drawn out of coloured transparent circles that bounce around the window
+// creating a symmetrical pattern
+// type (class): Bouncer (capital letter)
+// variable: bouncer (lowercase letter)
+// functions of objects are called methods
 color backgroundColor = color(200,150,150);
+
 Bouncer bouncer;
 Bouncer bouncer2;
 
+// sets up the size of the window and background colour
+// creates the "new" objects bouncer and bouncer2 from the class Bouncer
+// sets their properties (which are defined in the class Bouncer) which are:
+// width/2: starting position on X axis
+// height/2: starting position on Y axis
+// 2 & -2: X velocity of the balls
+// 2 & 2: Y velocity of the balls
+// 50: size of the balls
+// color(150,0,0,50) & color(0,0,150,50): sets colour/transparency of the balls
+// color(255,0,0,50) & color(0,0,255,50): sets colour of the balls when the cursor is hovering over a drawn ball
 void setup() {
   size(640,480);
   background(backgroundColor);
@@ -9,6 +25,8 @@ void setup() {
   bouncer2 = new Bouncer(width/2,height/2,-2,2,50,color(0,0,150,50),color(0,0,255,50));
 }
 
+// objects' functions, such as update, are called methods
+// draw loop that runs bouncer and bouncer2's methods
 void draw() {
   bouncer.update();
   bouncer2.update();
