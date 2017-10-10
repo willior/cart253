@@ -11,6 +11,7 @@ class Bouncer {
  // CHANGED: added variables for maximum and minimum sizes of the circles
  int sizeMax;
  int sizeMin;
+ int sizeMod;
  color fillColor;
  color defaultColor;
  color hoverColor;
@@ -21,7 +22,7 @@ class Bouncer {
  // declares the properties of the class Bouncer by fetching the values entered when the new objects are created (in exercise03)
  // and putting them in temp... variables, from which the variables declared above (x,y,vx,vy etc.) are given values
  // CHANGED: added properties for sizeMax and sizeMin
- Bouncer(int tempX, int tempY, int tempVX, int tempVY, int tempSize, int tempSizeMax, int tempSizeMin, color tempDefaultColor, color tempHoverColor) {
+ Bouncer(int tempX, int tempY, int tempVX, int tempVY, int tempSize, int tempSizeMax, int tempSizeMin, int tempSizeMod, color tempDefaultColor, color tempHoverColor) {
    x = tempX;
    y = tempY;
    vx = tempVX;
@@ -29,21 +30,30 @@ class Bouncer {
    size = tempSize;
    sizeMax = tempSizeMax;
    sizeMin = tempSizeMin;
+   sizeMod = tempSizeMod;
    defaultColor = tempDefaultColor;
    hoverColor = tempHoverColor;
    fillColor = defaultColor;
  }
  
- // CHANGED: added method that increases the size of the balls by 10 pixels each each time it is run
- // resets the balls' size to sizeMin once it exceeds sizeMax
+ // CHANGED: added method that modifies the size of the balls by the variable sizeMod each each time it is run (ie. by mouse clicked)
+ // first checks to see if the size is less than sizeMin; inverts sizeMod if it is
+ // sizeMod is used to either add or subtract 10 from size depending on whether sizeMin or sizeMax has been reached
+ // second checks to see if size is less than sizeMax; adds sizeMod to size if true
+ // else it inverts sizeMod, then adds sizeMod to size
  void click(){
-   if (size <= sizeMax){
-     size = (size+10);
+   if (size < sizeMin){
+     sizeMod = -sizeMod;
+   }
+   
+   if (size < sizeMax){
+     size = (size+sizeMod);
    }
    else{
-     size = sizeMin;
-     }
+     sizeMod = -sizeMod;
+     size = (size+sizeMod);
    }
+ }
  
  // function (or method) that "updates" the ball by adding the vx value to the x value and the same for the y values
  // also runs the handleBounce() and handleMouse() methods
@@ -61,7 +71,7 @@ class Bouncer {
  void handleBounce() {
    
    // CHANGED: added a random function to apply a degree of randomness to vx and vy when the ball "bounces"
-   randomBounce=random(2);
+   randomBounce=random(1);
    
    if (x - size/2 < 0 || x + size/2 > width) {
      
@@ -75,9 +85,6 @@ class Bouncer {
      vy += randomBounce;
      vy = -vy;
    }
-
-   
-   
    x = constrain(x,size/2,width-size/2);
    y = constrain(y,size/2,height-size/2);
  }
@@ -96,13 +103,13 @@ class Bouncer {
    }
  }
 
- 
  // draws the circle after fetching its attributes:
- // noStroke disables the outline
+ // stroke(255) gives each circle a white outline
  // fill sets the fillColor (fetched form either hoverColor or defaultColor as described above)
  // ellipse draws the circle (x-pos, y-pos, x-size, y-size)
+ // CHANGED: stroke colour to create something more visually appealing
  void draw() {
-   noStroke();
+   stroke(255);
    fill(fillColor);
    ellipse(x,y,size,size);
  }
