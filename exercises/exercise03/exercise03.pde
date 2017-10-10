@@ -3,8 +3,8 @@
 // variable: bouncer (lowercase letter)
 // functions of objects are called methods
 // creates backgroundColor from a color value
-// CHANGED: background colour to grey
-color backgroundColor = color(150,150,150);
+// CHANGED: background colour to black
+color backgroundColor = color(0);
 
 Bouncer bouncer;
 Bouncer bouncer2;
