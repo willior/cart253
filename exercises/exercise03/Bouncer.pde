@@ -4,10 +4,13 @@ class Bouncer {
   
  int x;
  int y;
- //CHANGED: vx and vy to floats in order to be modulated via a random() function
+ // CHANGED: vx and vy to floats in order to be modulated via a random() function
  float vx;
  float vy;
  int size;
+ // CHANGED: added variables for maximum and minimum sizes of the circles
+ int sizeMax;
+ int sizeMin;
  color fillColor;
  color defaultColor;
  color hoverColor;
@@ -17,16 +20,30 @@ class Bouncer {
  
  // declares the properties of the class Bouncer by fetching the values entered when the new objects are created (in exercise03)
  // and putting them in temp... variables, from which the variables declared above (x,y,vx,vy etc.) are given values
- Bouncer(int tempX, int tempY, int tempVX, int tempVY, int tempSize, color tempDefaultColor, color tempHoverColor) {
+ // CHANGED: added properties for sizeMax and sizeMin
+ Bouncer(int tempX, int tempY, int tempVX, int tempVY, int tempSize, int tempSizeMax, int tempSizeMin, color tempDefaultColor, color tempHoverColor) {
    x = tempX;
    y = tempY;
    vx = tempVX;
    vy = tempVY;
    size = tempSize;
+   sizeMax = tempSizeMax;
+   sizeMin = tempSizeMin;
    defaultColor = tempDefaultColor;
    hoverColor = tempHoverColor;
    fillColor = defaultColor;
  }
+ 
+ // CHANGED: added method that increases the size of the balls by 10 pixels each each time it is run
+ // resets the balls' size to sizeMin once it exceeds sizeMax
+ void click(){
+   if (size <= sizeMax){
+     size = (size+10);
+   }
+   else{
+     size = sizeMin;
+     }
+   }
  
  // function (or method) that "updates" the ball by adding the vx value to the x value and the same for the y values
  // also runs the handleBounce() and handleMouse() methods
@@ -78,6 +95,7 @@ class Bouncer {
      fillColor = defaultColor;
    }
  }
+
  
  // draws the circle after fetching its attributes:
  // noStroke disables the outline

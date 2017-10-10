@@ -16,13 +16,14 @@ Bouncer bouncer2;
 // 2 & -2: X velocity of the balls
 // 2 & 2: Y velocity of the balls
 // 50: size of the balls
+// CHANGED: added property declarations for balls' max (100) and min (25) size
 // color(150,0,0,50) & color(0,0,150,50): sets colour/transparency of the balls
 // color(255,0,0,50) & color(0,0,255,50): sets colour of the balls when the cursor is hovering over a drawn ball
 void setup() {
   size(640,480);
   background(backgroundColor);
-  bouncer = new Bouncer(width/2,height/2,2,2,50,color(150,0,0,50),color(255,0,0,50));
-  bouncer2 = new Bouncer(width/2,height/2,-2,2,50,color(0,0,150,50),color(0,0,255,50));
+  bouncer = new Bouncer(width/2,height/2,2,2,50,100,25,color(150,0,0,50),color(255,0,0,50));
+  bouncer2 = new Bouncer(width/2,height/2,-2,2,50,100,25,color(0,0,150,50),color(0,0,255,50));
 }
 
 // objects' functions, such as update, are called methods
@@ -32,4 +33,11 @@ void draw() {
   bouncer2.update();
   bouncer.draw();
   bouncer2.draw();
+//  click();
+}
+
+// runs the click() method for both bouncer objects when the mouse is clicked
+void mouseClicked(){
+  bouncer.click();
+  bouncer2.click();
 }
