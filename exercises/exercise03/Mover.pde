@@ -12,6 +12,8 @@
  color defaultColor;
  color hoverColor;
  float randomBounce;
+ float randomMoveX;
+ float randomMoveY;
  
 Mover(int tempX, int tempY, int tempVX, int tempVY, int tempSize, int tempSizeMax, int tempSizeMin, int tempSizeMod, color tempDefaultColor, color tempHoverColor) {
  
@@ -28,6 +30,9 @@ Mover(int tempX, int tempY, int tempVX, int tempVY, int tempSize, int tempSizeMa
    fillColor = defaultColor;
  }  
  
+ // click function for the Mover class behaves inversely to the Bouncer class
+ // ie. Bouncer class starts by getting bigger then smaller per click
+ // Mover class starts by getting smaller
  void click(){
    if (size > sizeMin){
      sizeMod = -sizeMod;
@@ -42,11 +47,24 @@ Mover(int tempX, int tempY, int tempVX, int tempVY, int tempSize, int tempSizeMa
    }
  }
  
+ // added factors determined by RNG that affect vx and vy indepedently
+ // constrains vx and vy so velocities do not become excessive
+ 
  void update() {
+   randomMoveX=random(-2,2);
+   randomMoveY=random(-2,2);
+   
+   vx += randomMoveX;
+   vy += randomMoveY;
+
    x += vx;
    y += vy;
    
+   vx = constrain(vx,-4,4);
+   vy = constrain(vy,-4,4);
+   
    handleBounce();
+   
  }
  
  void handleBounce() {

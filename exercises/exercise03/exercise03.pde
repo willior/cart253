@@ -29,7 +29,7 @@ void setup() {
   background(backgroundColor);
    bouncer = new Bouncer(width/2,height/2,2,2,50,100,11,10,color(150,0,0,50),color(255,0,0,50));
   bouncer2 = new Bouncer(width/2,height/2,-2,2,50,100,11,10,color(0,0,150,50),color(0,0,255,50));
-       mover = new Mover(width/2,height/2,4,4,50,50,11,-10,color(127,127,127,127),color(255,255,255,127));
+       mover = new Mover(width/2,height/2,1,1,50,100,11,-10,color(127,127,127,127),color(255,255,255,127));
 }
 
 // objects' functions, such as update(), are called methods
