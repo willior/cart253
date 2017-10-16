@@ -1,3 +1,27 @@
+// ideas: add a "hyper" mode that allows a hyper-smash once every 3 (?) deflections
+// increases the ball's speed substantially, changes colour, as well as its point value if goal
+// hyper-smashes can incorporate some kind of random property to affect game behaviour
+  // for example, giving a curve to the ball and/or changing how it looks
+// a hyper-smash can be counter-hyper-smashed; speed is retained, maybe changes color/increased point value
+// counter-hyper-smashes may also change the game; perhaps by inverting the opposing player's controls temporarily
+  // and/or adding visual interference/distraction, or lowering paddle speed and/or length
+// if 3 successful counter-hyper-smashes are performed in a row, that player has the option to perform a hyper-break
+  // which has the potential of literally breaking the other player's paddle
+    // either ending the round immediately or afflicting the "broken" player in some crippling way
+
+// scoring:
+// -1 point for letting a ball through
+// +1 point for hyper-smashing and getting a goal
+// +1 point for hyper-break
+// first to 10 points wins
+// rather than display points as a number, will be represented somehow through colours/background
+
+// sound effects?
+  // typical beep boops for normal deflections
+  // absurdly over-the-top sound effects for hyper-smashes
+
+// visuals? (images? or just colour changes?)
+
 // Pong
 //
 // A simple version of Pong using object-oriented programming.
