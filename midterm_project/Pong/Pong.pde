@@ -168,6 +168,4 @@ void keyReleased() {
   // Call both paddles' keyReleased methods
   leftPaddle.keyReleased();
   rightPaddle.keyReleased();
-  hyper1.keyPressed();
-  hyper2.keyPressed();
 }

@@ -36,7 +36,7 @@ class Hyper {
     rectMode(CENTER);
     constrain(stock,0,3);             // why doesn't this work??
     
-    // quick & dirty way to keep stock from exceeding 3 as i couldn't get constrain to work
+    // quick & dirty way to keep stock from exceeding 3 as i couldn't get constrain to work:
     if(stock > 3){
       stock = 3;
     }
@@ -73,7 +73,12 @@ class Hyper {
       if (key == hyperKey) {
         hyperMode = 1;
         stock--;
-        constrain(stock,0,3);
+        constrain(stock,0,3);        // again, doesn't work
+        
+// quick and dirty way to get stock from going under 0:
+        if (stock < 0){
+          stock = 0;
+        }
       }
       else{
         hyperMode = 0;
