@@ -26,12 +26,6 @@ class Hyper {
   }
   
   void update() {
-    ball.collide(leftPaddle);{
-      hyper1.stock++;
-    }
-    ball.collide(rightPaddle);{
-      hyper2.stock++;
-    }
     constrain(stock,0,3);
   }
   
@@ -40,6 +34,12 @@ class Hyper {
     stroke(hyperStroke);
     fill(hyperEmpty);
     rectMode(CENTER);
+    constrain(stock,0,3);             // why doesn't this work??
+    
+    // quick & dirty way to keep stock from exceeding 3 as i couldn't get constrain to work
+    if(stock > 3){
+      stock = 3;
+    }
     if(stock == 3){
       fill(hyperFull);
       rect(hyperX, hyperY, hyperSize, hyperSize);
@@ -61,7 +61,7 @@ class Hyper {
       rect((hyperX+40), hyperY, hyperSize, hyperSize);
     }
     
-    else {
+    else if(stock == 0) {
       rect(hyperX, hyperY, hyperSize, hyperSize);
       rect((hyperX+20), hyperY, hyperSize, hyperSize);
       rect((hyperX+40), hyperY, hyperSize, hyperSize);

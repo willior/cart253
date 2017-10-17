@@ -107,6 +107,8 @@ void draw() {
   leftPaddle.update();
   rightPaddle.update();
   ball.update();
+  constrain(hyper1.stock,0,3);
+  constrain(hyper2.stock,0,3);
 
   // Check if the ball has collided with either paddle
   ball.collide(leftPaddle);

@@ -107,9 +107,11 @@ class Ball {
       if (vx < 0) {
         // Reset its position to align with the right side of the paddle
         x = paddle.x + paddle.WIDTH/2 + SIZE/2;
+        hyper1.stock++;
       } else if (vx > 0) {
         // Reset its position to align with the left side of the paddle
         x = paddle.x - paddle.WIDTH/2 - SIZE/2;
+        hyper2.stock++;
       }
       // And make it bounce
       vx = -vx;
