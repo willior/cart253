@@ -20,7 +20,7 @@ class Ball {
   int vy;
 
   // The colour of the ball
-  color ballColor = color(255);
+  color ballColor = color(255,0,0);
 
 
   /////////////// Constructor ///////////////
@@ -80,8 +80,12 @@ class Ball {
   // something like an int (e.g. 0 = not off, 1 = off left, 2 = off right)
   // or a String (e.g. "ON SCREEN", "OFF LEFT", "OFF RIGHT")
   
-  boolean isOffScreen() {
-    return (x + SIZE/2 < 0 || x - SIZE/2 > width);
+  boolean goal1() {
+    return (x + SIZE/2 < 0);
+  }
+  
+  boolean goal2(){
+    return ( x - SIZE/2 > width);
   }
 
   // collide(Paddle paddle)

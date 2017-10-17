@@ -33,7 +33,7 @@ class Paddle {
   // Sets the position and controls based on arguments,
   // starts the velocity at 0
 
-  Paddle(int _x, int _y, char _upKey, char _downKey) {
+  Paddle(int _x, int _y, char _upKey, char _downKey, color _paddleColor) {
     x = _x;
     y = _y;
     vx = 0;
@@ -41,6 +41,9 @@ class Paddle {
 
     upKey = _upKey;
     downKey = _downKey;
+    
+    // added variable to set the paddle colour
+    paddleColor = _paddleColor;
   }
 
 

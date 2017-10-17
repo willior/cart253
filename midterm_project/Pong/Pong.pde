@@ -41,6 +41,9 @@ Ball ball;
 // The distance from the edge of the window a paddle should be
 int PADDLE_INSET = 8;
 
+// variable for tracking score
+int scorePos;
+
 // The background colour during play (black)
 color backgroundColor = color(0);
 
@@ -58,8 +61,10 @@ void setup() {
   // Also pass through the two keys used to control 'up' and 'down' respectively
   // NOTE: On a mac you can run into trouble if you use keys that create that popup of
   // different accented characters in text editors (so avoid those if you're changing this)
-  leftPaddle = new Paddle(PADDLE_INSET, height/2, '1', 'q');
-  rightPaddle = new Paddle(width - PADDLE_INSET, height/2, '0', 'p');
+  
+  // the left paddle is now black so that it shows up on the white half of the screen
+  leftPaddle = new Paddle(PADDLE_INSET, height/2, '1', 'q', (0));
+  rightPaddle = new Paddle(width - PADDLE_INSET, height/2, '0', 'p', (255));
 
   // Create the ball at the centre of the screen
   ball = new Ball(width/2, height/2);
@@ -73,6 +78,12 @@ void setup() {
 void draw() {
   // Fill the background each frame so we have animation
   background(backgroundColor);
+  
+  // Used a white rect to act as the abstract score display
+  fill(255);
+  
+  // The rect moves in accordance to scorePos, which goes up or down in value depending on who scores
+  rect((scorePos*32),height/2,width,height);
 
   // Update the paddles and ball by calling their update methods
   leftPaddle.update();
@@ -83,10 +94,25 @@ void draw() {
   ball.collide(leftPaddle);
   ball.collide(rightPaddle);
 
-  // Check if the ball has gone off the screen
-  if (ball.isOffScreen()) {
-    // If it has, reset the ball
-    ball.reset();
+  // split 'off screen' function into 2 separate functions for both sides
+  if (ball.goal1()) {
+    scorePos++;
+    if (scorePos < 10){
+      ball.reset();
+    }
+    else {
+      println("P1 win");
+      background(255);
+    }
+  }
+  if (ball.goal2()) {
+    scorePos--;
+    if (scorePos > -10){
+      ball.reset();
+    }
+    else {
+      println("P2 win");
+    }
   }
 
   // Display the paddles and the ball
