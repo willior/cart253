@@ -11,6 +11,8 @@ class Paddle {
   int SPEED = 5;
   int HEIGHT = 70;
   int WIDTH = 16;
+  
+  int stock;
 
   // The position and velocity of the paddle (note that vx isn't really used right now)
   int x;

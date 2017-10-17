@@ -37,12 +37,25 @@
 Paddle leftPaddle;
 Paddle rightPaddle;
 Ball ball;
+Hyper hyper1;
+Hyper hyper2;
 
 // The distance from the edge of the window a paddle should be
 int PADDLE_INSET = 8;
 
 // variable for tracking score
 int scorePos;
+
+// variables for players' hyper stocks
+int stock1 = 1;
+int stock2 = 2;
+color hyperEmpty1 = color(0);
+color hyperEmpty2 = color(255);
+color hyperFull1 = color(255,0,0);
+color hyperFull2 = color(255,0,0);
+color hyperStroke1 = color(255);
+color hyperStroke2 = color(0);
+
 
 // The background colour during play (black)
 color backgroundColor = color(0);
@@ -68,6 +81,11 @@ void setup() {
 
   // Create the ball at the centre of the screen
   ball = new Ball(width/2, height/2);
+  
+  // added hyper class for "special ability"
+  // (int _hyperSize, int _hyperX, int _hyperY, int _stock, int _hyperMode, char _hyperKey)
+  hyper1 = new Hyper(10, 50, (height - 50), stock1, 0, '2', hyperEmpty1, hyperStroke1);
+  hyper2 = new Hyper(10, (width - 90), (height - 50), stock2, 0, '-', hyperEmpty2, hyperStroke2);
 }
 
 // draw()
@@ -95,6 +113,9 @@ void draw() {
   ball.collide(rightPaddle);
 
   // split 'off screen' function into 2 separate functions for both sides
+  // score is displayed based on a factor of scorePos, which itself is used as 1/10 of the width of the screen
+  // the first person to reach 10 (aka cover the entire screen) wins
+  
   if (ball.goal1()) {
     scorePos++;
     if (scorePos < 10){
@@ -119,6 +140,8 @@ void draw() {
   leftPaddle.display();
   rightPaddle.display();
   ball.display();
+  hyper1.display();
+  hyper2.display();
 }
 
 // keyPressed()
@@ -131,6 +154,8 @@ void keyPressed() {
   // Just call both paddles' own keyPressed methods
   leftPaddle.keyPressed();
   rightPaddle.keyPressed();
+  hyper1.keyPressed();
+  hyper2.keyPressed();
 }
 
 // keyReleased()
@@ -141,4 +166,6 @@ void keyReleased() {
   // Call both paddles' keyReleased methods
   leftPaddle.keyReleased();
   rightPaddle.keyReleased();
+  hyper1.keyPressed();
+  hyper2.keyPressed();
 }
