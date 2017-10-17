@@ -137,6 +137,20 @@ void draw() {
       println("P2 win");
     }
   }
+  
+    // changes paddleColor if hyperMode is on
+  if (hyper1.hyperMode == 1){
+    leftPaddle.paddleColor = color(255,0,0);
+  }
+  else{
+    leftPaddle.paddleColor = (0);
+  }
+  if (hyper2.hyperMode == 1){
+    rightPaddle.paddleColor = color(255,0,0);
+  }
+    else{
+      rightPaddle.paddleColor = (255);
+    }
 
   // Display the paddles and the ball
   leftPaddle.display();
@@ -144,6 +158,9 @@ void draw() {
   ball.display();
   hyper1.display();
   hyper2.display();
+  
+  
+
 }
 
 // keyPressed()

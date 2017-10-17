@@ -75,16 +75,10 @@ class Hyper {
         stock--;
         constrain(stock,0,3);        // again, doesn't work
         
-// quick and dirty way to get stock from going under 0:
+        // quick and dirty way to prevent stock from going under 0:
         if (stock < 0){
           stock = 0;
         }
       }
-      else{
-        hyperMode = 0;
-      }
     }
-    void keyReleased() {
-      hyperMode = 0;
-    }
-}
+  }

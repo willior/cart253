@@ -21,6 +21,9 @@ class Ball {
 
   // The colour of the ball
   color ballColor = color(255,0,0);
+  
+  // Velocity modulator for hyper mode
+  int vMod;
 
 
   /////////////// Constructor ///////////////
@@ -108,6 +111,7 @@ class Ball {
         // Reset its position to align with the right side of the paddle
         x = paddle.x + paddle.WIDTH/2 + SIZE/2;
         hyper1.stock++;
+          
       } else if (vx > 0) {
         // Reset its position to align with the left side of the paddle
         x = paddle.x - paddle.WIDTH/2 - SIZE/2;
