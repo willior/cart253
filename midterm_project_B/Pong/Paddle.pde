@@ -89,9 +89,6 @@ class Paddle {
       // If so we want a positive y velocity
       vy = SPEED;
     }
-    if (key == hyperKey){
-      paddleColor = hyperColor;
-    }
   }
 
 
@@ -110,10 +107,6 @@ class Paddle {
     else if (key == downKey && vy > 0) {
       // If so it should stop
       vy = 0;
-    }
-    
-    if (key == hyperKey){
-      paddleColor = (255);
     }
   }
 }

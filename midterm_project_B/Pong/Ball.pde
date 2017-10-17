@@ -113,7 +113,6 @@ class Ball {
       }
       // And make it bounce
       vx = -vx;
-      hyper.update();
     }
   }
 

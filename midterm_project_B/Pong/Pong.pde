@@ -37,12 +37,8 @@
 Paddle leftPaddle;
 Paddle rightPaddle;
 Ball ball;
-Hyper hyper1A;
-Hyper hyper1B;
-Hyper hyper1C;
-Hyper hyper2A;
-Hyper hyper2B;
-Hyper hyper2C;
+Hyper hyper1;
+Hyper hyper2;
 
 // The distance from the edge of the window a paddle should be
 int PADDLE_INSET = 8;
@@ -56,12 +52,8 @@ int score2 = 0;
 int maxScore = 10;
 
 // initializes the hyper stocks
-int stock1A;
-int stock1B;
-int stock1C;
-int stock2A;
-int stock2B;
-int stock2C;
+int stock1 =1;
+int stock2 =2;
 
 // setup()
 //
@@ -76,20 +68,19 @@ void setup() {
   // Also pass through the two keys used to control 'up' and 'down' respectively
   // NOTE: On a mac you can run into trouble if you use keys that create that popup of
   // different accented characters in text editors (so avoid those if you're changing this)
+  
+    // hyper mode
+  // (int _hyperSize, int _hyperX, int _hyperY, int _stock, int _hyperMode, char _hyperKey)
+  hyper1 = new Hyper(10, 50, (height - 50), stock1, 0, '2');
+  hyper2 = new Hyper(10, (width - 90), (height - 50), stock2, 0, '-');
+  
   leftPaddle = new Paddle(PADDLE_INSET, height/2, '1', 'q');
   rightPaddle = new Paddle(width - PADDLE_INSET, height/2, '0', 'p');
 
   // Create the ball at the centre of the screen
   ball = new Ball(width/2, height/2);
   
-  // hyper mode
-  // (int int _hyperSize, int _hyperX, int _hyperY, int _stock, int _hyperMode, char _hyperKey)
-  hyper1A = new Hyper(10, 50, (height - 50), 0, 0, '2');
-  hyper1B = new Hyper(10, 70, (height - 50), 0, 0, '2');
-  hyper1C = new Hyper(10, 90, (height - 50), 0, 0, '2');
-  hyper2A = new Hyper(10, (width - 50), (height - 50), 0, 0, '-');
-  hyper2B = new Hyper(10, (width - 70), (height - 50), 0, 0, '-');
-  hyper2C = new Hyper(10, (width - 90), (height - 50), 0, 0, '-');
+
 }
 
 // draw()
@@ -100,6 +91,7 @@ void setup() {
 void draw() {
   // Fill the background each frame so we have animation
   background(backgroundColor);
+  rect(width/4,height/2,width/2,height);
 
   // Update the paddles and ball by calling their update methods
   leftPaddle.update();
@@ -125,12 +117,8 @@ void draw() {
   leftPaddle.display();
   rightPaddle.display();
   ball.display();
-  hyper1A.display();
-  hyper1B.display();
-  hyper1C.display();
-  hyper2A.display();
-  hyper2B.display();
-  hyper2C.display();
+  hyper1.hyperDisplay();
+  hyper2.hyperDisplay();
 }
 
 // keyPressed()
@@ -143,6 +131,8 @@ void keyPressed() {
   // Just call both paddles' own keyPressed methods
   leftPaddle.keyPressed();
   rightPaddle.keyPressed();
+  hyper1.keyPressed();
+  hyper2.keyPressed();
 }
 
 // keyReleased()
@@ -153,4 +143,6 @@ void keyReleased() {
   // Call both paddles' keyReleased methods
   leftPaddle.keyReleased();
   rightPaddle.keyReleased();
+  hyper1.keyReleased();
+  hyper2.keyReleased();
 }
