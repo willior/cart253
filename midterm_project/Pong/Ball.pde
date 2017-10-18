@@ -26,7 +26,7 @@ class Ball {
   float vxMod;
   float vyMod;
   
-  // random seed for picking sound effects
+  // random seed for picking sound effects on hyper smash
   float hyperSFXseed;
 
   /////////////// Constructor ///////////////
