@@ -8,7 +8,7 @@ class Ball {
   /////////////// Properties ///////////////
 
   // Default values for speed and size
-  float SPEED = 4;
+  float SPEED = 3.5;
   float SIZE = 16;
 
   // The location of the ball

@@ -104,7 +104,7 @@ void draw() {
   
   // function for when player 1 scores
   if (ball.goal1()) {
-    scorePos++;
+    scorePos--;
     
     // checking to see if player 1's maximum score has been reached...
     if (scorePos < 10){
@@ -120,7 +120,7 @@ void draw() {
   
   // function for when player 2 scores
   if (ball.goal2()) {
-    scorePos--;
+    scorePos++;
     
     // checking to see if player 2's maximum score has been reached...
     if (scorePos > -10){
