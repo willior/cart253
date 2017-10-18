@@ -20,6 +20,18 @@
 // Pretty ugly. (Now!)
 // Only two paddles. (So far!)
 
+// sound library
+import processing.sound.*;
+SoundFile hyperSFX1;
+SoundFile hyperSFX2;
+SoundFile hyperSFX3;
+SoundFile hyperSFX4;
+SoundFile hyperSFX5;
+SoundFile hyperSFX6;
+SoundFile hyperSFX7;
+SoundFile hyperSFX8;
+SoundFile hyperSFX9;
+
 // Global variables for the paddles, ball, and hyper stocks
 Paddle leftPaddle;
 Paddle rightPaddle;
@@ -53,6 +65,17 @@ color backgroundColor = color(0);
 void setup() {
   // Set the size
   size(640, 480);
+  
+  // declaring hyper sound effects
+  hyperSFX1 = new SoundFile(this,"hyper1.wav");
+  hyperSFX2 = new SoundFile(this,"hyper2.wav");
+  hyperSFX3 = new SoundFile(this,"hyper3.wav");
+  hyperSFX4 = new SoundFile(this,"hyper4.wav");
+  hyperSFX5 = new SoundFile(this,"hyper5.wav");
+  hyperSFX6 = new SoundFile(this,"hyper6.wav");
+  hyperSFX7 = new SoundFile(this,"hyper7.wav");
+  hyperSFX8 = new SoundFile(this,"hyper8.wav");
+  hyperSFX9 = new SoundFile(this,"hyper9.wav");
 
   // Create the paddles on either side of the screen. 
   // Use PADDLE_INSET to to position them on x, position them both at centre on y
