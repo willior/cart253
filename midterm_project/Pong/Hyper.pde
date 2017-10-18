@@ -80,17 +80,18 @@ class Hyper {
     // checks to see if hyperKey is pressed  
     void keyPressed() {
       
-      // activates hyper mode on hyperKey press
-      if (key == hyperKey) {
-        hyperMode = 1;
-        
+      // activates hyper mode on hyperKey press & checks if player has more than 0 hyper stocks
+      if ((key == hyperKey) && (stock > 0)) {
+          hyperMode = 1;
+          
         // subtracts one hyper stock
         stock--;
+      }
         
-        // quick and dirty way to prevent stock from going under 0:
-        if (stock < 0){
+        // quick and dirty way to prevent stock from going under 0 and making sure hyperMode doesn't activate:
+       else if ((key == hyperKey) && (stock <= 0)){
           stock = 0;
+          hyperMode = 0;
         }
       }
     }
-  }
