@@ -25,9 +25,6 @@ class Ball {
   // Velocity modulator for hyper mode
   float vxMod;
   float vyMod;
-  
-  // Determines which direction the ball will start in
-  float coinToss = random(-1,1);
 
   /////////////// Constructor ///////////////
 
@@ -39,18 +36,25 @@ class Ball {
   // (so the ball starts by moving down and to the right)
   // NOTE that I'm using an underscore in front of the arguments to distinguish
   // them from the class's properties
-
   Ball(int _x, int _y) {
     x = _x;
     y = _y;
     
-    if (coinToss <= 0){
+    // randomyly determines starting trajectory for x-axis; actual velocity is preset
+    if (random(-1,1) <= 0){
       vx = -SPEED;
     }
     else{
       vx = SPEED;
     }
-    vy = SPEED;
+    
+    // randomly determines starting trajectory for y-axis; actual velocity is preset
+    if (random(-1,1) <= 0){ 
+      vy = -SPEED;
+    }
+    else{
+      vy = SPEED;
+    }
   }
 
 
@@ -69,6 +73,7 @@ class Ball {
 
     // Check if the ball is going off the top of bottom
     if (y - SIZE/2 < 0 || y + SIZE/2 > height) {
+      
       // If it is, then make it "bounce" by reversing its velocity
       vy = -vy;
     }
@@ -80,25 +85,29 @@ class Ball {
   // Note that it KEEPS its velocity
   
   void reset() {
-    x = width/2;
+    
+    // the ball now resets not in the center of the screen but at the cusp of the "territorial boundary"
+    x = (width/2)+(scorePos*32);
     y = height/2;
+    
+    // the balls intial x-trajectory is determined by whichever player scored
     if (vx < 0) {
       vx = -SPEED;
     }
     else{
       vx = SPEED;
+    }    
+    
+    // randomly determines whether the ball will begin moving up or down on y-axis
+    if (random(-1,1) <= 0){ 
+      vy = -SPEED;
     }
-    vy = SPEED;
+    else{
+      vy = SPEED;
+    }
   }
   
-  // isOffScreen()
-  //
-  // Returns true if the ball is off the left or right side of the window
-  // otherwise false
-  // (If we wanted to return WHICH side it had gone off, we'd have to return
-  // something like an int (e.g. 0 = not off, 1 = off left, 2 = off right)
-  // or a String (e.g. "ON SCREEN", "OFF LEFT", "OFF RIGHT")
-  
+  // booleans to determine which player scores
   boolean goal1() {
     return (x + SIZE/2 < 0);
   }
@@ -123,33 +132,81 @@ class Ball {
     // Check if the ball overlaps with the paddle
     if (insideLeft && insideRight && insideTop && insideBottom) {
       
-      vxMod = random(2,7);
-      vyMod = random(2,7);
+      // random functions to change up ball velocity on bounce
+      vxMod = random(5,10);
+      vyMod = random(5,10);
       
       // If it was moving to the left
       if (vx < 0) {
         // Reset its position to align with the right side of the paddle
         x = paddle.x + paddle.WIDTH/2 + SIZE/2;
         
-        // added so that the player only gets a hyper stock on bounce when hypermode is off
+        // checks to see if hyper mode is not active for player 1
         if (hyper1.hyperMode == 0){
+          
+          // randomness added to regular bounces; the degree of randomness is 1/5th that of a hyper bounce
+          // (actually subtracted because this is for when the ball is moving left)
+          vx -= (vxMod/5);
+          
+          // adds vyMod to vy if already positive
+          if (vy >= 0){
+            vy += (vyMod/5);
+          }
+          
+          // otherwise subtracts vyMod from vy if negative
+          else{
+            vy -= (vyMod/5);
+          }
+          
+          // adds 1 to player 1's hyper stock on bounce only when hyper mode inactive
           hyper1.stock++;
         }
         
+        // if hyper mode is active, applies the full force of the randomly generated velocity modulators
         if (hyper1.hyperMode == 1){
           vx -= vxMod;
-          vy += vyMod;
+          
+          // adds vyMod to vy if already positive
+          if (vy >= 0){
+            vy += vyMod;
+          }
+          
+          // subtracts vyMod from vy if negative
+          else{
+            vy -= vyMod;
+          }
+          
+          // resets hyper mode to 0
           hyper1.hyperMode = 0;
         }
           
-          
+      // moving right
       } else if (vx > 0) {
+        
         // Reset its position to align with the left side of the paddle
         x = paddle.x - paddle.WIDTH/2 - SIZE/2;
+        
+        // checks if hyper mode is not active for player 2
         if (hyper2.hyperMode == 0){
+          
+          // randomness added to regular bounces; the degree of randomness is 1/5th that of a hyper bounce
+          vx += (vxMod/5);
+          
+          // only adds to vy if vy already positive
+          if (vy >= 0){
+            vy += (vyMod/5);
+          }
+          
+          // otherwise subtracts if negative
+          else{
+            vy -= (vxMod/5);
+          }
+          
+          // adds 1 to player 2's hyper stock on bounce only when hyper mode inactive
           hyper2.stock++;
         }
         
+        // if hyper mode is active, applies the full force of the randomly generated velocity modulators
         if (hyper2.hyperMode == 1){
           vx += vxMod;
           vy += vyMod;
