@@ -34,8 +34,8 @@ int PADDLE_INSET = 8;
 int scorePos;
 
 // variables for players' hyper stocks
-int stock1 = 1;
-int stock2 = 2;
+int stock1 = 0;
+int stock2 = 0;
 color hyperEmpty1 = color(0);
 color hyperEmpty2 = color(255);
 color hyperFull1 = color(255,0,0);

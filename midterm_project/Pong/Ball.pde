@@ -8,7 +8,7 @@ class Ball {
   /////////////// Properties ///////////////
 
   // Default values for speed and size
-  float SPEED = 5;
+  float SPEED = 4;
   float SIZE = 16;
 
   // The location of the ball
@@ -40,11 +40,12 @@ class Ball {
     x = _x;
     y = _y;
     
-    // randomyly determines starting trajectory for x-axis
-    // added VERY SLIGHT randomness to the pong-off x-velocity: 1/10th of the velocity modulator
+    // random seeds for the x&y-axis velocity modulators
     vxMod = random(5,10);
-    vyMod = random(5,10);
+    vyMod = random(-5,10);
     
+    // randomyly determines starting trajectory for x-axis (ie. left or right)
+    // then added VERY SLIGHT randomness to the pong-off x-velocity: 1/10th of the velocity modulator
     if (random(-1,1) <= 0){
       vx = (-SPEED)-(vxMod/10);
     }
@@ -52,14 +53,14 @@ class Ball {
       vx = (SPEED)+(vxMod/10);
     }
     
-    // randomly determines starting trajectory for y-axis
-    // added slight randomness to the pong-off y-velocity: 1/5th of the velocity modulator
+    // randomly determines starting trajectory for y-axis (ie. up or down)
+    // then added slight randomness to the pong-off y-velocity: half of the velocity modulator
     if (random(-1,1) <= 0){
       
-      vy = (-SPEED)-(vyMod/5);
+      vy = (-SPEED)-(vyMod/2);
     }
     else{
-      vy = (SPEED)+(vyMod/5);
+      vy = (SPEED)+(vyMod/2);
     }
   }
 
@@ -97,19 +98,21 @@ class Ball {
     y = height/2;
     
     // the balls intial x-trajectory is determined by whichever player scored
+    // and of course slight randomness is added through 1/10th of vxMod
     if (vx < 0) {
-      vx = -SPEED;
+      vx = (-SPEED)-(vxMod/10);
     }
     else{
-      vx = SPEED;
+      vx = (SPEED)+(vxMod/10);
     }    
     
     // randomly determines whether the ball will begin moving up or down on y-axis
+    // with added randomness to determine velocity
     if (random(-1,1) <= 0){ 
-      vy = -SPEED;
+      vy = (-SPEED)-(vyMod/2);
     }
     else{
-      vy = SPEED;
+      vy = (SPEED)+(vyMod/2);
     }
   }
   
@@ -139,8 +142,11 @@ class Ball {
     if (insideLeft && insideRight && insideTop && insideBottom) {
       
       // random functions to change up ball velocity on bounce
-      vxMod = random(5,10);
-      vyMod = random(5,10);
+      // vxMod will always make the ball faster on the x-axis
+      vxMod = random(0,10);
+      // vyMod has the chance of making the ball move slower on the y-axis
+      // in some cases (ie. hyper smashes), it can even invert the y-trajectory!
+      vyMod = random(-7.5,7.5);
       
       // If it was moving to the left
       if (vx < 0) {
@@ -150,20 +156,17 @@ class Ball {
         // checks to see if hyper mode is not active for player 1
         if (hyper1.hyperMode == 0){
           
-          // randomness added to regular bounces; the degree of randomness is 1/5th that of a hyper bounce
+          // randomness added to regular bounces; the degree of randomness is 1/10th that of a hyper bounce
           // (actually subtracted because this is for when the ball is moving left)
-          vx -= (vxMod/5);
+          vx -= (vxMod/10);
           
-          // adds vyMod to vy if already positive
-          if (vy >= 0){
-            vy += (vyMod/5);
-          }
-          
-          // otherwise subtracts vyMod from vy if negative
-          else{
-            vy -= (vyMod/5);
-          }
-          
+          // got rid of the logic to determine whether to add or subtract to vy...
+          // and instead incorporated it into the random() function instead.
+          // makes it more random this way, as the values can now be added or subtracted regardless of...
+          // whether the ball is currently moving up or down...
+          // so sometimes you'll get a straight shooting fast one OR a sharp angled one
+          vy += (vyMod/10);
+         
           // adds 1 to player 1's hyper stock on bounce only when hyper mode inactive
           hyper1.stock++;
         }
@@ -171,16 +174,7 @@ class Ball {
         // if hyper mode is active, applies the full force of the randomly generated velocity modulators
         if (hyper1.hyperMode == 1){
           vx -= vxMod;
-          
-          // adds vyMod to vy if already positive
-          if (vy >= 0){
-            vy += vyMod;
-          }
-          
-          // subtracts vyMod from vy if negative
-          else{
-            vy -= vyMod;
-          }
+          vy += vyMod;
           
           // resets hyper mode to 0
           hyper1.hyperMode = 0;
@@ -197,16 +191,8 @@ class Ball {
           
           // randomness added to regular bounces; the degree of randomness is 1/5th that of a hyper bounce
           vx += (vxMod/5);
+          vy += (vyMod/5);
           
-          // only adds to vy if vy already positive
-          if (vy >= 0){
-            vy += (vyMod/5);
-          }
-          
-          // otherwise subtracts if negative
-          else{
-            vy -= (vxMod/5);
-          }
           
           // adds 1 to player 2's hyper stock on bounce only when hyper mode inactive
           hyper2.stock++;
