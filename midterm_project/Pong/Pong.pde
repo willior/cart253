@@ -61,16 +61,17 @@ void setup() {
   // different accented characters in text editors (so avoid those if you're changing this)
   
   // the left paddle is now black so that it shows up on the white half of the screen
+  // changed controls slightly
   leftPaddle = new Paddle(PADDLE_INSET, height/2, '1', 'q', (0));
-  rightPaddle = new Paddle(width - PADDLE_INSET, height/2, '0', 'p', (255));
+  rightPaddle = new Paddle(width - PADDLE_INSET, height/2, '-', 'p', (255));
 
   // Create the ball at the centre of the screen
   ball = new Ball(width/2, height/2);
   
   // added hyper class for hyper smashes
   // (int _hyperSize, int _hyperX, int _hyperY, int _stock, int _hyperMode, char _hyperKey)
-  hyper1 = new Hyper(10, 50, (height - 50), stock1, 0, '2', hyperEmpty1, hyperStroke1);
-  hyper2 = new Hyper(10, (width - 90), (height - 50), stock2, 0, '-', hyperEmpty2, hyperStroke2);
+  hyper1 = new Hyper(10, 50, (height - 50), stock1, 0, '`', hyperEmpty1, hyperStroke1);
+  hyper2 = new Hyper(10, (width - 90), (height - 50), stock2, 0, '=', hyperEmpty2, hyperStroke2);
 }
 
 // draw()

@@ -40,20 +40,25 @@ class Ball {
     x = _x;
     y = _y;
     
-    // randomyly determines starting trajectory for x-axis; actual velocity is preset
+    // randomyly determines starting trajectory for x-axis
+    // added VERY SLIGHT randomness to the pong-off: 1/10th of the velocity modulators
+    vxMod = random(5,10);
+    vyMod = random(5,10);
+    
     if (random(-1,1) <= 0){
-      vx = -SPEED;
+      vx = (-SPEED)-(vxMod/5);
     }
     else{
-      vx = SPEED;
+      vx = (SPEED)+(vxMod/5);
     }
     
-    // randomly determines starting trajectory for y-axis; actual velocity is preset
-    if (random(-1,1) <= 0){ 
-      vy = -SPEED;
+    // randomly determines starting trajectory for y-axis
+    if (random(-1,1) <= 0){
+      
+      vy = (-SPEED)-(vyMod/10);
     }
     else{
-      vy = SPEED;
+      vy = (SPEED)+(vyMod/10);
     }
   }
 

@@ -8,7 +8,7 @@ class Paddle {
   /////////////// Properties ///////////////
 
   // Default values for speed and size
-  int SPEED = 10;
+  int SPEED = 12;
   int HEIGHT = 70;
   int WIDTH = 16;
   
@@ -26,7 +26,6 @@ class Paddle {
   // The characters used to make the paddle move up and down, defined in constructor
   char upKey;
   char downKey;
-
 
   /////////////// Constructor ///////////////
 
