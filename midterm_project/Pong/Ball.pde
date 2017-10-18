@@ -25,6 +25,9 @@ class Ball {
   // Velocity modulator for hyper mode
   float vxMod;
   float vyMod;
+  
+  // random seed for picking sound effects
+  float hyperSFXseed;
 
   /////////////// Constructor ///////////////
 
@@ -178,6 +181,36 @@ class Ball {
           
           // resets hyper mode to 0
           hyper1.hyperMode = 0;
+          
+          // picks a hyper sound effect at random from the library
+          hyperSFXseed = random(0,9);
+          if ((hyperSFXseed >= 0) && (hyperSFXseed <= 1)){
+            hyperSFX1.play();
+          }
+          if ((hyperSFXseed > 1) && (hyperSFXseed <= 2)){
+            hyperSFX2.play();
+          }
+          if ((hyperSFXseed > 2) && (hyperSFXseed <= 3)){
+            hyperSFX3.play();
+          }
+          if ((hyperSFXseed > 3) && (hyperSFXseed <= 4)){
+            hyperSFX4.play();
+          }
+          if ((hyperSFXseed > 4) && (hyperSFXseed <= 5)){
+            hyperSFX5.play();
+          }
+          if ((hyperSFXseed > 5) && (hyperSFXseed <= 6)){
+            hyperSFX6.play();
+          }
+          if ((hyperSFXseed > 6) && (hyperSFXseed <= 7)){
+            hyperSFX7.play();
+          }
+          if ((hyperSFXseed > 7) && (hyperSFXseed <= 8)){
+            hyperSFX8.play();
+          }
+          if ((hyperSFXseed > 8) && (hyperSFXseed <= 9)){
+            hyperSFX9.play();
+          }
         }
           
       // moving right
@@ -203,6 +236,36 @@ class Ball {
           vx += vxMod;
           vy += vyMod;
           hyper2.hyperMode = 0;
+          
+          // picks a hyper sound effect at random from the library
+          hyperSFXseed = random(0,9);
+          if ((hyperSFXseed >= 0) && (hyperSFXseed <= 1)){
+            hyperSFX1.play();
+          }
+          if ((hyperSFXseed > 1) && (hyperSFXseed <= 2)){
+            hyperSFX2.play();
+          }
+          if ((hyperSFXseed > 2) && (hyperSFXseed <= 3)){
+            hyperSFX3.play();
+          }
+          if ((hyperSFXseed > 3) && (hyperSFXseed <= 4)){
+            hyperSFX4.play();
+          }
+          if ((hyperSFXseed > 4) && (hyperSFXseed <= 5)){
+            hyperSFX5.play();
+          }
+          if ((hyperSFXseed > 5) && (hyperSFXseed <= 6)){
+            hyperSFX6.play();
+          }
+          if ((hyperSFXseed > 6) && (hyperSFXseed <= 7)){
+            hyperSFX7.play();
+          }
+          if ((hyperSFXseed > 7) && (hyperSFXseed <= 8)){
+            hyperSFX8.play();
+          }
+          if ((hyperSFXseed > 8) && (hyperSFXseed <= 9)){
+            hyperSFX9.play();
+          }
         }
       }
       // And make it bounce
