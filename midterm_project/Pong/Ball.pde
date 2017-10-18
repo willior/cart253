@@ -8,23 +8,26 @@ class Ball {
   /////////////// Properties ///////////////
 
   // Default values for speed and size
-  int SPEED = 5;
-  int SIZE = 16;
+  float SPEED = 5;
+  float SIZE = 16;
 
   // The location of the ball
-  int x;
-  int y;
+  float x;
+  float y;
 
   // The velocity of the ball
-  int vx;
-  int vy;
+  float vx;
+  float vy;
 
   // The colour of the ball
   color ballColor = color(255,0,0);
   
   // Velocity modulator for hyper mode
-  int vMod = 5;
-
+  float vxMod;
+  float vyMod;
+  
+  // Determines which direction the ball will start in
+  float coinToss = random(-1,1);
 
   /////////////// Constructor ///////////////
 
@@ -40,7 +43,13 @@ class Ball {
   Ball(int _x, int _y) {
     x = _x;
     y = _y;
-    vx = SPEED;
+    
+    if (coinToss <= 0){
+      vx = -SPEED;
+    }
+    else{
+      vx = SPEED;
+    }
     vy = SPEED;
   }
 
@@ -73,6 +82,13 @@ class Ball {
   void reset() {
     x = width/2;
     y = height/2;
+    if (vx < 0) {
+      vx = -SPEED;
+    }
+    else{
+      vx = SPEED;
+    }
+    vy = SPEED;
   }
   
   // isOffScreen()
@@ -106,16 +122,23 @@ class Ball {
     
     // Check if the ball overlaps with the paddle
     if (insideLeft && insideRight && insideTop && insideBottom) {
+      
+      vxMod = random(2,7);
+      vyMod = random(2,7);
+      
       // If it was moving to the left
       if (vx < 0) {
         // Reset its position to align with the right side of the paddle
         x = paddle.x + paddle.WIDTH/2 + SIZE/2;
-        hyper1.stock++;
         
+        // added so that the player only gets a hyper stock on bounce when hypermode is off
+        if (hyper1.hyperMode == 0){
+          hyper1.stock++;
+        }
         
         if (hyper1.hyperMode == 1){
-          vx += vMod;
-          vy += vMod;
+          vx -= vxMod;
+          vy += vyMod;
           hyper1.hyperMode = 0;
         }
           
@@ -123,11 +146,13 @@ class Ball {
       } else if (vx > 0) {
         // Reset its position to align with the left side of the paddle
         x = paddle.x - paddle.WIDTH/2 - SIZE/2;
-        hyper2.stock++;
+        if (hyper2.hyperMode == 0){
+          hyper2.stock++;
+        }
         
         if (hyper2.hyperMode == 1){
-          vx += vMod;
-          vy += vMod;
+          vx += vxMod;
+          vy += vyMod;
           hyper2.hyperMode = 0;
         }
       }

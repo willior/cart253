@@ -8,7 +8,7 @@ class Paddle {
   /////////////// Properties ///////////////
 
   // Default values for speed and size
-  int SPEED = 5;
+  int SPEED = 10;
   int HEIGHT = 70;
   int WIDTH = 16;
   
