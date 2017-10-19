@@ -153,17 +153,48 @@ void draw() {
   
   // function for when player 2 scores
   if (ball.goal1()) {
+    
+    // updates score variable
     scorePos--;
+    
+    // stops any goal sound effects still playing
+    if ((goalSFXseed >= 0) && (goalSFXseed <= 1)){
+      goalSFX1.stop();
+    }
+    else if ((goalSFXseed > 1) && (goalSFXseed <= 2)){
+      goalSFX2.stop();
+    }
+    else if ((goalSFXseed > 2) && (goalSFXseed <= 3)){
+      goalSFX3.stop();
+    }
+    else if ((goalSFXseed > 3) && (goalSFXseed <= 4)){
+      goalSFX4.stop();
+    }
+    else if ((goalSFXseed > 4) && (goalSFXseed <= 5)){
+      goalSFX5.stop();
+    }
+    else if ((goalSFXseed > 5) && (goalSFXseed <= 6)){
+      goalSFX6.stop();
+    }
+    else if ((goalSFXseed > 6) && (goalSFXseed <= 7)){
+      goalSFX7.stop();
+    }
+    else if ((goalSFXseed > 7) && (goalSFXseed <= 8)){
+      goalSFX8.stop();
+    }
+    else if ((goalSFXseed > 8) && (goalSFXseed <= 9)){
+      goalSFX9.stop();
+    }
     
     // checks if win and stops the draw loop if so
     if (scorePos == -10){
       println("P2 win");
-      background(255);
+      background(0);
       noLoop();
     }
     
    // stops any goal sound effects still playing
-    else if ((goalSFXseed >= 0) && (goalSFXseed <= 1)){
+    if ((goalSFXseed >= 0) && (goalSFXseed <= 1)){
       goalSFX1.stop();
     }
     else if ((goalSFXseed > 1) && (goalSFXseed <= 2)){
@@ -233,11 +264,12 @@ void draw() {
 
     if (scorePos == 10) {
       println("P1 win");
+      background(255);
       noLoop();
     }
     
    // stops any goal sound effects still playing
-    else if ((goalSFXseed >= 0) && (goalSFXseed <= 1)){
+    if ((goalSFXseed >= 0) && (goalSFXseed <= 1)){
       goalSFX1.stop();
     }
     else if ((goalSFXseed > 1) && (goalSFXseed <= 2)){
