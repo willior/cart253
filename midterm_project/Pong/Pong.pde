@@ -88,15 +88,17 @@ void setup() {
   hyperSFX7 = new SoundFile(this,"hyper7.wav");
   hyperSFX8 = new SoundFile(this,"hyper8.wav");
   hyperSFX9 = new SoundFile(this,"hyper9.wav");
-  goalSFX1 = new SoundFile(this,"goal1.wav");
-  goalSFX2 = new SoundFile(this,"goal2.wav");
-  goalSFX3 = new SoundFile(this,"goal3.wav");
-  goalSFX4 = new SoundFile(this,"goal4.wav");
-  goalSFX5 = new SoundFile(this,"goal5.wav");
-  goalSFX6 = new SoundFile(this,"goal6.wav");
-  goalSFX7 = new SoundFile(this,"goal7.wav");
-  goalSFX8 = new SoundFile(this,"goal8.wav");
-  goalSFX9 = new SoundFile(this,"goal9.wav");
+  
+  // declaring goal sound effects
+  goalSFX1 = new SoundFile(this,"goal1.mp3");
+  goalSFX2 = new SoundFile(this,"goal2.mp3");
+  goalSFX3 = new SoundFile(this,"goal3.mp3");
+  goalSFX4 = new SoundFile(this,"goal4.mp3");
+  goalSFX5 = new SoundFile(this,"goal5.mp3");
+  goalSFX6 = new SoundFile(this,"goal6.mp3");
+  goalSFX7 = new SoundFile(this,"goal7.mp3");
+  goalSFX8 = new SoundFile(this,"goal8.mp3");
+  goalSFX9 = new SoundFile(this,"goal9.mp3");
   
 
   // Create the paddles on either side of the screen. 
