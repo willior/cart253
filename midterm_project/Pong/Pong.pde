@@ -51,12 +51,7 @@ Hyper hyper2;
 // The distance from the edge of the window a paddle should be
 int PADDLE_INSET = 8;
 
-// variable for tracking score
-int scorePos;
-
 // variables for players' hyper stocks
-int stock1 = 0;
-int stock2 = 0;
 color hyperEmpty1 = color(0);
 color hyperEmpty2 = color(255);
 color hyperFull1 = color(255,0,0);
@@ -66,6 +61,9 @@ color hyperStroke2 = color(0);
 
 // The background colour during play (black)
 color backgroundColor = color(0);
+
+// variable for tracking score
+int scorePos;
 
 // random seed for picking sound effects on goal
 float goalSFXseed;
@@ -99,6 +97,10 @@ void setup() {
   goalSFX7 = new SoundFile(this,"goal7.mp3");
   goalSFX8 = new SoundFile(this,"goal8.mp3");
   goalSFX9 = new SoundFile(this,"goal9.mp3");
+  
+  // players' starting hyper stocks
+  int stock1 = 0;
+  int stock2 = 0;
   
 
   // Create the paddles on either side of the screen. 
@@ -149,36 +151,43 @@ void draw() {
   // score is displayed based on a factor of scorePos, which itself is used as 1/10 of the width of the screen
   // the first person to reach 10 (aka cover the entire screen) wins
   
-  // function for when player 1 scores
+  // function for when player 2 scores
   if (ball.goal1()) {
     scorePos--;
     
+    // checks if win and stops the draw loop if so
+    if (scorePos == -10){
+      println("P2 win");
+      background(255);
+      noLoop();
+    }
+    
    // stops any goal sound effects still playing
-   if ((goalSFXseed >= 0) && (goalSFXseed <= 1)){
+    else if ((goalSFXseed >= 0) && (goalSFXseed <= 1)){
       goalSFX1.stop();
     }
-    if ((goalSFXseed > 1) && (goalSFXseed <= 2)){
+    else if ((goalSFXseed > 1) && (goalSFXseed <= 2)){
       goalSFX2.stop();
     }
-    if ((goalSFXseed > 2) && (goalSFXseed <= 3)){
+    else if ((goalSFXseed > 2) && (goalSFXseed <= 3)){
       goalSFX3.stop();
     }
-    if ((goalSFXseed > 3) && (goalSFXseed <= 4)){
+    else if ((goalSFXseed > 3) && (goalSFXseed <= 4)){
       goalSFX4.stop();
     }
-    if ((goalSFXseed > 4) && (goalSFXseed <= 5)){
+    else if ((goalSFXseed > 4) && (goalSFXseed <= 5)){
       goalSFX5.stop();
     }
-    if ((goalSFXseed > 5) && (goalSFXseed <= 6)){
+    else if ((goalSFXseed > 5) && (goalSFXseed <= 6)){
       goalSFX6.stop();
     }
-    if ((goalSFXseed > 6) && (goalSFXseed <= 7)){
+    else if ((goalSFXseed > 6) && (goalSFXseed <= 7)){
       goalSFX7.stop();
     }
-    if ((goalSFXseed > 7) && (goalSFXseed <= 8)){
+    else if ((goalSFXseed > 7) && (goalSFXseed <= 8)){
       goalSFX8.stop();
     }
-    if ((goalSFXseed > 8) && (goalSFXseed <= 9)){
+    else if ((goalSFXseed > 8) && (goalSFXseed <= 9)){
       goalSFX9.stop();
     }
     
@@ -187,73 +196,72 @@ void draw() {
     if ((goalSFXseed >= 0) && (goalSFXseed <= 1)){
       goalSFX1.play();
     }
-    if ((goalSFXseed > 1) && (goalSFXseed <= 2)){
+    else if ((goalSFXseed > 1) && (goalSFXseed <= 2)){
       goalSFX2.play();
     }
-    if ((goalSFXseed > 2) && (goalSFXseed <= 3)){
+    else if ((goalSFXseed > 2) && (goalSFXseed <= 3)){
       goalSFX3.play();
     }
-    if ((goalSFXseed > 3) && (goalSFXseed <= 4)){
+    else if ((goalSFXseed > 3) && (goalSFXseed <= 4)){
       goalSFX4.play();
     }
-    if ((goalSFXseed > 4) && (goalSFXseed <= 5)){
+    else if ((goalSFXseed > 4) && (goalSFXseed <= 5)){
       goalSFX5.play();
     }
-    if ((goalSFXseed > 5) && (goalSFXseed <= 6)){
+    else if ((goalSFXseed > 5) && (goalSFXseed <= 6)){
       goalSFX6.play();
     }
-    if ((goalSFXseed > 6) && (goalSFXseed <= 7)){
+    else if ((goalSFXseed > 6) && (goalSFXseed <= 7)){
       goalSFX7.play();
     }
-    if ((goalSFXseed > 7) && (goalSFXseed <= 8)){
+    else if ((goalSFXseed > 7) && (goalSFXseed <= 8)){
       goalSFX8.play();
     }
-    if ((goalSFXseed > 8) && (goalSFXseed <= 9)){
+    else if ((goalSFXseed > 8) && (goalSFXseed <= 9)){
       goalSFX9.play();
     }
     
-    // checking to see if player 1's maximum score has been reached...
+    // checking to see if player 2's maximum score has been reached...
     if (scorePos < 10){
       ball.reset();
     }
-    
-    // ... if it has, they win
-    else {
-      println("P1 win");
-      background(255);
-    }
   }
   
-  // function for when player 2 scores
+  // function for when player 1 scores
   if (ball.goal2()) {
     scorePos++;
+
+    if (scorePos == 10) {
+      println("P1 win");
+      noLoop();
+    }
     
    // stops any goal sound effects still playing
-   if ((goalSFXseed >= 0) && (goalSFXseed <= 1)){
+    else if ((goalSFXseed >= 0) && (goalSFXseed <= 1)){
       goalSFX1.stop();
     }
-    if ((goalSFXseed > 1) && (goalSFXseed <= 2)){
+    else if ((goalSFXseed > 1) && (goalSFXseed <= 2)){
       goalSFX2.stop();
     }
-    if ((goalSFXseed > 2) && (goalSFXseed <= 3)){
+    else if ((goalSFXseed > 2) && (goalSFXseed <= 3)){
       goalSFX3.stop();
     }
-    if ((goalSFXseed > 3) && (goalSFXseed <= 4)){
+    else if ((goalSFXseed > 3) && (goalSFXseed <= 4)){
       goalSFX4.stop();
     }
-    if ((goalSFXseed > 4) && (goalSFXseed <= 5)){
+    else if ((goalSFXseed > 4) && (goalSFXseed <= 5)){
       goalSFX5.stop();
     }
-    if ((goalSFXseed > 5) && (goalSFXseed <= 6)){
+    else if ((goalSFXseed > 5) && (goalSFXseed <= 6)){
       goalSFX6.stop();
     }
-    if ((goalSFXseed > 6) && (goalSFXseed <= 7)){
+    else if ((goalSFXseed > 6) && (goalSFXseed <= 7)){
       goalSFX7.stop();
     }
-    if ((goalSFXseed > 7) && (goalSFXseed <= 8)){
+    else if ((goalSFXseed > 7) && (goalSFXseed <= 8)){
       goalSFX8.stop();
     }
-    if ((goalSFXseed > 8) && (goalSFXseed <= 9)){
+    else if ((goalSFXseed > 8) && (goalSFXseed <= 9)){
       goalSFX9.stop();
     }
     
@@ -263,47 +271,34 @@ void draw() {
     if ((goalSFXseed >= 0) && (goalSFXseed <= 1)){
       goalSFX1.play();
     }
-    if ((goalSFXseed > 1) && (goalSFXseed <= 2)){
+    else if ((goalSFXseed > 1) && (goalSFXseed <= 2)){
       goalSFX2.play();
     }
-    if ((goalSFXseed > 2) && (goalSFXseed <= 3)){
+    else if ((goalSFXseed > 2) && (goalSFXseed <= 3)){
       goalSFX3.play();
     }
-    if ((goalSFXseed > 3) && (goalSFXseed <= 4)){
+    else if ((goalSFXseed > 3) && (goalSFXseed <= 4)){
       goalSFX4.play();
     }
-    if ((goalSFXseed > 4) && (goalSFXseed <= 5)){
+    else if ((goalSFXseed > 4) && (goalSFXseed <= 5)){
       goalSFX5.play();
     }
-    if ((goalSFXseed > 5) && (goalSFXseed <= 6)){
+    else if ((goalSFXseed > 5) && (goalSFXseed <= 6)){
       goalSFX6.play();
     }
-    if ((goalSFXseed > 6) && (goalSFXseed <= 7)){
+    else if ((goalSFXseed > 6) && (goalSFXseed <= 7)){
       goalSFX7.play();
     }
-    if ((goalSFXseed > 7) && (goalSFXseed <= 8)){
+    else if ((goalSFXseed > 7) && (goalSFXseed <= 8)){
       goalSFX8.play();
     }
-    if ((goalSFXseed > 8) && (goalSFXseed <= 9)){
+    else if ((goalSFXseed > 8) && (goalSFXseed <= 9)){
       goalSFX9.play();
     }
     
     // checking to see if player 2's maximum score has been reached...
     if (scorePos > -10){
       ball.reset();
-    }
-    // ... if it has, they win
-    else {
-      println("P2 win");
-      goalSFX1.stop();
-      goalSFX2.stop();
-      goalSFX3.stop();
-      goalSFX4.stop();
-      goalSFX5.stop();
-      goalSFX6.stop();
-      goalSFX7.stop();
-      goalSFX8.stop();
-      goalSFX9.stop();
     }
   }
   
@@ -358,4 +353,10 @@ void keyReleased() {
   // Call both paddles' keyReleased methods
   leftPaddle.keyReleased();
   rightPaddle.keyReleased();
+}
+
+void mouseClicked() {
+    scorePos = 0;
+    setup();
+    loop();
 }
