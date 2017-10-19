@@ -20,6 +20,11 @@
 // Pretty ugly. (Now!)
 // Only two paddles. (So far!)
 
+// image library
+PImage win1;
+PImage win2;
+
+
 // sound library
 import processing.sound.*;
 SoundFile hyperSFX1;
@@ -75,6 +80,10 @@ float goalSFXseed;
 void setup() {
   // Set the size
   size(640, 480);
+  
+  // images (win screens)
+  win1 = loadImage("winscreen1.png");
+  win2 = loadImage("winscreen2.png");
   
   // declaring hyper sound effects
   hyperSFX1 = new SoundFile(this,"hyper1.wav");
@@ -190,6 +199,7 @@ void draw() {
     if (scorePos == -10){
       println("P2 win");
       background(0);
+      image(win2,0,0);
       noLoop();
     }
     
@@ -265,6 +275,7 @@ void draw() {
     if (scorePos == 10) {
       println("P1 win");
       background(255);
+      image(win1,0,0);
       noLoop();
     }
     
