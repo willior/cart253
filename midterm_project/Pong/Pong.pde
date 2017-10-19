@@ -24,9 +24,10 @@
 PImage win1;
 PImage win2;
 
-
 // sound library
 import processing.sound.*;
+SoundFile bounceSFX1;
+SoundFile bounceSFX2;
 SoundFile hyperSFX1;
 SoundFile hyperSFX2;
 SoundFile hyperSFX3;
@@ -45,6 +46,7 @@ SoundFile goalSFX6;
 SoundFile goalSFX7;
 SoundFile goalSFX8;
 SoundFile goalSFX9;
+SoundFile gameOverSFX1;
 
 // Global variables for the paddles, ball, and hyper stocks
 Paddle leftPaddle;
@@ -85,6 +87,10 @@ void setup() {
   win1 = loadImage("winscreen1.png");
   win2 = loadImage("winscreen2.png");
   
+  //declaring bounce sound effects
+  bounceSFX1 = new SoundFile(this,"bounce1.wav");
+  bounceSFX2 = new SoundFile(this,"bounce2.wav");
+  
   // declaring hyper sound effects
   hyperSFX1 = new SoundFile(this,"hyper1.wav");
   hyperSFX2 = new SoundFile(this,"hyper2.wav");
@@ -106,6 +112,9 @@ void setup() {
   goalSFX7 = new SoundFile(this,"goal7.mp3");
   goalSFX8 = new SoundFile(this,"goal8.mp3");
   goalSFX9 = new SoundFile(this,"goal9.mp3");
+  
+  // declaring the game over music
+  gameOverSFX1 = new SoundFile(this,"gameover1.mp3");
   
   // players' starting hyper stocks
   int stock1 = 0;
@@ -194,42 +203,14 @@ void draw() {
     else if ((goalSFXseed > 8) && (goalSFXseed <= 9)){
       goalSFX9.stop();
     }
-    
-    // checks if win and stops the draw loop if so
+
+    // checks if player 2 has reached maximum score; displays win screen and stops loop
     if (scorePos == -10){
       println("P2 win");
       background(0);
       image(win2,0,0);
+      gameOverSFX1.play();
       noLoop();
-    }
-    
-   // stops any goal sound effects still playing
-    if ((goalSFXseed >= 0) && (goalSFXseed <= 1)){
-      goalSFX1.stop();
-    }
-    else if ((goalSFXseed > 1) && (goalSFXseed <= 2)){
-      goalSFX2.stop();
-    }
-    else if ((goalSFXseed > 2) && (goalSFXseed <= 3)){
-      goalSFX3.stop();
-    }
-    else if ((goalSFXseed > 3) && (goalSFXseed <= 4)){
-      goalSFX4.stop();
-    }
-    else if ((goalSFXseed > 4) && (goalSFXseed <= 5)){
-      goalSFX5.stop();
-    }
-    else if ((goalSFXseed > 5) && (goalSFXseed <= 6)){
-      goalSFX6.stop();
-    }
-    else if ((goalSFXseed > 6) && (goalSFXseed <= 7)){
-      goalSFX7.stop();
-    }
-    else if ((goalSFXseed > 7) && (goalSFXseed <= 8)){
-      goalSFX8.stop();
-    }
-    else if ((goalSFXseed > 8) && (goalSFXseed <= 9)){
-      goalSFX9.stop();
     }
     
     // picks a goal sound effect at random from the library
@@ -271,15 +252,8 @@ void draw() {
   // function for when player 1 scores
   if (ball.goal2()) {
     scorePos++;
-
-    if (scorePos == 10) {
-      println("P1 win");
-      background(255);
-      image(win1,0,0);
-      noLoop();
-    }
     
-   // stops any goal sound effects still playing
+    // stops any goal sound effects still playing
     if ((goalSFXseed >= 0) && (goalSFXseed <= 1)){
       goalSFX1.stop();
     }
@@ -306,6 +280,15 @@ void draw() {
     }
     else if ((goalSFXseed > 8) && (goalSFXseed <= 9)){
       goalSFX9.stop();
+    }
+
+    // checks if player 1 has reached maximum score; displays win screen and stops loop
+    if (scorePos == 10) {
+      println("P1 win");
+      background(255);
+      image(win1,0,0);
+      gameOverSFX1.play();
+      noLoop();
     }
     
     // picks a goal sound effect at random from the library
@@ -400,6 +383,7 @@ void keyReleased() {
 
 void mouseClicked() {
     scorePos = 0;
+    gameOverSFX1.stop();
     setup();
     loop();
 }

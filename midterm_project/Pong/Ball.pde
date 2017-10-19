@@ -152,12 +152,17 @@ class Ball {
       vyMod = random(-7.5,7.5);
       
       // If it was moving to the left
+      
       if (vx < 0) {
+        
         // Reset its position to align with the right side of the paddle
         x = paddle.x + paddle.WIDTH/2 + SIZE/2;
         
         // checks to see if hyper mode is not active for player 1
         if (hyper1.hyperMode == 0){
+          
+        // plays sound
+        bounceSFX1.play();
           
           // randomness added to regular bounces; the degree of randomness is 1/10th that of a hyper bounce
           // (actually subtracted because this is for when the ball is moving left)
@@ -221,6 +226,9 @@ class Ball {
         
         // checks if hyper mode is not active for player 2
         if (hyper2.hyperMode == 0){
+          
+        // plays sound
+        bounceSFX2.play();
           
           // randomness added to regular bounces; the degree of randomness is 1/5th that of a hyper bounce
           vx += (vxMod/5);
