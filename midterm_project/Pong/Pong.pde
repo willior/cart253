@@ -88,15 +88,15 @@ void setup() {
   hyperSFX7 = new SoundFile(this,"hyper7.wav");
   hyperSFX8 = new SoundFile(this,"hyper8.wav");
   hyperSFX9 = new SoundFile(this,"hyper9.wav");
-  goalSFX1 = new SoundFile(this,"goal1.mp3");
-  goalSFX2 = new SoundFile(this,"goal2.mp3");
-  goalSFX3 = new SoundFile(this,"goal3.mp3");
-  goalSFX4 = new SoundFile(this,"goal4.mp3");
-  goalSFX5 = new SoundFile(this,"goal5.mp3");
-  goalSFX6 = new SoundFile(this,"goal6.mp3");
-  goalSFX7 = new SoundFile(this,"goal7.mp3");
-  goalSFX8 = new SoundFile(this,"goal8.mp3");
-  goalSFX9 = new SoundFile(this,"goal9.mp3");
+  goalSFX1 = new SoundFile(this,"goal1.wav");
+  goalSFX2 = new SoundFile(this,"goal2.wav");
+  goalSFX3 = new SoundFile(this,"goal3.wav");
+  goalSFX4 = new SoundFile(this,"goal4.wav");
+  goalSFX5 = new SoundFile(this,"goal5.wav");
+  goalSFX6 = new SoundFile(this,"goal6.wav");
+  goalSFX7 = new SoundFile(this,"goal7.wav");
+  goalSFX8 = new SoundFile(this,"goal8.wav");
+  goalSFX9 = new SoundFile(this,"goal9.wav");
   
 
   // Create the paddles on either side of the screen. 
@@ -151,16 +151,34 @@ void draw() {
   if (ball.goal1()) {
     scorePos--;
     
-    // stops any goal sound effects still playing
-    goalSFX1.stop();
-    goalSFX2.stop();
-    goalSFX3.stop();
-    goalSFX4.stop();
-    goalSFX5.stop();
-    goalSFX6.stop();
-    goalSFX7.stop();
-    goalSFX8.stop();
-    goalSFX9.stop();
+   // stops any goal sound effects still playing
+   if ((goalSFXseed >= 0) && (goalSFXseed <= 1)){
+      goalSFX1.stop();
+    }
+    if ((goalSFXseed > 1) && (goalSFXseed <= 2)){
+      goalSFX2.stop();
+    }
+    if ((goalSFXseed > 2) && (goalSFXseed <= 3)){
+      goalSFX3.stop();
+    }
+    if ((goalSFXseed > 3) && (goalSFXseed <= 4)){
+      goalSFX4.stop();
+    }
+    if ((goalSFXseed > 4) && (goalSFXseed <= 5)){
+      goalSFX5.stop();
+    }
+    if ((goalSFXseed > 5) && (goalSFXseed <= 6)){
+      goalSFX6.stop();
+    }
+    if ((goalSFXseed > 6) && (goalSFXseed <= 7)){
+      goalSFX7.stop();
+    }
+    if ((goalSFXseed > 7) && (goalSFXseed <= 8)){
+      goalSFX8.stop();
+    }
+    if ((goalSFXseed > 8) && (goalSFXseed <= 9)){
+      goalSFX9.stop();
+    }
     
     // picks a goal sound effect at random from the library
     goalSFXseed = random(0,9);
@@ -208,16 +226,34 @@ void draw() {
   if (ball.goal2()) {
     scorePos++;
     
-    // stops any goal sound effects still playing
-    goalSFX1.stop();
-    goalSFX2.stop();
-    goalSFX3.stop();
-    goalSFX4.stop();
-    goalSFX5.stop();
-    goalSFX6.stop();
-    goalSFX7.stop();
-    goalSFX8.stop();
-    goalSFX9.stop();
+   // stops any goal sound effects still playing
+   if ((goalSFXseed >= 0) && (goalSFXseed <= 1)){
+      goalSFX1.stop();
+    }
+    if ((goalSFXseed > 1) && (goalSFXseed <= 2)){
+      goalSFX2.stop();
+    }
+    if ((goalSFXseed > 2) && (goalSFXseed <= 3)){
+      goalSFX3.stop();
+    }
+    if ((goalSFXseed > 3) && (goalSFXseed <= 4)){
+      goalSFX4.stop();
+    }
+    if ((goalSFXseed > 4) && (goalSFXseed <= 5)){
+      goalSFX5.stop();
+    }
+    if ((goalSFXseed > 5) && (goalSFXseed <= 6)){
+      goalSFX6.stop();
+    }
+    if ((goalSFXseed > 6) && (goalSFXseed <= 7)){
+      goalSFX7.stop();
+    }
+    if ((goalSFXseed > 7) && (goalSFXseed <= 8)){
+      goalSFX8.stop();
+    }
+    if ((goalSFXseed > 8) && (goalSFXseed <= 9)){
+      goalSFX9.stop();
+    }
     
     // picks a goal sound effect at random from the library
     goalSFXseed = random(0,9);
@@ -257,6 +293,15 @@ void draw() {
     // ... if it has, they win
     else {
       println("P2 win");
+      goalSFX1.stop();
+      goalSFX2.stop();
+      goalSFX3.stop();
+      goalSFX4.stop();
+      goalSFX5.stop();
+      goalSFX6.stop();
+      goalSFX7.stop();
+      goalSFX8.stop();
+      goalSFX9.stop();
     }
   }
   
