@@ -1,24 +1,17 @@
-// current status:
+// hyper pong: mashup '98 edition (-final turbo mix-)
+// "a game" by will graham-simpkins
 
-// typical Pong game with the "score" built-in to the visuals
+// this is a typical Pong game with the "score" built-in to the visuals
 // no longer a "first-to-10" scoring system, but a "tug-of-war" kind of scoring system
-// added the "hyper smash": for each successful deflection, the player accrus a "hyper stock"
+// added the "hyper smash": for each successful deflection, the player accrues a "hyper stock"
 // hyper stocks can be spent to significantly amplify the degree of randomness applied...
 // ...  to the ball's velocities on the next successful bounce
 // the player's paddle turns red to signify "hyper mode"
 // the players' hyper stocks are shown in the bottom corners
 // each player may hold a maximum of 3 hyper-stocks
-
-// Pong
-//
-// A simple version of Pong using object-oriented programming.
-// Allows to people to bounce a ball back and forth between
-// two paddles that they control.
-//
-// No scoring. (Yet!)
-// No score display. (Yet!)
-// Pretty ugly. (Now!)
-// Only two paddles. (So far!)
+// a short 3 to 5 second clip of music will play following a successful goal
+// in intense matches, the background music becomes a '90s mashup dance party
+// i hope you enjoy playing - it is surprisingly fun!!
 
 // image library
 PImage win1;
@@ -68,7 +61,7 @@ color hyperFull2 = color(255,0,0);
 color hyperStroke1 = color(255);
 color hyperStroke2 = color(0);
 
-// The background colour during play (black)
+// Tplayer 2's territory (the background, black)
 color backgroundColor = color(0);
 
 // variable for tracking score
@@ -126,7 +119,6 @@ void setup() {
   int stock1 = 0;
   int stock2 = 0;
   
-
   // Create the paddles on either side of the screen. 
   // Use PADDLE_INSET to to position them on x, position them both at centre on y
   // Also pass through the two keys used to control 'up' and 'down' respectively
@@ -167,11 +159,10 @@ void draw() {
     image(splash, 0, 0);
     }
   
-  
   // Main code
   else {
   
-    // Used a white rect to act as the abstract score display
+    // player one's territory (the rect, white)
     fill(255);
     
     // The rect moves in accordance to scorePos, which goes up or down in value depending on who scores
@@ -375,13 +366,13 @@ void draw() {
         rightPaddle.paddleColor = (255);
       }
   
-    // Display the paddles, ball, and hyper stocks
-    leftPaddle.display();
-    rightPaddle.display();
-    ball.display();
-    hyper1.display();
-    hyper2.display();
-  }
+      // Display the paddles, ball, and hyper stocks
+      leftPaddle.display();
+      rightPaddle.display();
+      ball.display();
+      hyper1.display();
+      hyper2.display();
+    }
   }
   
   // keyPressed()
