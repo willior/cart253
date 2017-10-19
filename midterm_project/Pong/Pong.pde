@@ -213,39 +213,42 @@ void draw() {
       noLoop();
     }
     
-    // picks a goal sound effect at random from the library
-    goalSFXseed = random(0,9);
-    if ((goalSFXseed >= 0) && (goalSFXseed <= 1)){
-      goalSFX1.play();
-    }
-    else if ((goalSFXseed > 1) && (goalSFXseed <= 2)){
-      goalSFX2.play();
-    }
-    else if ((goalSFXseed > 2) && (goalSFXseed <= 3)){
-      goalSFX3.play();
-    }
-    else if ((goalSFXseed > 3) && (goalSFXseed <= 4)){
-      goalSFX4.play();
-    }
-    else if ((goalSFXseed > 4) && (goalSFXseed <= 5)){
-      goalSFX5.play();
-    }
-    else if ((goalSFXseed > 5) && (goalSFXseed <= 6)){
-      goalSFX6.play();
-    }
-    else if ((goalSFXseed > 6) && (goalSFXseed <= 7)){
-      goalSFX7.play();
-    }
-    else if ((goalSFXseed > 7) && (goalSFXseed <= 8)){
-      goalSFX8.play();
-    }
-    else if ((goalSFXseed > 8) && (goalSFXseed <= 9)){
-      goalSFX9.play();
-    }
-    
-    // checking to see if player 2's maximum score has been reached...
-    if (scorePos < 10){
-      ball.reset();
+    // checks if winning goal
+    if (scorePos > -10){
+      
+      // picks a goal sound effect at random from the library
+      goalSFXseed = random(0,9);
+      if ((goalSFXseed >= 0) && (goalSFXseed <= 1)){
+        goalSFX1.play();
+      }
+      else if ((goalSFXseed > 1) && (goalSFXseed <= 2)){
+        goalSFX2.play();
+      }
+      else if ((goalSFXseed > 2) && (goalSFXseed <= 3)){
+        goalSFX3.play();
+      }
+      else if ((goalSFXseed > 3) && (goalSFXseed <= 4)){
+        goalSFX4.play();
+      }
+      else if ((goalSFXseed > 4) && (goalSFXseed <= 5)){
+        goalSFX5.play();
+      }
+      else if ((goalSFXseed > 5) && (goalSFXseed <= 6)){
+        goalSFX6.play();
+      }
+      else if ((goalSFXseed > 6) && (goalSFXseed <= 7)){
+        goalSFX7.play();
+      }
+      else if ((goalSFXseed > 7) && (goalSFXseed <= 8)){
+        goalSFX8.play();
+      }
+      else if ((goalSFXseed > 8) && (goalSFXseed <= 9)){
+        goalSFX9.play();
+      }
+      // checking to see if player 2's maximum score has been reached...
+      if (scorePos > -10){
+        ball.reset();
+      }
     }
   }
   
@@ -321,9 +324,8 @@ void draw() {
     else if ((goalSFXseed > 8) && (goalSFXseed <= 9)){
       goalSFX9.play();
     }
-    
-    // checking to see if player 2's maximum score has been reached...
-    if (scorePos > -10){
+    // checking to see if player 1's maximum score has been reached...
+    if (scorePos < 10){
       ball.reset();
     }
   }
