@@ -129,7 +129,7 @@ class Griddie {
     // effectively displaying the griddies with varying degrees of transparancy...
     // depending on their energy levels
     // ie. less energy = more transparency
-    fill(255,energyOffset,0, energy); 
+    fill((255-energyOffset),energyOffset,0, energy); 
     noStroke();
     rect(x, y, size, size);
   }
