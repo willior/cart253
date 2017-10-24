@@ -29,10 +29,6 @@ class Parasite {
   // Move the Parasite
   void update() {
     
-    if (energy == 0) {
-      return;
-    }
-    
     int xMoveType = floor(random(-1,2));
     int yMoveType = floor(random(-1,2));
     x += size * xMoveType;
