@@ -13,7 +13,7 @@ class Parasite {
   int y;
   int size;
   int energy;
-  color fill = color(127,0,255);
+  color fill = color(0,0,255);
 
   // Parasite(tempX, tempY, tempSize)
   //
@@ -68,6 +68,7 @@ class Parasite {
   void display() {
     fill(fill, 127); 
     noStroke();
-    ellipse(x, y, size, size);
+    ellipseMode(CORNER);
+    ellipse(x+15, y+15, 30, 30);
   }
 }

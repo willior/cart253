@@ -61,7 +61,7 @@ void setup() {
 // Update all the griddies, check for collisions between them, display them.
 
 void draw() {
-  background(50);
+  background(255);
 
   // We need to loop through all the griddies one by one
   for (int i = 0; i < griddies.length; i++) {
