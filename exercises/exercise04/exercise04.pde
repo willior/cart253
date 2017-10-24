@@ -17,9 +17,7 @@ int gridSize = 20;
 // each instance in the array is known as an element, and they are numbered (indexes)
 // 
 Griddie[] griddies = new Griddie[100];
-
-
-
+Parasite[] parasites = new Parasite[10];
 // setup()
 //
 // Set up the window and the griddies
@@ -49,6 +47,12 @@ void setup() {
     // its 3 properties being x-pos, y-pos, and size
     // (x/y-pos being factors of the previous random function, and gridSize=20)
     griddies[i] = new Griddie(x * gridSize, y * gridSize, gridSize);
+  }
+  for (int p = 0; p < parasites.length; p++) {
+    int x = floor(random(0, width/gridSize));
+    int y = floor(random(0, height/gridSize));
+    
+    parasites[p] = new Parasite(x * gridSize, y * gridSize, gridSize);
   }
 }
 
@@ -88,8 +92,19 @@ void draw() {
         griddies[i].collide(griddies[j]);
       }
     }
+    for (int p = 0; i < parasites.length; p++) {
+      parasites[p].update();
+      for (int j = 0; j < griddies.length; j++) {
+        if (j != p) {
+          parasites[p].attack(griddies[j]);
+        }
+      }
+    }
+      
     
     // Display the griddies
     griddies[i].display();
+    parasites[p].display();
+    
   }
 }

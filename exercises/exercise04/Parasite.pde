@@ -70,7 +70,7 @@ class Parasite {
   //
   // Draw the Parasite on the screen as a circle
   void display() {
-    fill(fill); 
+    fill(fill, 127); 
     noStroke();
     ellipse(x, y, size, size);
   }
