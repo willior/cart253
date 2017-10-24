@@ -67,7 +67,7 @@ class Parasite {
   // Draw the Parasite on the screen as a transparent circle
   void display() {
     fill(fill, 127); 
-    noStroke();
+    stroke(127,0,127);
     ellipseMode(CORNER);
     ellipse(x+15, y+15, 30, 30);
   }
