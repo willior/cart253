@@ -16,6 +16,8 @@ class Griddie {
   int y;
   int size;
   int energy;
+  
+  //the energyOffset variable is used to determine how much energy a Griddie has lost
   int energyOffset;
   color fill = color(255,0,0);
 
@@ -88,6 +90,8 @@ class Griddie {
     
     // Constrain the Griddies energy level to be within the defined bounds
     energy = constrain(energy,0,maxEnergy);
+    
+    // sets the value for energyOffset, which will be used to change the colour of the Griddies
     energyOffset = maxEnergy-energy;
   }
 
@@ -129,6 +133,9 @@ class Griddie {
     // effectively displaying the griddies with varying degrees of transparancy...
     // depending on their energy levels
     // ie. less energy = more transparency
+    //
+    // CHANGED: fill colour to decrease its R value from the energyOffset variable
+    // and to increase its G value from the energyOffset variable
     fill((255-energyOffset),energyOffset,0, energy); 
     noStroke();
     rect(x, y, size, size);
