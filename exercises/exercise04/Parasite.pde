@@ -51,5 +51,27 @@ class Parasite {
       y -= height;
     }
   }
+  // attack(host)
+  //
+  // Checks for collision with Griddie
+  // and updates energy level
   
+  void attack(Griddie host) {
+
+    if (x == host.x && y == host.y) {
+      // Decreases that Griddie's energy
+      host.energy -= drainEnergy;
+      // Constrain the energy level to be within bounds
+      host.energy = constrain(energy,0,255);
+    }
+  }
+
+  // display()
+  //
+  // Draw the Parasite on the screen as a circle
+  void display() {
+    fill(fill); 
+    noStroke();
+    ellipse(x, y, size, size);
+  }
 }
