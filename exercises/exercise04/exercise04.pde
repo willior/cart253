@@ -92,19 +92,17 @@ void draw() {
         griddies[i].collide(griddies[j]);
       }
     }
-    for (int p = 0; i < parasites.length; p++) {
+    // Display the griddies
+    griddies[i].display();
+  }
+  
+  for (int p = 0; p < parasites.length; p++) {
       parasites[p].update();
       for (int j = 0; j < griddies.length; j++) {
         if (j != p) {
-          parasites[p].attack(griddies[j]);
+          parasites[p].attack(griddies[j]);    
         }
       }
-    }
-      
-    
-    // Display the griddies
-    griddies[i].display();
     parasites[p].display();
-    
   }
 }
