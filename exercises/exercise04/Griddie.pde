@@ -16,6 +16,7 @@ class Griddie {
   int y;
   int size;
   int energy;
+  int energyOffset;
   color fill = color(255,0,0);
 
   // Griddie(tempX, tempY, tempSize)
@@ -87,6 +88,7 @@ class Griddie {
     
     // Constrain the Griddies energy level to be within the defined bounds
     energy = constrain(energy,0,maxEnergy);
+    energyOffset = maxEnergy-energy;
   }
 
   // collide(other)
@@ -127,7 +129,7 @@ class Griddie {
     // effectively displaying the griddies with varying degrees of transparancy...
     // depending on their energy levels
     // ie. less energy = more transparency
-    fill(fill, energy); 
+    fill(255,energyOffset,0, energy); 
     noStroke();
     rect(x, y, size, size);
   }
