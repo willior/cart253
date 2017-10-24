@@ -24,4 +24,32 @@ class Parasite {
     size = tempSize;
   }
   
+  // update()
+  //
+  // Move the Parasite
+  void update() {
+    
+    if (energy == 0) {
+      return;
+    }
+    
+    int xMoveType = floor(random(-1,2));
+    int yMoveType = floor(random(-1,2));
+    x += size * xMoveType;
+    y += size * yMoveType;
+    
+    if (x < 0) {
+      x += width;
+    }
+    else if (x >= width) {
+      x -= width;
+    }
+    if (y < 0) {
+      y += height;
+    }
+    else if (y >= height) {
+      y -= height;
+    }
+  }
+  
 }
