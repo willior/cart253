@@ -64,7 +64,7 @@ class Parasite {
 
   // display()
   //
-  // Draw the Parasite on the screen as a circle
+  // Draw the Parasite on the screen as a transparent circle
   void display() {
     fill(fill, 127); 
     noStroke();

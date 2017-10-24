@@ -48,10 +48,11 @@ void setup() {
     // (x/y-pos being factors of the previous random function, and gridSize=20)
     griddies[i] = new Griddie(x * gridSize, y * gridSize, gridSize);
   }
+  
+  // Creates 10 Parasite objects
   for (int p = 0; p < parasites.length; p++) {
     int x = floor(random(0, width/gridSize));
     int y = floor(random(0, height/gridSize));
-    
     parasites[p] = new Parasite(x * gridSize, y * gridSize, gridSize);
   }
 }
@@ -59,6 +60,7 @@ void setup() {
 // draw()
 //
 // Update all the griddies, check for collisions between them, display them.
+// Update all the parasites, check for collisions with griddies, display them.
 
 void draw() {
   background(255);
@@ -96,6 +98,7 @@ void draw() {
     griddies[i].display();
   }
   
+  // goes through the parasites, updates them, and applies the attack() function on overlap with griddie
   for (int p = 0; p < parasites.length; p++) {
       parasites[p].update();
       for (int j = 0; j < griddies.length; j++) {
@@ -103,6 +106,7 @@ void draw() {
           parasites[p].attack(griddies[j]);    
         }
       }
+    // Display the parasites
     parasites[p].display();
   }
 }
