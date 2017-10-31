@@ -35,8 +35,8 @@ class Cell {
       return;
     }
     
-    float vx = speed * (noise(tx) * 2 - 1);
-    float vy = speed * (noise(ty) * 2 - 1);
+    float vx = speed * (noise(tx) * 2 - 1) + ((mouseX) - (width/2)) / (width/10);
+    float vy = speed * (noise(ty) * 2 - 1) + ((mouseY) - (width/2)) / (width/10);
     x += vx;
     y += vy;
   
