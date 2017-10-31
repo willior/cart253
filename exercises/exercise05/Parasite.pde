@@ -50,7 +50,7 @@ class Parasite {
   
   void attack(Cell host) {
 
-    if ((x == host.x && y == host.y) || (x <= host.x + 10 && y <= host.y + 10) && (x >= host.x - 10 && y >= host.y - 10)) {
+    if ((x == host.x && y == host.y) || (x <= host.x + (10) && y <= host.y + (10) && (x >= host.x - (10) && y >= host.y - (10)))) {
       // Decreases that Griddie's energy
       host.energy -= drainEnergy;
       // Constrain the energy level to be within bounds
