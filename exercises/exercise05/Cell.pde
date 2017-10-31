@@ -2,23 +2,20 @@ class Cell {
 
   int maxEnergy = 255;
   int moveEnergy = -1;
-  int collideEnergy = 20;
+  int collideEnergy = 10;
+  int size;
+  int energy;
   
   float tx = random(0,100);
   float ty = random(0,100);
   
   float speed = 10;
-  
   float x;
   float y;
-  int size;
-  int energy;
-  
+
   int energyOffset;
   
-  // variables for collision detection
-  float posRange;
-  float negRange;
+  // variable for collision detection
   float areaSize = 10;
   
   color fill = color(255,0,0);
