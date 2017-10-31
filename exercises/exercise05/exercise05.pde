@@ -15,5 +15,10 @@ void setup() {
 
 void draw() {
   background(0);
-  
+  for (int i = 0; i < cells.length; i++) {
+    cells[i].update();
+    for (int j = 0; j < cells.length; j++) {
+    }
+    cells[i].display();
+  }
 }

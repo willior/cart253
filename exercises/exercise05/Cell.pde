@@ -31,7 +31,7 @@ class Cell {
     x += vx;
     y += vy;
   
-    ellipse(x,y,20,20);
+
     tx += 0.01;
     ty += 0.01;
   
@@ -49,5 +49,9 @@ class Cell {
     else if (y > height) {
       y -= height;
     }
+  }
+  
+  void display() {
+    ellipse(x,y,20,20);
   }
 }
