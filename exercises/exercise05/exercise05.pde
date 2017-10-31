@@ -1,4 +1,4 @@
-Cell[] cells = new Cell[10];
+Cell[] cells = new Cell[100];
 
 void setup() {
   size(640,480);
