@@ -1,6 +1,6 @@
 class Parasite {
 
-  int drainEnergy = 50;
+  int drainEnergy = 25;
   int size;
   int energy;
   
@@ -65,6 +65,6 @@ class Parasite {
     fill(fill, 127); 
     stroke(127,0,127);
     ellipseMode(CORNER);
-    ellipse(x+15, y+15, 20+(killCount), 20+(killCount));
+    ellipse(x+15, y+15, 20+(killCount/4), 20+(killCount/4));
   }
 }
