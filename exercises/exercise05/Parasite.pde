@@ -10,6 +10,8 @@ class Parasite {
   float speed = 10;
   float x;
   float y;
+  
+  int killCount = 0;
 
   color fill = color(0,0,255);
 
@@ -53,6 +55,9 @@ class Parasite {
       host.energy -= drainEnergy;
       // Constrain the energy level to be within bounds
       host.energy = constrain(energy,0,255);
+      if (host.energy == 0) {
+        killCount++;
+      }
     }
   }
 
@@ -60,6 +65,6 @@ class Parasite {
     fill(fill, 127); 
     stroke(127,0,127);
     ellipseMode(CORNER);
-    ellipse(x+15, y+15, 30, 30);
+    ellipse(x+15, y+15, 20+(killCount), 20+(killCount));
   }
 }

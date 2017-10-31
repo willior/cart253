@@ -1,3 +1,6 @@
+// exercise 05
+// goal: use the noise() function to regulate objects' movement
+
 Cell[] cells = new Cell[200];
 Parasite[] parasites = new Parasite[10];
 

@@ -15,6 +15,8 @@ class Cell {
 
   int energyOffset;
   
+  int killCount;
+  
   // variable for collision detection
   float areaSize = 10;
   
