@@ -16,8 +16,9 @@ class Cell {
   
   int energyOffset;
   
-  float areaX;
-  float areaY;
+  // variables for collision detection
+  float posRange;
+  float negRange;
   float areaSize = 10;
   
   color fill = color(255,0,0);
@@ -68,19 +69,11 @@ class Cell {
       return;
     }
     
-    if (x == other.x && y == other.y){
+    // collision detection logic
+    if ((x == other.x && y == other.y) || (x <= other.x + 10 && y <= other.y + 10) && (x >= other.x - 10 && y >= other.y - 10)){
       energy += collideEnergy;
       energy = constrain(energy,0,maxEnergy);
     }
-    
-    //if (x >= (other.x - areaSize) && y >= (other.y - areaSize)) {
-    //  energy += collideEnergy;
-    //  energy = constrain(energy,0,maxEnergy);
-    //}
-    //else if (x <= (other.x + areaSize) && y <= (other.y + areaSize)) {
-    //  energy += collideEnergy;
-    //  energy = constrain(energy,0,maxEnergy);
-    //}
   }
   
   void display() {
