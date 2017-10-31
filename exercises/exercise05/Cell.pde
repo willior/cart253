@@ -26,15 +26,17 @@ class Cell {
   
   void update() {
   
+    if (energy == 0){
+      return;
+    }
+    
     float vx = speed * (noise(tx) * 2 - 1);
     float vy = speed * (noise(ty) * 2 - 1);
     x += vx;
     y += vy;
   
-
     tx += 0.01;
     ty += 0.01;
-  
   
     // wrap detection
     if (x < 0) {
@@ -49,9 +51,27 @@ class Cell {
     else if (y > height) {
       y -= height;
     }
+    
+    energy += moveEnergy;
+    energy = constrain(energy,0,maxEnergy);
+    energyOffset = maxEnergy-energy;
+    
+  }
+  
+  void collide(Cell other) {
+    if (energy == 0 || other.energy == 0) {
+      return;
+    }
+    
+    if (x == other.x && y == other.y) {
+      energy += collideEnergy;
+      energy = constrain(energy,0,maxEnergy);
+    }
   }
   
   void display() {
+    fill((255-energyOffset), energyOffset, 0, energy);
+    noStroke();
     ellipse(x,y,20,20);
   }
 }

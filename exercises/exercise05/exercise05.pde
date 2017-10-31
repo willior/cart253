@@ -1,7 +1,5 @@
 Cell[] cells = new Cell[100];
 
-
-
 void setup() {
   size(640,480);
   for (int i = 0; i < cells.length; i++) {
