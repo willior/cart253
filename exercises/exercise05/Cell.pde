@@ -1,7 +1,7 @@
 class Cell {
 
   int maxEnergy = 255;
-  int moveEnergy = -1;
+  int moveEnergy = -10;
   int collideEnergy = 10;
   
   float tx = random(0,100);
@@ -15,6 +15,11 @@ class Cell {
   int energy;
   
   int energyOffset;
+  
+  float areaX;
+  float areaY;
+  float areaSize = 20;
+  
   color fill = color(255,0,0);
   
   Cell(int tempX, int tempY, int tempSize) {
@@ -63,7 +68,11 @@ class Cell {
       return;
     }
     
-    if (x == other.x && y == other.y) {
+    if (x <= (other.x - areaSize)) {
+      energy += collideEnergy;
+      energy = constrain(energy,0,maxEnergy);
+    }
+    else if (x >= (other.x + areaSize)) {
       energy += collideEnergy;
       energy = constrain(energy,0,maxEnergy);
     }

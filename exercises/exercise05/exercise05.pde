@@ -1,4 +1,4 @@
-Cell[] cells = new Cell[100];
+Cell[] cells = new Cell[10];
 
 void setup() {
   size(640,480);
@@ -16,6 +16,9 @@ void draw() {
   for (int i = 0; i < cells.length; i++) {
     cells[i].update();
     for (int j = 0; j < cells.length; j++) {
+      if (j != i){
+        cells[i].collide(cells[j]);
+      }
     }
     cells[i].display();
   }
