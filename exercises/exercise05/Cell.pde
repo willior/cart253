@@ -37,6 +37,20 @@ class Cell {
     
     float vx = speed * (noise(tx) * 2 - 1) + ((mouseX) - (width/2)) / (width/10);
     float vy = speed * (noise(ty) * 2 - 1) + ((mouseY) - (width/2)) / (width/10);
+    
+    if (mouseX > x){
+      vx += 1;
+    }
+    if (mouseX < x){
+      vx -= 1;
+    }
+    if (mouseY > y){
+      vy += 1;
+    }
+    if (mouseY < y){
+      vy -= 1;
+    }
+    
     x += vx;
     y += vy;
   
