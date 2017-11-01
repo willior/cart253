@@ -1,7 +1,7 @@
 class Antibody {
   
   int maxEnergy = 255;
-  float moveEnergy = -1;
+  float moveEnergy = -2;
   int collideEnergy = 50;
   int size;
   int energy;
@@ -14,12 +14,7 @@ class Antibody {
   float y;
 
   int energyOffset;
-  
-  // variable for collision detection
-  float areaSize = 10;
-  
-  color fill = color(255,255,0);
-  
+
   Antibody(int tempX, int tempY, int tempSize) {
     x = tempX;
     y = tempY;
@@ -34,12 +29,7 @@ class Antibody {
       return;
     }
     
-    if (energy == 0) {
-      energy--;
-      return;
-    }
-    
-    // behaviour for cells with energy remaining
+    // behaviour for antibodies with energy remaining
     else if (energy > 0) {
     
     float vx = speed * (noise(tx) * 2 - 1);
@@ -95,7 +85,7 @@ class Antibody {
   }
   
   void display() {
-    fill((255), 255, 0, energy);
+    fill(255, 255, 0, energy);
     noStroke();
     ellipse(x,y,20,20);
   }

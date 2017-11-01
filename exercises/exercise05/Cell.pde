@@ -15,11 +15,6 @@ class Cell {
 
   int energyOffset;
   
-  // variable for collision detection
-  float areaSize = 10;
-  
-  color fill = color(255,0,0);
-  
   Cell(int tempX, int tempY, int tempSize) {
     x = tempX;
     y = tempY;
