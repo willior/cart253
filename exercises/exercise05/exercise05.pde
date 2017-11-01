@@ -10,6 +10,7 @@
 // sound library
  import processing.sound.*;
  SoundFile pop;
+ SoundFile bgm;
 
 // initializing arrays
 Cell[] cells = new Cell[200];
@@ -29,10 +30,16 @@ void setup() {
   
   size(800,600);
   pop = new SoundFile(this,"pop.wav");
+  bgm = new SoundFile(this,"bgm.mp3");
+  
+  // plays the background music in a loop
+  bgm.loop();
   
   // player starts with 3 antibodies
   int stock = 3;
   meter = new Hyper(10, 50, (height - 50), stock, 0, hyperEmpty, hyperStroke);
+  
+  
   
   // instantiating cells
   for (int i = 0; i < cells.length; i++) {
@@ -83,6 +90,7 @@ void draw() {
       int score = (millis() - time);
       println("your score: ", score);
       println("please press the 'R' key to begin again");
+      bgm.stop();
       noLoop();
     }
   }
