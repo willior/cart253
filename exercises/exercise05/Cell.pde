@@ -1,5 +1,5 @@
 class Cell {
-
+  
   int maxEnergy = 255;
   float moveEnergy = -.2;
   int collideEnergy = 10;
@@ -15,8 +15,6 @@ class Cell {
 
   int energyOffset;
   
-  int killCount;
-  
   // variable for collision detection
   float areaSize = 10;
   
@@ -30,10 +28,22 @@ class Cell {
   }
   
   void update() {
-  
-    if (energy == 0){
+    
+    // terminates the function if energy is less than 0
+    if (energy < 0) {
       return;
     }
+  
+    // increases the global kill count by 1 if energy is at 0
+    // then changed energy to -1 so that the function will terminate (see above)
+    else if (energy == 0) {
+      globalKillCount++;
+      energy = -1;
+      return;
+    }
+    
+    // behaviour for cells with energy remaining
+    else if (energy > 0) {
     
     float vx = speed * (noise(tx) * 2 - 1) + ((mouseX) - (width/2)) / (width/10);
     float vy = speed * (noise(ty) * 2 - 1) + ((mouseY) - (width/2)) / (width/10);
@@ -71,10 +81,11 @@ class Cell {
       y -= height;
     }
     
+    // energy 
     energy += moveEnergy;
     energy = constrain(energy,0,maxEnergy);
     energyOffset = maxEnergy-energy;
-    
+    }
   }
   
   void collide(Cell other) {

@@ -1,6 +1,6 @@
 class Parasite {
 
-  int drainEnergy = 25;
+  int drainEnergy = 10;
   int size;
   int energy;
   
@@ -15,9 +15,6 @@ class Parasite {
 
   color fill = color(0,0,255);
 
-  // Parasite(tempX, tempY, tempSize)
-  //
-  // Set up the Parasite with the specified location and size
   Parasite(int tempX, int tempY, int tempSize) {
     x = tempX;
     y = tempY;
@@ -51,9 +48,7 @@ class Parasite {
   void attack(Cell host) {
 
     if ((x == host.x && y == host.y) || (x <= host.x + (10) && y <= host.y + (10) && (x >= host.x - (10) && y >= host.y - (10)))) {
-      // Decreases that Griddie's energy
       host.energy -= drainEnergy;
-      // Constrain the energy level to be within bounds
       host.energy = constrain(energy,0,255);
       if (host.energy == 0) {
         killCount++;
