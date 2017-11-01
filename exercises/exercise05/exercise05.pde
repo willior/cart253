@@ -1,7 +1,6 @@
 // exercise 05
 // goal: use the noise() function to regulate objects' movement
 
-int globalKillCount = 0;
 Cell[] cells = new Cell[200];
 Parasite[] parasites = new Parasite[10];
 
@@ -23,6 +22,7 @@ void setup() {
 
 void draw() {
   background(255);
+  int globalKillCount = 0;
   for (int i = 0; i < cells.length; i++) {
     cells[i].update();
     for (int j = 0; j < cells.length; j++) {
@@ -31,6 +31,12 @@ void draw() {
       }
     }
     cells[i].display();
+    if (cells[i].energy == 0) {
+      globalKillCount++;
+    }
+    if (globalKillCount == 200) {
+      noLoop();
+    }
   }
   for (int p = 0; p < parasites.length; p++) {
       parasites[p].update();

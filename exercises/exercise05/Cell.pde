@@ -30,15 +30,7 @@ class Cell {
   void update() {
     
     // terminates the function if energy is less than 0
-    if (energy < 0) {
-      return;
-    }
-  
-    // increases the global kill count by 1 if energy is at 0
-    // then changed energy to -1 so that the function will terminate (see above)
-    else if (energy == 0) {
-      globalKillCount++;
-      energy = -1;
+    if (energy <= 0) {
       return;
     }
     
