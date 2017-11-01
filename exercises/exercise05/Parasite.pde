@@ -1,3 +1,7 @@
+// Parasite
+//
+// a class that defines parasite objects, which drain energy from cells and become larger when they kill one
+
 class Parasite {
 
   int drainEnergy = 20;

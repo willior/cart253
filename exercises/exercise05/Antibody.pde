@@ -1,3 +1,9 @@
+// Antibody
+//
+// a class that defines antibody objects, which are released whenever/wherever the player clicks
+// they heal cells they come into contact with and have the potential to revive dead cells
+// however, they do not last long and cannot be healed themself
+
 class Antibody {
   
   int maxEnergy = 255;

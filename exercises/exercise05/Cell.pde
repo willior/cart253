@@ -1,3 +1,9 @@
+// Cell
+//
+// a class that defines cell objects, which float around and can be influenced with mouse movement
+// they slowly lose energy over time and gain a small amount of energy when colliding with other cells
+// once killed, they can be resurrected by antibodies
+
 class Cell {
   
   int maxEnergy = 255;
