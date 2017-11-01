@@ -1,6 +1,6 @@
 class Parasite {
 
-  int drainEnergy = 10;
+  int drainEnergy = 20;
   int size;
   int energy;
   

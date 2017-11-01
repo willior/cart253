@@ -3,9 +3,12 @@
 
 Cell[] cells = new Cell[200];
 Parasite[] parasites = new Parasite[10];
+int time = 0;
+int score = 0;
 
 void setup() {
-  size(640,480);
+  size(800,600);
+  
   for (int i = 0; i < cells.length; i++) {
 
     int x = floor(random(0, width));
@@ -23,6 +26,7 @@ void setup() {
 void draw() {
   background(255);
   int globalKillCount = 0;
+  
   for (int i = 0; i < cells.length; i++) {
     cells[i].update();
     for (int j = 0; j < cells.length; j++) {
@@ -35,6 +39,9 @@ void draw() {
       globalKillCount++;
     }
     if (globalKillCount == 200) {
+      int score = (millis() - time);
+      println("your score: ", score);
+      println("please click the screen to begin again");
       noLoop();
     }
   }
@@ -46,6 +53,12 @@ void draw() {
         }
       }
     parasites[p].display();
-    println(globalKillCount);
+    
   }
+}
+
+void mouseClicked() {
+    setup();
+    time = millis();
+    loop();
 }
