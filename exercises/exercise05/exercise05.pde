@@ -118,6 +118,7 @@ void draw() {
 // reset button
 void keyPressed() {
   if (key == 'r') {
+    bgm.stop();
     setup();
     time = millis();
     loop();
