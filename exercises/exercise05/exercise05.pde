@@ -1,13 +1,24 @@
 // exercise 05
 // goal: use the noise() function to regulate objects' movement
+// added interactivity based on mouse position
+// used a timer to track score
+
+// import processing.sound.*;
+// SoundFile pop;
+
 
 Cell[] cells = new Cell[200];
 Parasite[] parasites = new Parasite[10];
+Antibody[] antibodies = new Antibody[10];
+
 int time = 0;
 int score = 0;
 
 void setup() {
+  
   size(800,600);
+  
+//  pop = new SoundFile(this,"pop.wav");
   
   for (int i = 0; i < cells.length; i++) {
 
@@ -45,20 +56,47 @@ void draw() {
       noLoop();
     }
   }
+  
+  
   for (int p = 0; p < parasites.length; p++) {
       parasites[p].update();
+//      antibodies[p].update();
       for (int j = 0; j < cells.length; j++) {
         if (j != p) {
-          parasites[p].attack(cells[j]);    
+          parasites[p].attack(cells[j]);
+//          antibodies[p].heal(cells[j]);
         }
       }
-    parasites[p].display();
-    
+    parasites[p].display();   
+//    antibodies[p].display();
   }
+  
+  
+  
+  //for (int a = 0; a < antibodies.length; a++) {
+  //  antibodies[a].update();
+  //  for (int b = 0; b < cells.length; b++) {
+  //    if (a != b) {
+  //      antibodies[a].heal(cells[b]);
+  //    }
+  //  }
+  //  antibodies[a].display();
+  //}
+    
 }
 
-void mouseClicked() {
+void keyPressed() {
+  if (key == 'q') {
     setup();
     time = millis();
     loop();
+  }
 }
+
+//void mouseClicked() {
+//  for (int a=0; a < 10; a++) {
+//    int x = mouseX;
+//    int y = mouseY;
+//    antibodies[a] = new Antibody (x, y, 20);
+//  }
+//}

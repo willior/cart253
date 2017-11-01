@@ -1,8 +1,8 @@
-class Cell {
+class Antibody {
   
   int maxEnergy = 255;
-  float moveEnergy = -.2;
-  int collideEnergy = 10;
+  float moveEnergy = -1;
+  int collideEnergy = 50;
   int size;
   int energy;
   
@@ -18,9 +18,9 @@ class Cell {
   // variable for collision detection
   float areaSize = 10;
   
-  color fill = color(255,0,0);
+  color fill = color(255,255,0);
   
-  Cell(int tempX, int tempY, int tempSize) {
+  Antibody(int tempX, int tempY, int tempSize) {
     x = tempX;
     y = tempY;
     size = tempSize;
@@ -42,8 +42,8 @@ class Cell {
     // behaviour for cells with energy remaining
     else if (energy > 0) {
     
-    float vx = speed * (noise(tx) * 2 - 1) + ((mouseX) - (width/2)) / (width/10);
-    float vy = speed * (noise(ty) * 2 - 1) + ((mouseY) - (width/2)) / (width/10);
+    float vx = speed * (noise(tx) * 2 - 1);
+    float vy = speed * (noise(ty) * 2 - 1);
     
     if (mouseX > x){
       vx += 1;
@@ -85,20 +85,17 @@ class Cell {
     }
   }
   
-  void collide(Cell other) {
-    if (energy == 0 || other.energy == 0) {
-      return;
-    }
+  void heal(Cell patient) {
     
     // collision detection logic
-    if ((x == other.x && y == other.y) || (x <= other.x + 10 && y <= other.y + 10) && (x >= other.x - 10 && y >= other.y - 10)){
-      energy += collideEnergy;
-      energy = constrain(energy,0,maxEnergy);
+    if ((x == patient.x && y == patient.y) || (x <= patient.x + 10 && y <= patient.y + 10) && (x >= patient.x - 10 && y >= patient.y - 10)){
+      patient.energy += collideEnergy;
+      patient.energy = constrain(energy,0,maxEnergy);
     }
   }
   
   void display() {
-    fill((255-energyOffset), energyOffset, 0, energy);
+    fill((255), 255, 0, energy);
     noStroke();
     ellipse(x,y,20,20);
   }
