@@ -63,7 +63,7 @@ class Parasite {
   void display() {
     fill(fill, 127); 
     stroke(127,0,127);
-    ellipseMode(CORNER);
+    ellipseMode(CENTER);
     ellipse(x+15, y+15, 20+(killCount/4), 20+(killCount/4));
   }
 }
