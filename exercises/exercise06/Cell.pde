@@ -43,9 +43,19 @@ class Cell {
     // behaviour for cells with energy remaining
     else if (energy > 0) {
     
-    float vx = speed * (noise(tx) * 2 - 1) + ((mouseX) - (width/2)) / (width/10);
-    float vy = speed * (noise(ty) * 2 - 1) + ((mouseY) - (width/2)) / (width/10);
+    // variables for x & y velocity
+    float vx;
+    float vy;
     
+    // behaviour for how mouse movement affects velocities
+    vx = speed * (noise(tx) * 2 - 1) + ((mouseX) - (width/2)) / (width/10);
+    vy = speed * (noise(ty) * 2 - 1) + ((mouseY) - (height/2)) / (height/10);
+    
+    // behaviour for how brightestPixel affects velocities
+    vx = ((brightestPixel.x) - (width/2)) / (width/10);
+    vy = ((brightestPixel.y) - (height/2)) / (height/10);
+    
+    // modifies velocities based on cursor position
     if (mouseX > x){
       vx += 1;
     }

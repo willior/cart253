@@ -85,10 +85,9 @@ void draw() {
   image(video, 0, 0);
   
   // For now we just draw a crappy ellipse at the brightest pixel
-  fill(#ff0000);
-  stroke(#ffff00);
-  strokeWeight(10);
-  ellipse(brightestPixel.x,brightestPixel.y,20,20);
+  fill(0,255,255);
+  stroke(255,127,0);
+  ellipse(brightestPixel.x,brightestPixel.y,50,50);
   
   // variable to store the amount of dead cells
   int globalKillCount = 0;
