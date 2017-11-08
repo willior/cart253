@@ -158,7 +158,7 @@ class Cell {
     // collision detection logic
     if ((energy > 0) && (other.energy > 0) && ((x == other.x && y == other.y) || ( energy>0 ) && (other.energy > 0) && (x <= other.x + 10 && y <= other.y + 10) && (x >= other.x - 10 && y >= other.y - 10))){
       energy += collideEnergy;
-      constrain(energy,-255,maxEnergy);
+      constrain(energy,0,maxEnergy);
     }
   }
   
