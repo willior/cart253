@@ -7,7 +7,7 @@
 class Cell {
   
   int maxEnergy = 255;
-  float moveEnergy = -.1;
+  float moveEnergy = -0;
   int collideEnergy = 10;
   int size;
   int energy;
@@ -36,6 +36,7 @@ class Cell {
   void update() {
     
     // terminates the function if energy is less than 0
+    // draws a red X at death location
     if (energy <= 0) {
       strokeWeight(1);
       stroke(255,0,0);
@@ -46,8 +47,6 @@ class Cell {
     
     if (energy == 0) {
       energy--;
-
-      
       return;
     }
     
@@ -101,6 +100,7 @@ class Cell {
     tx += 0.01;
     ty += 0.01;
   
+    bounce();
   
     // CHANGED: commented out wrap detection in order to test with bouncing cells
     // wrap detection
@@ -117,7 +117,7 @@ class Cell {
     //  y -= height;
     //}
     
-    bounce();
+    
     
     // energy 
     energy += moveEnergy;
@@ -159,7 +159,7 @@ class Cell {
   }
   
   void display() {
-    fill((energyOffset), 255-energyOffset, 0, energy);
+    fill((energyOffset), 255-energyOffset, 0, energy*2);
     noStroke();
     ellipse(x,y,20,20);
   }

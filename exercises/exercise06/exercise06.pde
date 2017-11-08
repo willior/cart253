@@ -64,14 +64,14 @@ void setup() {
     int x = floor(random(0, width));
     int y = floor(random(0, height));
     
-    cells[i] = new Cell (x * 20, y * 20, 20);
+    cells[i] = new Cell (x, y, 20);
   }
   
   // and parasites
   for (int p = 0; p < parasites.length; p++) {
     int x = floor(random(0, width));
     int y = floor(random(0, height));
-    parasites[p] = new Parasite(x * 20, y * 20, 20);
+    parasites[p] = new Parasite(x, y, 20);
     antibodies[p] = new Antibody (x, y, 20);
   }
 }
