@@ -83,6 +83,8 @@ void draw() {
   
   // Draw the video frame to the screen
   image(video, 0, 0);
+  
+  // Draw a rect that acts as a transparent overlay for the video, providing cleaner visuals
   fill(64,64,64,96);
   noStroke();
   rectMode(CORNERS);

@@ -37,7 +37,7 @@ class Cell {
     
     // terminates the function if energy is less than 0
     // draws a red X at death location
-    if (energy <= 0) {
+    if (energy < 0) {
       strokeWeight(1);
       stroke(255,0,0);
       line(x,y,x+20,y+20);
@@ -151,9 +151,9 @@ class Cell {
   }
   
   void collide(Cell other) {
-    if (energy == 0 || other.energy == 0) {
-      return;
-    }
+    //if (energy == 0 || other.energy == 0) {
+    //  other.energy--;
+    //}
     
     // collision detection logic
     if ((energy > 0) && (other.energy > 0) && ((x == other.x && y == other.y) || ( energy>0 ) && (other.energy > 0) && (x <= other.x + 10 && y <= other.y + 10) && (x >= other.x - 10 && y >= other.y - 10))){

@@ -4,7 +4,7 @@
 
 class Parasite {
 
-  int drainEnergy = 1000;
+  int drainEnergy = 255;
   int size;
   int energy;
   
@@ -82,13 +82,13 @@ class Parasite {
       // drains energy if in range
       host.energy -= drainEnergy;
       
-      // if drainEnergy brings host.energy below 0, constrains the value back to 0...
+      // if drainEnergy kills the attacked Cell, constrain ensures the value becomes 0
       constrain(host.energy,0,255);
       
-      // ... so that the if statement can check if it is 0....
+      // checking if attacked Cell is dead
       if (host.energy == 0) {
         
-          // in order to raise the killCount and hitbox variables (which dictate Parasite size and attack range)
+          // raises the killCount and hitbox variables (which dictate Parasite size and attack range)
           killCount++;
           hitbox++;
           
@@ -102,6 +102,6 @@ class Parasite {
   void display() {
     fill(fill, 127); 
     stroke(255,0,192);
-    ellipse(x, y, size+killCount, size+killCount);
+    ellipse(x, y, size+hitbox, size+hitbox);
   }
 }
