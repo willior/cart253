@@ -112,7 +112,7 @@ void draw() {
     cells[i].display();
     
     // checks to see how many cells are dead
-    if (cells[i].energy == 0) {
+    if (cells[i].energy <= 0) {
       globalKillCount++;
     }
     

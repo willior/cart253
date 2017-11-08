@@ -148,6 +148,8 @@ class Cell {
   
   void collide(Cell other) {
     if (energy == 0 || other.energy == 0) {
+      energy--;
+      other.energy--;
       return;
     }
     

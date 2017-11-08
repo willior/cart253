@@ -75,9 +75,9 @@ class Parasite {
   
   void attack(Cell host) {
 
-    if ((x == host.x && y == host.y) || (x <= host.x - (hitbox) && y <= host.y - (hitbox) && (x >= host.x + (hitbox) && y >= host.y + (hitbox)))) {
+    if ((x == host.x && y == host.y) || ((x <= host.x + (hitbox) && y <= host.y + (hitbox)) && ((x >= host.x - (hitbox) && y >= host.y - (hitbox))))) {
       host.energy -= drainEnergy;
-      host.energy = constrain(energy,0,255);
+      constrain(host.energy,0,255);
       if (host.energy == 0) {
         host.energy--;
         killCount++;
