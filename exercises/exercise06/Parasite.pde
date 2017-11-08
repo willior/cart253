@@ -73,13 +73,26 @@ class Parasite {
     y = constrain(y, 0+(size/2), height-(size/2));
   }
   
+  // attack function
   void attack(Cell host) {
+    
+    // collision logic
     if (((x == host.x && y == host.y) || ((x <= host.x + (hitbox) && y <= host.y + (hitbox)) && ((x >= host.x - (hitbox) && y >= host.y - (hitbox)))))) {
+      
+      // drains energy if in range
       host.energy -= drainEnergy;
+      
+      // if drainEnergy brings host.energy below 0, constrains the value back to 0...
       constrain(host.energy,0,255);
-        if (host.energy == 0) {
+      
+      // ... so that the if statement can check if it is 0....
+      if (host.energy == 0) {
+        
+          // in order to raise the killCount and hitbox variables (which dictate Parasite size and attack range)
           killCount++;
           hitbox++;
+          
+          // and lowers host.energy to a value below 0
           host.energy--;
         }
       }
