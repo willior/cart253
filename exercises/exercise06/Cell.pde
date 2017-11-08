@@ -8,7 +8,7 @@ class Cell {
   
   int maxEnergy = 255;
   float moveEnergy = -0;
-  int collideEnergy = 10;
+  int collideEnergy = 0;
   int size;
   int energy;
   
@@ -121,7 +121,7 @@ class Cell {
     
     // energy 
     energy += moveEnergy;
-    energy = constrain(energy,0,maxEnergy);
+    constrain(energy,0,maxEnergy);
     energyOffset = maxEnergy-energy;
     }
   }
@@ -161,7 +161,7 @@ class Cell {
   }
   
   void display() {
-    fill((energyOffset), 255-energyOffset, 0, energy*2);
+    fill(energyOffset, 255-energyOffset, 0, energy);
     noStroke();
     ellipse(x,y,20,20);
   }
