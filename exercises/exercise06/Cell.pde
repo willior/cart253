@@ -52,8 +52,25 @@ class Cell {
     vy = speed * (noise(ty) * 2 - 1) + ((mouseY) - (height/2)) / (height/10);
     
     // behaviour for how brightestPixel affects velocities
-    vx = ((brightestPixel.x) - (width/2)) / (width/10);
-    vy = ((brightestPixel.y) - (height/2)) / (height/10);
+    // vx = ((brightestPixel.x) - (width/2)) / (width/10);
+    // vy = ((brightestPixel.y) - (height/2)) / (height/10);
+    
+    // orients Cell velocity towards brightestPixel
+    // modifier = 2, which is twice the strength as the mouse position modifier
+    // emphasizing using the light source to herd the cells together
+    // allowing them to survive easier
+    if (brightestPixel.x > x){
+      vx += 2;
+    }
+    if (brightestPixel.x < x){
+      vx -= 2;
+    }
+    if (brightestPixel.y > y){
+      vy += 2;
+    }
+    if (brightestPixel.y < y){
+      vy -= 2;
+    }
     
     // modifies velocities based on cursor position
     if (mouseX > x){
