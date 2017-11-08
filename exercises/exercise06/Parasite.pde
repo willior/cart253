@@ -34,18 +34,22 @@ class Parasite {
     vx = speed * (noise(tx) * 2 - 1);
     vy = speed * (noise(ty) * 2 - 1);
     
+    bounce();
+    
     if (brightestPixel.x > x){
-      vx -= 2;
+      vx += .8;
     }
     if (brightestPixel.x < x){
-      vx += 2;
+      vx -= .8;
     }
     if (brightestPixel.y > y){
-      vy -= 2;
+      vy += .8;
     }
     if (brightestPixel.y < y){
-      vy += 2;
+      vy -= .8;
     }
+    
+    bounce();
     
     x += vx;
     y += vy;
@@ -69,17 +73,17 @@ class Parasite {
     //  y -= height;
     //}
     
-    bounce();
+    
   }
   void bounce() {
     // Check the left and right
-    if (x - size/2 <= 0 || x + size/2 >= width) {
+    if (x - size/2 < 0 || x + size/2 > width) {
       // Bounce on the x-axis
       vx = -vx;
     }
 
     // Check the top and bottom
-    if (y - size/2 <= 0 || y + size/2 >= height) {
+    if (y - size/2 < 0 || y + size/2 > height) {
       // Bounce on the y-axis
       vy = -vy;
     }

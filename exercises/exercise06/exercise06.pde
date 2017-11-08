@@ -85,7 +85,7 @@ void draw() {
   image(video, 0, 0);
   
   // Draw a rect that acts as a transparent overlay for the video, providing cleaner visuals
-  fill(64,64,64,96);
+  fill(64,64,64,128);
   noStroke();
   rectMode(CORNERS);
   rect(0,0,width,height);

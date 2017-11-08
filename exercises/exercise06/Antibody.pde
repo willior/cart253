@@ -44,6 +44,8 @@ class Antibody {
     vx = speed * (noise(tx) * 2 - 1);
     vy = speed * (noise(ty) * 2 - 1);
     
+    bounce();
+    
     if (mouseX > x){
       vx += 1;
     }

@@ -63,6 +63,8 @@ class Cell {
     vx = speed * (noise(tx) * 2 - 1) + ((mouseX) - (width/2)) / (width/10);
     vy = speed * (noise(ty) * 2 - 1) + ((mouseY) - (height/2)) / (height/10);
    
+   bounce();
+   
     // modifies velocities based on cursor position
     // influences cells towards cursor
     if (mouseX > x){
@@ -84,7 +86,7 @@ class Cell {
     tx += 0.01;
     ty += 0.01;
   
-    bounce();
+    
   
     // CHANGED: commented out wrap detection in order to test with bouncing cells
     // wrap detection
@@ -100,9 +102,7 @@ class Cell {
     //else if (y > height) {
     //  y -= height;
     //}
-    
-    
-    
+
     // energy
     //
     // subtracts the value of moveEnergy from a Cell's energy
@@ -117,13 +117,13 @@ class Cell {
   // code taken from handleBounce() function in exercise06 Bouncer template
   void bounce() {
     // Check the left and right
-    if (x - size/2 < 0 || x + size/2 > width) {
+    if (x - (size/2+1) < 0 || x + (size/2-1) > width) {
       // Bounce on the x-axis
       vx = -vx;
     }
 
     // Check the top and bottom
-    if (y - size/2 < 0 || y + size/2 > height) {
+    if (y - (size/2+1) < 0 || y + (size/2-1) > height) {
       // Bounce on the y-axis
       vy = -vy;
     }
