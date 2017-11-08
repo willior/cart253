@@ -49,7 +49,7 @@ class Parasite {
       vy -= .8;
     }
     
-    bounce();
+
     
     x += vx;
     y += vy;
@@ -57,7 +57,7 @@ class Parasite {
     tx += 0.01;
     ty += 0.01;
     
-    
+        bounce();
     
     // CHANGED: commented out wrapping behaviour
     //if (x < 0) {
