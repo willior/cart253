@@ -43,7 +43,7 @@ int score = 0;
 
 void setup() {
   
-  size(800,600);
+  size(800,450);
   pop = new SoundFile(this,"pop.wav");
   bgm = new SoundFile(this,"bgm.mp3");
   
@@ -51,7 +51,7 @@ void setup() {
   bgm.loop();
   
   // Start up the webcam
-  video = new Capture(this, 800, 600, 30);
+  video = new Capture(this, 800, 450, 30);
   video.start();
   
   // player starts with 3 antibodies
@@ -77,7 +77,7 @@ void setup() {
 }
 
 void draw() {
-  // background(224);
+  background(224);
   // A function that processes the current frame of video
   handleVideoInput();
   
