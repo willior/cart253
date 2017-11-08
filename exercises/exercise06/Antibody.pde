@@ -8,7 +8,7 @@ class Antibody {
   
   int maxEnergy = 255;
   float moveEnergy = -2;
-  int collideEnergy = 50;
+  int collideEnergy = 32;
   int size;
   int energy;
   
@@ -114,6 +114,6 @@ class Antibody {
   void display() {
     fill(255, 255, 0, energy);
     noStroke();
-    ellipse(x,y,20,20);
+    ellipse(x,y,10,10);
   }
 }

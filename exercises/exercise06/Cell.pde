@@ -7,8 +7,8 @@
 class Cell {
   
   int maxEnergy = 255;
-  float moveEnergy = -0;
-  int collideEnergy = 0;
+  float moveEnergy = -0.5;
+  int collideEnergy = 10;
   int size;
   int energy;
   
@@ -62,26 +62,9 @@ class Cell {
     
     vx = speed * (noise(tx) * 2 - 1) + ((mouseX) - (width/2)) / (width/10);
     vy = speed * (noise(ty) * 2 - 1) + ((mouseY) - (height/2)) / (height/10);
-    
-    // behaviour for how brightestPixel affects velocities    
-    // orients Cell velocity towards brightestPixel
-    // modifier = 2, which is twice the strength as the mouse position modifier
-    // emphasizing using the light source to herd the cells together
-    // allowing them to survive easier
-    if (brightestPixel.x > x){
-      vx += 2;
-    }
-    if (brightestPixel.x < x){
-      vx -= 2;
-    }
-    if (brightestPixel.y > y){
-      vy += 2;
-    }
-    if (brightestPixel.y < y){
-      vy -= 2;
-    }
-    
+   
     // modifies velocities based on cursor position
+    // influences cells towards cursor
     if (mouseX > x){
       vx += 1;
     }
