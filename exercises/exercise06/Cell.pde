@@ -42,6 +42,7 @@ class Cell {
       stroke(255,0,0);
       line(x,y,x+20,y+20);
       line(x,y+20,x+20,y);
+      energy--;
       return;
     }
     
@@ -119,9 +120,12 @@ class Cell {
     
     
     
-    // energy 
+    // energy
+    //
+    // subtracts the value of moveEnergy from a Cell's energy
     energy += moveEnergy;
-    constrain(energy,0,maxEnergy);
+    
+    // updates the value of energyOffset (aka the amount of damage taken)
     energyOffset = maxEnergy-energy;
     }
   }
@@ -148,15 +152,13 @@ class Cell {
   
   void collide(Cell other) {
     if (energy == 0 || other.energy == 0) {
-      energy--;
-      other.energy--;
       return;
     }
     
     // collision detection logic
-    if ((x == other.x && y == other.y) || (x <= other.x + 10 && y <= other.y + 10) && (x >= other.x - 10 && y >= other.y - 10)){
+    if ((energy > 0) && (other.energy > 0) && ((x == other.x && y == other.y) || ( energy>0 ) && (other.energy > 0) && (x <= other.x + 10 && y <= other.y + 10) && (x >= other.x - 10 && y >= other.y - 10))){
       energy += collideEnergy;
-      energy = constrain(energy,0,maxEnergy);
+      constrain(energy,-255,maxEnergy);
     }
   }
   

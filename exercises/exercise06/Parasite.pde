@@ -4,7 +4,7 @@
 
 class Parasite {
 
-  int drainEnergy = 255;
+  int drainEnergy = 1000;
   int size;
   int energy;
   
