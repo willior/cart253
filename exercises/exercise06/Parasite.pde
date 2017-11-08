@@ -31,27 +31,29 @@ class Parasite {
   
   void update() {
     
-    if (brightestPixel.x > x){
-      vx -= 10;
-    }
-    if (brightestPixel.x < x){
-      vx += 10;
-    }
-    if (brightestPixel.y > y){
-      vy -= 10;
-    }
-    if (brightestPixel.y < y){
-      vy += 10;
-    }
-    
-    
     vx = speed * (noise(tx) * 2 - 1);
     vy = speed * (noise(ty) * 2 - 1);
+    
+    if (brightestPixel.x > x){
+      vx -= 2;
+    }
+    if (brightestPixel.x < x){
+      vx += 2;
+    }
+    if (brightestPixel.y > y){
+      vy -= 2;
+    }
+    if (brightestPixel.y < y){
+      vy += 2;
+    }
+    
     x += vx;
     y += vy;
   
     tx += 0.01;
     ty += 0.01;
+    
+    
     
     // CHANGED: commented out wrapping behaviour
     //if (x < 0) {
@@ -66,24 +68,6 @@ class Parasite {
     //else if (y >= height) {
     //  y -= height;
     //}
-    
-    // behaviour for how brightestPixel affects velocities
-    // negatively affects Parasite velocity; parasites will be influenced away from the brightest pixel
-
-    if (brightestPixel.x > x){
-      vx -= 10;
-    }
-    if (brightestPixel.x < x){
-      vx += 10;
-    }
-    if (brightestPixel.y > y){
-      vy -= 10;
-    }
-    if (brightestPixel.y < y){
-      vy += 10;
-    }
-    
-   
     
     bounce();
   }
@@ -129,10 +113,11 @@ class Parasite {
         }
       }
     }
+  
 
   void display() {
     fill(fill, 127); 
     stroke(255,0,192);
-    ellipse(x, y, size+(hitbox*2), size+(hitbox*2));
+    ellipse(x, y, size+hitbox, size+hitbox);
   }
 }
