@@ -48,13 +48,15 @@ class Cell {
     float vy;
     
     // behaviour for how mouse movement affects velocities
+    // aka "wind direction"
+    // as it is now, there are only 4 wind directions, NE, NW, SE, SW
+    // depending on which quadrant the cursor is in at the time
+    // well add more variance/possibilities for final project
+    
     vx = speed * (noise(tx) * 2 - 1) + ((mouseX) - (width/2)) / (width/10);
     vy = speed * (noise(ty) * 2 - 1) + ((mouseY) - (height/2)) / (height/10);
     
-    // behaviour for how brightestPixel affects velocities
-    // vx = ((brightestPixel.x) - (width/2)) / (width/10);
-    // vy = ((brightestPixel.y) - (height/2)) / (height/10);
-    
+    // behaviour for how brightestPixel affects velocities    
     // orients Cell velocity towards brightestPixel
     // modifier = 2, which is twice the strength as the mouse position modifier
     // emphasizing using the light source to herd the cells together
