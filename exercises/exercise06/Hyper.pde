@@ -12,8 +12,8 @@ class Hyper {
   int hyperMode;
   char hyperKey;
   
-  // the colour of a full hyper stock (red)
-  color hyperFull = color(255,0,0);
+  // the colour of a full hyper stock (yellow)
+  color hyperFull = color(255,255,0);
   
   // colour properties for the Hyper class
   color hyperEmpty;

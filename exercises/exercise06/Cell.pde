@@ -141,9 +141,9 @@ class Cell {
       vy = -vy;
     }
 
-    // Make sure the Bouncer isn't off the edge
-    x = constrain(x, size/2, width-size/2);
-    y = constrain(y, size/2, height-size/2);
+    // Make sure the Cell isn't off the edge
+    x = constrain(x, 0, width);
+    y = constrain(y, 0, height);
   }
   
   void collide(Cell other) {

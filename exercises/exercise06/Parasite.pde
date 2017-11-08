@@ -17,7 +17,7 @@ class Parasite {
   
   int killCount = 0;
 
-  color fill = color(0,0,255);
+  color fill = color(127,0,255);
 
   Parasite(int tempX, int tempY, int tempSize) {
     x = tempX;
@@ -62,8 +62,7 @@ class Parasite {
 
   void display() {
     fill(fill, 127); 
-    stroke(127,0,127);
-    ellipseMode(CENTER);
+    stroke(192,0,192);
     ellipse(x+15, y+15, 20+(killCount/8), 20+(killCount/8));
   }
 }

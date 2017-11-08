@@ -77,12 +77,16 @@ void setup() {
 }
 
 void draw() {
-  background(224);
+
   // A function that processes the current frame of video
   handleVideoInput();
   
   // Draw the video frame to the screen
   image(video, 0, 0);
+  fill(64,64,64,96);
+  noStroke();
+  rectMode(CORNERS);
+  rect(0,0,width,height);
   
   // For now we just draw a crappy ellipse at the brightest pixel
   fill(0,255,255);
