@@ -117,14 +117,17 @@ void draw() {
     antibodies[p].display();
   }
   
-  // gives the player 1 energy/frame
   bar.eLevel++;
+  // WHY DOESN'T THIS WORK?
+  constrain(bar.eLevel, 0, 100);
+  println(bar.eLevel);
   
-  // displays antibody stocks & energy bar
-  meter.display();
+  // updates and displays energy bar
   bar.display();
-}
 
+  // displays antibody stocks
+  meter.display();
+}
 
 void keyPressed() {
   
@@ -151,10 +154,9 @@ void keyPressed() {
       return;
     }
   }
-    
 }
 
 // mouse clicked function
-void mouseClicked() {
+void mousePressed() {
   
 }

@@ -30,7 +30,11 @@ class Energy {
     energyMode = _energyMode;
     energyEmpty = _energyEmpty;
     energyStroke = _energyStroke;
-    
+  }
+  
+  // update function to display the spending of energy
+  void update() {
+
   }
   
   // setting properties for the display of the energy eLevels
@@ -39,22 +43,16 @@ class Energy {
     fill(energyEmpty);
     rectMode(CORNER);
     
-    if(eLevel > 100){
-      eLevel = 100;
-    }
-    
     // formatting the display of the energy eLevels
     
     fill(energyEmpty);
     rect(energyX, energyY, energySizeX, energySizeY);
     
+    // WHY DOESN'T THIS WORK?
+    constrain(eLevel, 0, 100);
     
+    fill(energyFull);
+    rect(energyX, energyY, eLevel, energySizeY);
     
-    if(eLevel == 100){
-      fill(energyFull);
-      rect(energyX, energyY, energySizeX, energySizeY);
-      
-
-    }
   }
 }

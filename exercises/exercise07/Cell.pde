@@ -58,7 +58,7 @@ class Cell {
     if (mouseY < y){
       vy -= 1;
     }
-    
+      
     x += vx;
     y += vy;
   
