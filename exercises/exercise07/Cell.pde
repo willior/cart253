@@ -18,6 +18,8 @@ class Cell {
   float speed = 10;
   float x;
   float y;
+  float vx;
+  float vy;
 
   int energyOffset;
   
@@ -43,8 +45,8 @@ class Cell {
     // behaviour for cells with energy remaining
     else if (energy > 0) {
     
-    float vx = speed * (noise(tx) * 2 - 1) + ((mouseX) - (width/2)) / (width/10);
-    float vy = speed * (noise(ty) * 2 - 1) + ((mouseY) - (width/2)) / (width/10);
+    vx = speed * (noise(tx) * 2 - 1) + ((mouseX) - (width/2)) / (width/10);
+    vy = speed * (noise(ty) * 2 - 1) + ((mouseY) - (width/2)) / (width/10);
     
     if (mouseX > x){
       vx += 1;

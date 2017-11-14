@@ -32,10 +32,29 @@ class Energy {
     energyStroke = _energyStroke;
   }
   
-  // update function to display the spending of energy
+  // update function for energy usage
   void update() {
     eLevel -= 3;
-
+    
+    // the issue is here somewhere:
+    
+    //while (bar.eLevel > 0) {
+      //for (int i = 0; i < cells.length; i++) {
+          
+      //  if (mouseX > cells[i].x){
+      //    cells[i].vx += 3;
+      //  }
+      //  if (mouseX < cells[i].x){
+      //    cells[i].vx -= 3;
+      //  }
+      //  if (mouseY > cells[i].y){
+      //    cells[i].vy += 3;
+      //  }
+      //  if (mouseY < cells[i].y){
+      //    cells[i].vy -= 3;
+      //  }
+      //}
+    //}
   }
   
   // setting properties for the display of the energy eLevels

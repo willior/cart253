@@ -31,6 +31,9 @@ color energyStroke = color(0);
 int time = 0;
 int score = 0;
 
+float vx;
+float vy;
+
 void setup() {
   
   size(800,600);
@@ -119,8 +122,9 @@ void draw() {
   
   // function to drain energy bar if mouse is pressed
   if (mousePressed == true) {
-    bar.update();
+    bar.update(); //<>//
   }
+  
   // updates and displays energy bar
   bar.eLevel++;
   bar.eLevel = constrain(bar.eLevel,0,100);
