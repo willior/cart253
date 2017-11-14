@@ -120,12 +120,13 @@ void draw() {
     antibodies[p].display();
   }
   
-  // function to drain energy bar if mouse is pressed
-  if (mousePressed == true) {
-    bar.update(); //<>//
+  // drains energy when mouse is held
+  // for some reason, this would not work when embedded into the Energy class's update() function, so it goes here
+  if (mousePressed == true){
+    bar.eLevel -= 3;
   }
-  
-  // updates and displays energy bar
+
+  // regenerates energy over time, constrains their values, displays energy bar //<>//
   bar.eLevel++;
   bar.eLevel = constrain(bar.eLevel,0,100);
   println(bar.eLevel);
@@ -164,6 +165,6 @@ void keyPressed() {
 
 // mouse clicked function
 void mousePressed() {
-  
+
   
 }

@@ -34,27 +34,25 @@ class Energy {
   
   // update function for energy usage
   void update() {
-    eLevel -= 3;
-    
-    // the issue is here somewhere:
-    
-    //while (bar.eLevel > 0) {
-      //for (int i = 0; i < cells.length; i++) {
-          
-      //  if (mouseX > cells[i].x){
-      //    cells[i].vx += 3;
-      //  }
-      //  if (mouseX < cells[i].x){
-      //    cells[i].vx -= 3;
-      //  }
-      //  if (mouseY > cells[i].y){
-      //    cells[i].vy += 3;
-      //  }
-      //  if (mouseY < cells[i].y){
-      //    cells[i].vy -= 3;
-      //  }
-      //}
-    //}
+
+    // goes through all the cells
+    for (int i = 0; i < cells.length; i++) {
+        
+      // modify cell velocities based on their position in relation to mouse cursor on click
+      // additional logic checks if there remains sufficient energy; velocities unaffected if true
+      if ((mouseX > cells[i].x) && (bar.eLevel > 3)){
+        cells[i].vx += 5;
+      }
+      if ((mouseX < cells[i].x) && (bar.eLevel > 3)){
+        cells[i].vx -= 5;
+      }
+      if ((mouseY > cells[i].y) && (bar.eLevel > 3)){
+        cells[i].vy += 5;
+      }
+      if ((mouseY < cells[i].y) && (bar.eLevel > 3)){
+        cells[i].vy -= 5;
+      }
+    }
   }
   
   // setting properties for the display of the energy eLevels

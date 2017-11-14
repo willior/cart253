@@ -60,6 +60,10 @@ class Cell {
     if (mouseY < y){
       vy -= 1;
     }
+      // function to drain energy bar if mouse is pressed
+  if (mousePressed == true) {
+    bar.update();
+  }
       
     x += vx;
     y += vy;
