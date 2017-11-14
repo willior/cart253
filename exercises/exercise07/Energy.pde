@@ -48,9 +48,6 @@ class Energy {
     fill(energyEmpty);
     rect(energyX, energyY, energySizeX, energySizeY);
     
-    // WHY DOESN'T THIS WORK?
-    constrain(eLevel, 0, 100);
-    
     fill(energyFull);
     rect(energyX, energyY, eLevel, energySizeY);
     

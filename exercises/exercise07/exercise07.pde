@@ -117,12 +117,10 @@ void draw() {
     antibodies[p].display();
   }
   
-  bar.eLevel++;
-  // WHY DOESN'T THIS WORK?
-  constrain(bar.eLevel, 0, 100);
-  println(bar.eLevel);
-  
   // updates and displays energy bar
+  bar.eLevel++;
+  bar.eLevel = constrain(bar.eLevel,0,100);
+  println(bar.eLevel);
   bar.display();
 
   // displays antibody stocks
