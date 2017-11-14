@@ -34,6 +34,7 @@ class Energy {
   
   // update function to display the spending of energy
   void update() {
+    eLevel -= 3;
 
   }
   
