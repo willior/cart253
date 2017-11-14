@@ -1,4 +1,4 @@
-// exercise 05
+// exercise 07: incorporating sound
 //
 // a game where parasites (blue) drain energy from your cells (red)
 // release antibodies (yellow) by clicking on the screen to heal/revive your cells
@@ -115,28 +115,36 @@ void draw() {
   meter.display();
 }
 
-// reset button
+
 void keyPressed() {
+  
+  // reset button
   if (key == 'r') {
     bgm.stop();
     setup();
     time = millis();
     loop();
   }
-}
-
-// control for administering antibody
-void mouseClicked() {
-  if (meter.stock > 0) {
-    pop.play();
-    meter.stock--;
-    for (int a = 0; a < 10; a++) {
-      int x = mouseX;
-      int y = mouseY;
-      antibodies[a] = new Antibody (x, y, 20);
+  
+  // antibody release
+  if (key == '1') {
+    if (meter.stock > 0) {
+      pop.play();
+      meter.stock--;
+      for (int a = 0; a < 10; a++) {
+        int x = mouseX;
+        int y = mouseY;
+        antibodies[a] = new Antibody (x, y, 20);
+      }
+    }
+    else {
+      return;
     }
   }
-  else {
-    return;
-  }
+    
+}
+
+// mouse clicked function
+void mouseClicked() {
+  
 }
