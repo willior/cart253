@@ -22,6 +22,11 @@ Hyper meter;
 color hyperEmpty = color(255);
 color hyperStroke = color(0);
 
+// creating the energy meter to display energy
+Energy bar;
+color energyEmpty = color(255);
+color energyStroke = color(0);
+
 // variables for time and score
 int time = 0;
 int score = 0;
@@ -37,8 +42,9 @@ void setup() {
   
   // player starts with 3 antibodies
   int stock = 3;
+  int eLevel = 0;
   meter = new Hyper(10, 50, (height - 50), stock, 0, hyperEmpty, hyperStroke);
-  
+  bar = new Energy(100, 10, 50, (height - 30), eLevel, 0, energyEmpty, energyStroke);
   
   
   // instantiating cells
@@ -111,8 +117,12 @@ void draw() {
     antibodies[p].display();
   }
   
-  // displays antibody stocks
+  // gives the player 1 energy/frame
+  bar.eLevel++;
+  
+  // displays antibody stocks & energy bar
   meter.display();
+  bar.display();
 }
 
 

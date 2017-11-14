@@ -36,7 +36,7 @@ class Hyper {
   void display() {
     stroke(hyperStroke);
     fill(hyperEmpty);
-    rectMode(CENTER);
+    rectMode(CORNER);
     
     if(stock > 3){
       stock = 3;
