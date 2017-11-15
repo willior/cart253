@@ -44,16 +44,16 @@ class Antibody {
     float vy = speed * (noise(ty) * 2 - 1);
     
     if (mouseX > x){
-      vx += 3;
+      vx += 1;
     }
     if (mouseX < x){
-      vx -= 3;
+      vx -= 1;
     }
     if (mouseY > y){
-      vy += 3;
+      vy += 1;
     }
     if (mouseY < y){
-      vy -= 3;
+      vy -= 1;
     }
     
     x += vx;
@@ -89,6 +89,7 @@ class Antibody {
     if ((x == patient.x && y == patient.y) || (x <= patient.x + 8 && y <= patient.y + 8) && (x >= patient.x - 8 && y >= patient.y - 8)) {
       
       // sound picker for heal release
+      // sound only plays if cell is dead and antibody is alive
       if ((patient.energy <= 0) && (energy > 0)) {
         if ((healSFXseed >= 0) && (healSFXseed < 1)) {
           heal1.play();
@@ -102,13 +103,15 @@ class Antibody {
         if ((healSFXseed >= 3) && (healSFXseed <= 4)) {
           heal4.play();
         }
+        
+        // variable used to cycle sequentially through sound effects
         healSFXseed++;
         if (healSFXseed == 4) {
           healSFXseed = 0;
         }
       }
       
-      
+      // collideEnergy, how much energy the Antibody heals a Cell for, is determined by the Antibody's current remaining energy
       collideEnergy = energy;
       patient.energy += collideEnergy;
       patient.energy = constrain(energy,0,maxEnergy);

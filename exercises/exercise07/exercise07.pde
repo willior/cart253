@@ -1,11 +1,23 @@
 // exercise 07: incorporating sound
 //
-// a game where parasites (blue) drain energy from your cells (red)
-// release antibodies (yellow) by clicking on the screen to heal/revive your cells
-// you are given 3 antibodies to start with, and receive an additional one every 3 seconds
-// noise() function regulates objects' movement
-// however, cell/antibody movement can be influenced with mouse movement
-// used a timer to track "score"; the timer resets when the game is reset by pressing 'R'
+// a game where parasites (blue) drain energy from your cells (red).
+// release antibodies (yellow) at the location of your cursor by pressing your '1' key
+// antibodies heal/revive your cells based on how much energy they have left.
+// you are given 3 antibodies to start with, and receive an additional one every 3 seconds.
+// you can store a maximum of 6 antibodies at any given moment.
+// clicking on the screen herds your cells together, but it expends energy (green bar).
+// energy recharges over time.
+// overlapping cells heal each other slowly. the more overlapping, the faster the healing.
+// noise() function regulates objects' movement, among other factors.
+// which quadrant of the screen your cursor is in determines wind direction, influence cell movement.
+// used a timer to track "score"; the timer resets when the game is reset by pressing 'R'.
+// have fun!!
+//
+// sound elements:
+// the percussion background track was generated using a midi-synced Korg es2 and Eleketron Analog RYTM.
+// the rhythms are stochastically modified based on a number of randomly modulating control voltages.
+// the melodic elements were generated on a DSI Prophet '08 analog synthesizer.
+// all sound effects recorded digitally and edited with Adobe Audition.
 
 // sound library
  import processing.sound.*;
@@ -38,7 +50,7 @@
  SoundFile revive4;
 
 // initializing arrays
-Cell[] cells = new Cell[100];
+Cell[] cells = new Cell[200];
 Parasite[] parasites = new Parasite[10];
 Antibody[] antibodies = new Antibody[10];
 
@@ -56,9 +68,11 @@ color energyStroke = color(0);
 int time = 0;
 int score = 0;
 
+// global variables for velocities
 float vx;
 float vy;
 
+// initializing the number that determines Antibody release sound effects
 float antibodySFXseed = 0;
 
 void setup() {
@@ -93,8 +107,9 @@ void setup() {
   int stock = 3;
   int eLevel = 0;
   meter = new Hyper(10, 50, (height - 50), stock, 0, hyperEmpty, hyperStroke);
-  bar = new Energy(100, 10, 50, (height - 30), eLevel, 0, energyEmpty, energyStroke);
   
+  // instantiates the Energy bar for herding cells
+  bar = new Energy(110, 10, 50, (height - 30), eLevel, 0, energyEmpty, energyStroke);
   
   // instantiating cells
   for (int i = 0; i < cells.length; i++) {
@@ -174,7 +189,7 @@ void draw() {
 
   // regenerates energy over time, constrains their values, displays energy bar //<>//
   bar.eLevel++;
-  bar.eLevel = constrain(bar.eLevel,0,100);
+  bar.eLevel = constrain(bar.eLevel,0,110);
   println(bar.eLevel);
   bar.display();
 
@@ -215,6 +230,8 @@ void keyPressed() {
       }
       // pop.play();
       meter.stock--;
+      
+      // releases 10 antibodies at the location of the cursor when the '1' key is pressed.
       for (int a = 0; a < 10; a++) {
         int x = mouseX;
         int y = mouseY;
