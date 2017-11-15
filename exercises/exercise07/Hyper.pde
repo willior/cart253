@@ -38,38 +38,80 @@ class Hyper {
     fill(hyperEmpty);
     rectMode(CORNER);
     
-    if(stock > 3){
-      stock = 3;
+    if(stock > 6){
+      stock = 6;
     }
     
     // formatting the display of the hyper stocks
-    // if 3, all 3 rects are red
-    if(stock == 3){
+
+    if(stock == 6){
       fill(hyperFull);
       rect(hyperX, hyperY, hyperSize, hyperSize);
-      rect((hyperX+20), hyperY, hyperSize, hyperSize);
-      rect((hyperX+40), hyperY, hyperSize, hyperSize);
+      rect(hyperX+20, hyperY, hyperSize, hyperSize);
+      rect(hyperX+40, hyperY, hyperSize, hyperSize);
+      rect(hyperX+60, hyperY, hyperSize, hyperSize);
+      rect(hyperX+80, hyperY, hyperSize, hyperSize);
+      rect(hyperX+100, hyperY, hyperSize, hyperSize);
     }
-    // if 2, only 2 are, etc.
+    else if(stock == 5){
+      fill(hyperFull);
+      rect(hyperX, hyperY, hyperSize, hyperSize);
+      rect(hyperX+20, hyperY, hyperSize, hyperSize);
+      rect(hyperX+40, hyperY, hyperSize, hyperSize);
+      rect(hyperX+60, hyperY, hyperSize, hyperSize);
+      rect(hyperX+80, hyperY, hyperSize, hyperSize);
+      fill(hyperEmpty);
+      rect(hyperX+100, hyperY, hyperSize, hyperSize);
+      
+    }
+    else if(stock == 4){
+      fill(hyperFull);
+      rect(hyperX, hyperY, hyperSize, hyperSize);
+      rect(hyperX+20, hyperY, hyperSize, hyperSize);
+      rect(hyperX+40, hyperY, hyperSize, hyperSize);
+      rect(hyperX+60, hyperY, hyperSize, hyperSize);
+      fill(hyperEmpty);
+      rect(hyperX+80, hyperY, hyperSize, hyperSize);
+      rect(hyperX+100, hyperY, hyperSize, hyperSize); 
+    }
+    else if(stock == 3){
+      fill(hyperFull);
+      rect(hyperX, hyperY, hyperSize, hyperSize);
+      rect(hyperX+20, hyperY, hyperSize, hyperSize);
+      rect(hyperX+40, hyperY, hyperSize, hyperSize);
+      fill(hyperEmpty);
+      rect(hyperX+60, hyperY, hyperSize, hyperSize);
+      rect(hyperX+80, hyperY, hyperSize, hyperSize);
+      rect(hyperX+100, hyperY, hyperSize, hyperSize);
+      
+    }
     else if(stock == 2){
       fill(hyperFull);
       rect(hyperX, hyperY, hyperSize, hyperSize);
-      rect((hyperX+20), hyperY, hyperSize, hyperSize);
+      rect(hyperX+20, hyperY, hyperSize, hyperSize);
       fill(hyperEmpty);
-      rect((hyperX+40), hyperY, hyperSize, hyperSize);
+      rect(hyperX+40, hyperY, hyperSize, hyperSize);
+      rect(hyperX+60, hyperY, hyperSize, hyperSize);
+      rect(hyperX+80, hyperY, hyperSize, hyperSize);
+      rect(hyperX+100, hyperY, hyperSize, hyperSize);
     }
     else if(stock == 1){
       fill(hyperFull);
       rect(hyperX, hyperY, hyperSize, hyperSize);
       fill(hyperEmpty);
-      rect((hyperX+20), hyperY, hyperSize, hyperSize);
-      rect((hyperX+40), hyperY, hyperSize, hyperSize);
+      rect(hyperX+20, hyperY, hyperSize, hyperSize);
+      rect(hyperX+40, hyperY, hyperSize, hyperSize);
+      rect(hyperX+60, hyperY, hyperSize, hyperSize);
+      rect(hyperX+80, hyperY, hyperSize, hyperSize);
+      rect(hyperX+100, hyperY, hyperSize, hyperSize);
     }
-    
     else if(stock == 0) {
       rect(hyperX, hyperY, hyperSize, hyperSize);
-      rect((hyperX+20), hyperY, hyperSize, hyperSize);
-      rect((hyperX+40), hyperY, hyperSize, hyperSize);
+      rect(hyperX+20, hyperY, hyperSize, hyperSize);
+      rect(hyperX+40, hyperY, hyperSize, hyperSize);
+      rect(hyperX+60, hyperY, hyperSize, hyperSize);
+      rect(hyperX+80, hyperY, hyperSize, hyperSize);
+      rect(hyperX+100, hyperY, hyperSize, hyperSize);      
     }
   }
 }

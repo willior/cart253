@@ -44,16 +44,16 @@ class Antibody {
     float vy = speed * (noise(ty) * 2 - 1);
     
     if (mouseX > x){
-      vx += 1;
+      vx += 3;
     }
     if (mouseX < x){
-      vx -= 1;
+      vx -= 3;
     }
     if (mouseY > y){
-      vy += 1;
+      vy += 3;
     }
     if (mouseY < y){
-      vy -= 1;
+      vy -= 3;
     }
     
     x += vx;

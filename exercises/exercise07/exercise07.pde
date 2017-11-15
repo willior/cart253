@@ -121,7 +121,7 @@ void draw() {
   int globalKillCount = 0;
   
   // dirty way of giving the player a stock every 3 seconds
-  if (millis() % 1000 <= 20) {
+  if (millis() % 3000 <= 20) {
     meter.stock++;
   }
   
