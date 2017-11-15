@@ -8,7 +8,7 @@ class Antibody {
   
   int maxEnergy = 255;
   float moveEnergy = -2;
-  int collideEnergy = 50;
+  int collideEnergy;
   int size;
   int energy;
   
@@ -20,6 +20,8 @@ class Antibody {
   float y;
 
   int energyOffset;
+  
+  float healSFXseed = 0;
 
   Antibody(int tempX, int tempY, int tempSize) {
     x = tempX;
@@ -84,12 +86,34 @@ class Antibody {
   void heal(Cell patient) {
     
     // collision detection logic
-    if ((x == patient.x && y == patient.y) || (x <= patient.x + 10 && y <= patient.y + 10) && (x >= patient.x - 10 && y >= patient.y - 10)){
+    if ((x == patient.x && y == patient.y) || (x <= patient.x + 8 && y <= patient.y + 8) && (x >= patient.x - 8 && y >= patient.y - 8)) {
+      
+      // sound picker for heal release
+      if ((patient.energy <= 0) && (energy > 0)) {
+        if ((healSFXseed >= 0) && (healSFXseed < 1)) {
+          heal1.play();
+        }
+        if ((healSFXseed >= 1) && (healSFXseed < 2)) {
+          heal2.play();
+        }
+        if ((healSFXseed >= 2) && (healSFXseed < 3)) {
+          heal3.play();
+        }
+        if ((healSFXseed >= 3) && (healSFXseed <= 4)) {
+          heal4.play();
+        }
+        healSFXseed++;
+        if (healSFXseed == 4) {
+          healSFXseed = 0;
+        }
+      }
+      
+      
+      collideEnergy = energy;
       patient.energy += collideEnergy;
       patient.energy = constrain(energy,0,maxEnergy);
       
-      
-      
+
     }
   }
   

@@ -38,7 +38,7 @@
  SoundFile revive4;
 
 // initializing arrays
-Cell[] cells = new Cell[200];
+Cell[] cells = new Cell[100];
 Parasite[] parasites = new Parasite[10];
 Antibody[] antibodies = new Antibody[10];
 
@@ -121,7 +121,7 @@ void draw() {
   int globalKillCount = 0;
   
   // dirty way of giving the player a stock every 3 seconds
-  if (millis() % 3000 <= 20) {
+  if (millis() % 1000 <= 20) {
     meter.stock++;
   }
   
