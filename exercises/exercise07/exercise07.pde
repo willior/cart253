@@ -11,6 +11,31 @@
  import processing.sound.*;
  SoundFile pop;
  SoundFile bgm;
+  
+ SoundFile bloom1;
+ SoundFile bloom2;
+ SoundFile bloom3;
+ SoundFile bloom4;
+
+ SoundFile kill1;
+ SoundFile kill2;
+ SoundFile kill3;
+ SoundFile kill4;
+ SoundFile kill5;
+ SoundFile kill6;
+ SoundFile kill7;
+ SoundFile kill8;
+ SoundFile kill9;
+  
+ SoundFile heal1;
+ SoundFile heal2;
+ SoundFile heal3;
+ SoundFile heal4;
+ 
+ SoundFile revive1;
+ SoundFile revive2;
+ SoundFile revive3;
+ SoundFile revive4;
 
 // initializing arrays
 Cell[] cells = new Cell[200];
@@ -39,9 +64,28 @@ void setup() {
   size(800,600);
   pop = new SoundFile(this,"pop.wav");
   bgm = new SoundFile(this,"bgm.mp3");
+  bloom1 = new SoundFile(this,"bloom1.wav");
+  bloom2 = new SoundFile(this,"bloom2.wav");
+  bloom3 = new SoundFile(this,"bloom3.wav");
+  bloom4 = new SoundFile(this,"bloom4.wav");
+  
+  kill1 = new SoundFile(this,"kill1.wav");
+  kill2 = new SoundFile(this,"kill2.wav");
+  kill3 = new SoundFile(this,"kill3.wav");
+  kill4 = new SoundFile(this,"kill4.wav");
+  kill5 = new SoundFile(this,"kill5.wav");
+  kill6 = new SoundFile(this,"kill6.wav");
+  kill7 = new SoundFile(this,"kill7.wav");
+  kill8 = new SoundFile(this,"kill8.wav");
+  kill9 = new SoundFile(this,"kill9.wav");
+  
+  heal1 = new SoundFile(this,"heal1.wav");
+  heal2 = new SoundFile(this,"heal2.wav");
+  heal3 = new SoundFile(this,"heal3.wav");
+  heal4 = new SoundFile(this,"heal4.wav");
   
   // plays the background music in a loop
-  bgm.loop();
+  // bgm.loop();
   
   // player starts with 3 antibodies
   int stock = 3;
