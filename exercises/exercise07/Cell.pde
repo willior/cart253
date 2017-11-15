@@ -34,6 +34,10 @@ class Cell {
     
     // terminates the function if energy is less than 0
     if (energy <= 0) {
+      strokeWeight(1);
+      stroke(255,0,0);
+      line(x-5,y-5,x+5,y+5);
+      line(x-5,y+5,x+5,y-5);
       return;
     }
     
@@ -49,16 +53,16 @@ class Cell {
     vy = speed * (noise(ty) * 2 - 1) + ((mouseY) - (width/2)) / (width/10);
     
     if (mouseX > x){
-      vx += 1;
+      vx += .5;
     }
     if (mouseX < x){
-      vx -= 1;
+      vx -= .5;
     }
     if (mouseY > y){
-      vy += 1;
+      vy += .5;
     }
     if (mouseY < y){
-      vy -= 1;
+      vy -= .5;
     }
       // function to drain energy bar if mouse is pressed
   if (mousePressed == true) {
