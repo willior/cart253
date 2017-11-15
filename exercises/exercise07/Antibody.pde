@@ -15,7 +15,7 @@ class Antibody {
   float tx = random(0,100);
   float ty = random(0,100);
   
-  float speed = 10;
+  float speed = 8;
   float x;
   float y;
 
@@ -87,6 +87,9 @@ class Antibody {
     if ((x == patient.x && y == patient.y) || (x <= patient.x + 10 && y <= patient.y + 10) && (x >= patient.x - 10 && y >= patient.y - 10)){
       patient.energy += collideEnergy;
       patient.energy = constrain(energy,0,maxEnergy);
+      
+      
+      
     }
   }
   

@@ -59,6 +59,8 @@ int score = 0;
 float vx;
 float vy;
 
+float antibodySFXseed = 0;
+
 void setup() {
   
   size(800,600);
@@ -85,7 +87,7 @@ void setup() {
   heal4 = new SoundFile(this,"heal4.wav");
   
   // plays the background music in a loop
-  // bgm.loop();
+  bgm.loop();
   
   // player starts with 3 antibodies
   int stock = 3;
@@ -193,7 +195,25 @@ void keyPressed() {
   // antibody release
   if (key == '1') {
     if (meter.stock > 0) {
-      pop.play();
+      
+      // sound picker for antibody release
+      if ((antibodySFXseed >= 0) && (antibodySFXseed < 1)) {
+        bloom1.play();
+      }
+      if ((antibodySFXseed >= 1) && (antibodySFXseed < 2)) {
+        bloom2.play();
+      }
+      if ((antibodySFXseed >= 2) && (antibodySFXseed < 3)) {
+        bloom3.play();
+      }
+      if ((antibodySFXseed >= 3) && (antibodySFXseed <= 4)) {
+        bloom4.play();
+      }
+      antibodySFXseed++;
+      if (antibodySFXseed == 4) {
+        antibodySFXseed = 0;
+      }
+      // pop.play();
       meter.stock--;
       for (int a = 0; a < 10; a++) {
         int x = mouseX;

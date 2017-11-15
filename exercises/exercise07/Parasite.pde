@@ -11,7 +11,7 @@ class Parasite {
   float tx = random(0,100);
   float ty = random(0,100);
   
-  float speed = 10;
+  float speed = 8;
   float x;
   float y;
   

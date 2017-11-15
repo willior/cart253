@@ -41,16 +41,16 @@ class Energy {
       // modify cell velocities based on their position in relation to mouse cursor on click
       // additional logic checks if there remains sufficient energy; velocities unaffected if true
       if ((mouseX > cells[i].x) && (bar.eLevel > 3)){
-        cells[i].vx += 5;
+        cells[i].vx += 8;
       }
       if ((mouseX < cells[i].x) && (bar.eLevel > 3)){
-        cells[i].vx -= 5;
+        cells[i].vx -= 8;
       }
       if ((mouseY > cells[i].y) && (bar.eLevel > 3)){
-        cells[i].vy += 5;
+        cells[i].vy += 8;
       }
       if ((mouseY < cells[i].y) && (bar.eLevel > 3)){
-        cells[i].vy -= 5;
+        cells[i].vy -= 8;
       }
     }
   }
