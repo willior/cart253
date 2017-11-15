@@ -47,6 +47,8 @@ SoundFile heal4;
 SoundFile herd;
 SoundFile empty;
 
+SoundFile coda;
+
 // initializing arrays
 Cell[] cells = new Cell[200];
 Parasite[] parasites = new Parasite[10];
@@ -80,10 +82,10 @@ boolean depleted;
 void setup() {
 
   size(800, 600);
-  
+
   pop = new SoundFile(this, "pop.wav");
   bgm = new SoundFile(this, "bgm.mp3");
-  
+
   bloom1 = new SoundFile(this, "bloom1.wav");
   bloom2 = new SoundFile(this, "bloom2.wav");
   bloom3 = new SoundFile(this, "bloom3.wav");
@@ -106,6 +108,10 @@ void setup() {
 
   herd = new SoundFile(this, "herd.wav");
   empty = new SoundFile(this, "empty.wav");
+  
+  coda = new SoundFile(this,"coda.mp3");
+  
+
 
   // plays the background music in a loop
   bgm.loop();
@@ -120,7 +126,7 @@ void setup() {
 
   // instantiating cells
   for (int i = 0; i < cells.length; i++) {
-
+ //<>//
     int x = floor(random(0, width));
     int y = floor(random(0, height));
 
@@ -138,7 +144,6 @@ void setup() {
 
 void draw() {
   background(224);
-
   // variable to store the amount of dead cells
   int globalKillCount = 0;
 
@@ -147,9 +152,11 @@ void draw() {
     meter.stock++;
   }
 
-  // cell collision
+  // cells update
   for (int i = 0; i < cells.length; i++) {
     cells[i].update();
+
+    // cell collision
     for (int j = 0; j < cells.length; j++) {
       if (j != i) {
         cells[i].collide(cells[j]);
@@ -167,7 +174,27 @@ void draw() {
       int score = (millis() - time);
       println("your score: ", score);
       println("please press the 'R' key to begin again");
+      background(0, 0, 0);
       bgm.stop();
+      coda.play();
+      for (int d = 0; d < parasites.length; d++) {
+        parasites[d].display(); 
+        {
+          fill(255, 0, 0, 32); 
+          stroke(255, 0, 0);
+
+          ellipseMode(CENTER);
+          for(int e = 0; e < 10; e++){
+            
+              ellipse(parasites[d].x+e*20, parasites[d].y+e*30, 200+(parasites[d].killCount/2), 200+(parasites[d].killCount/2));
+          }
+        }
+      }
+      fill(255, 255, 255);
+      textSize(256); // Font size
+      textAlign(CENTER, CENTER); // Center align both horizontally and vertically
+      textLeading(192); // Line height for text
+      text("game\nover", width/2, height/2); // Note that \n means "new line"
       noLoop();
     }
   }
@@ -222,6 +249,7 @@ void keyPressed() {
   // reset button
   if (key == 'r') {
     bgm.stop();
+    coda.stop(); 
     setup();
     time = millis();
     loop();
