@@ -235,7 +235,7 @@ void draw() {
   }
 
   // regenerates energy over time, constrains their values, displays energy bar
-  bar.eLevel += 0.5;
+  bar.eLevel += 1;
   bar.eLevel = constrain(bar.eLevel, 0, 110);
   println(bar.eLevel);
   bar.display();
