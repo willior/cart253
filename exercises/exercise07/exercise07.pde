@@ -79,6 +79,8 @@ float antibodySFXseed = 0;
 // boolean to determine whether energy remains or not; not yet used
 boolean depleted;
 
+int globalKillCount;
+
 void setup() {
 
   size(800, 600);
@@ -124,9 +126,9 @@ void setup() {
   // instantiates the Energy bar for herding cells
   bar = new Energy(110, 10, 50, (height - 30), eLevel, 0, energyEmpty, energyStroke);
 
-  // instantiating cells
+  // instantiating cells //<>//
   for (int i = 0; i < cells.length; i++) {
- //<>//
+
     int x = floor(random(0, width));
     int y = floor(random(0, height));
 
@@ -143,9 +145,10 @@ void setup() {
 }
 
 void draw() {
-  background(224);
-  // variable to store the amount of dead cells
-  int globalKillCount = 0;
+  background(25+globalKillCount);
+  
+  // resets variable to store the amount of dead cells
+  globalKillCount = 0;
 
   // dirty way of giving the player a stock every 3 seconds
   if (millis() % 3000 <= 20) {
