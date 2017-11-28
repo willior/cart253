@@ -45,16 +45,8 @@ class Cell {
       return;
     }
 
-    // if a cell falls to 1 energy or below, the kill sound picker is run
-    else if (energy <= 1) {
-
-      // energy is ticked down once again in order to trigger the previous if statement (energy <= 0) on next update(), then breaks out of the function
-      energy = -1;
-      return;
-    }
-
     // behaviour for cells with energy remaining
-    else if (energy > 1) {
+    else if (energy >= 0) {
 
       vx = speed * (noise(tx) * 2 - 1) + ((mouseX) - (width/2)) / (width/10);
       vy = speed * (noise(ty) * 2 - 1) + ((mouseY) - (width/2)) / (width/10);
