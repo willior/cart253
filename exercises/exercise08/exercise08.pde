@@ -1,12 +1,16 @@
-// exercise 07: incorporating sound //<>// //<>//
+// final project //<>//
+// objective: survive
 //
 // a game where parasites (blue) drain energy from your cells (red).
-// release antibodies (yellow) at the location of your cursor by pressing your '1' key
+// you are given 3 hyper stocks to start with, and receive an additional one every 3 seconds.
+// hyper stocks (the red squares) are spent to use abilities (the '1', '2', and '3' keys).
+// you can store a maximum of 6 hyper stocks at any given moment.
+// release antibodies (yellow) at the location of your cursor by pressing your '1' key (expends one hyper stock)
 // antibodies heal/revive your cells based on how much energy they have left.
-// you are given 3 antibodies to start with, and receive an additional one every 3 seconds.
-// you can store a maximum of 6 antibodies at any given moment.
 // clicking on the screen herds your cells together, but it expends energy (green bar).
 // energy recharges over time.
+// press '2' to instantly recharge your herding energy (expends one hyper stock).
+// press '3' to stun the parasites for a short amount of time (expends one hyper stock).
 // overlapping cells heal each other slowly. the more overlapping, the faster the healing.
 // noise() function regulates objects' movement, among other factors.
 // which quadrant of the screen your cursor is in determines wind direction, influence cell movement.
