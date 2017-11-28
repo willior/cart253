@@ -309,5 +309,5 @@ void mouseReleased() {
 
   // stops both harmonic tone and non-harmonic noise
   herd.stop();
-  empty.stop();
+  empty.stop();  
 }

@@ -11,7 +11,7 @@ class Cell {
 
 
   int maxEnergy = 255;
-  float moveEnergy = -9;
+  float moveEnergy = -0.2;
   int collideEnergy = 10;
   int size;
   int energy;
