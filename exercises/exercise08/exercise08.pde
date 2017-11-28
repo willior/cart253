@@ -293,6 +293,15 @@ void keyPressed() {
       return;
     }
   }
+  
+  // energy recharge (uses 1 hyper stock)
+  if (key =='2') {
+    if (meter.stock > 0) {
+      meter.stock--;
+      bar.eLevel = 110;
+    }
+  }
+  
 }
 
 // mouse clicked function
