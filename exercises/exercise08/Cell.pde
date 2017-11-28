@@ -81,7 +81,7 @@ class Cell {
       }
 
       // energy is ticked down once again in order to trigger the previous if statement (energy <= 0) on next update(), then breaks out of the function
-      energy--;
+      energy = -1;
       return;
     }
 
@@ -131,6 +131,10 @@ class Cell {
       energy += moveEnergy;
       energy = constrain(energy, 0, maxEnergy);
       energyOffset = maxEnergy-energy;
+      if (energy == 0) {
+        return;
+      }
+      
     }
   }
 
@@ -143,7 +147,7 @@ class Cell {
     // collision detection logic
     if ((x == other.x && y == other.y) || (x <= other.x + 10 && y <= other.y + 10) && (x >= other.x - 10 && y >= other.y - 10)) {
       energy += collideEnergy;
-      energy = constrain(energy, 0, maxEnergy);
+      energy = constrain(energy, -1, maxEnergy);
     }
   }
 
