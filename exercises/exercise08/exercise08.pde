@@ -51,7 +51,7 @@ SoundFile coda;
 
 // initializing arrays
 Cell[] cells = new Cell[200];
-Parasite[] parasites = new Parasite[10];
+Parasite[] parasites = new Parasite[1];
 Antibody[] antibodies = new Antibody[10];
 
 // creating the meter to display antibody stock
@@ -143,6 +143,14 @@ void setup() {
     antibodies[p] = new Antibody (x, y, 20);
   }
 }
+
+// flow:
+// cells update
+// cells collide
+// cells display
+// parasites/antibodies update
+// parasites/antibodies attack/heal
+// parasites/antibodies display
 
 void draw() {
   background(25+globalKillCount);

@@ -39,7 +39,7 @@ class Cell {
   void update() {
     // draws a kill marker at the spot where the update function sees the Cell at 0 or less energy
     // terminates the function if energy is less than 0
-    if (energy <= 0) {
+    if (energy < 0) {
       strokeWeight(1);
       stroke(255, 0, 0);
       line(x-5, y-5, x+5, y+5);
@@ -48,7 +48,7 @@ class Cell {
     }
 
     // if a cell falls to 1 energy or below, the kill sound picker is run
-    if (energy <= 1) {
+    else if (energy <= 1) {
 
       // picks a kill sound effect at random from the library
       killSFXseed = random(0, 9);
@@ -81,12 +81,12 @@ class Cell {
       }
 
       // energy is ticked down once again in order to trigger the previous if statement (energy <= 0) on next update(), then breaks out of the function
-      energy = 0;
+      energy--;
       return;
     }
 
     // behaviour for cells with energy remaining
-    else if (energy > 0) {
+    else if (energy > 1) {
 
       vx = speed * (noise(tx) * 2 - 1) + ((mouseX) - (width/2)) / (width/10);
       vy = speed * (noise(ty) * 2 - 1) + ((mouseY) - (width/2)) / (width/10);
@@ -136,7 +136,7 @@ class Cell {
 
   // collision functions; breaks out if either Cell is dead
   void collide(Cell other) {
-    if (energy == 0 || other.energy == 0) {
+    if (energy <= 0 || other.energy <= 0) {
       return;
     }
 
