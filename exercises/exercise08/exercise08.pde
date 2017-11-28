@@ -154,7 +154,6 @@ void setup() {
 
 void draw() {
   background(25+globalKillCount);
-  println("globalKillCount=",globalKillCount);
 
   // resets variable to store the amount of dead cells
   globalKillCount = 0;
