@@ -43,6 +43,7 @@ class Cell {
       stroke(255, 0, 0);
       line(x-5, y-5, x+5, y+5);
       line(x-5, y+5, x+5, y-5);
+      energy = -1;
       return;
     }
 
