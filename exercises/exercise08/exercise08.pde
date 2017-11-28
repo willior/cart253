@@ -241,7 +241,7 @@ void draw() {
   // regenerates energy over time, constrains their values, displays energy bar
   bar.eLevel += 1;
   bar.eLevel = constrain(bar.eLevel, 0, 110);
-  println(bar.eLevel);
+  // println(bar.eLevel);
   bar.display();
 
   // displays antibody stocks

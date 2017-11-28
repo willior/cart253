@@ -81,7 +81,7 @@ class Cell {
       }
 
       // energy is ticked down once again in order to trigger the previous if statement (energy <= 0) on next update(), then breaks out of the function
-      energy--;
+      energy = 0;
       return;
     }
 
