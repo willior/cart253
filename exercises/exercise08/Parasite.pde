@@ -32,7 +32,7 @@ class Parasite {
     sizeOffset = killCount/4;
     
     // constrains the sizeOffset variable to remain within a reasonable range; otherwise, the parasites become too big and the game becomes impossible very quickly
-    sizeOffset = constrain (sizeOffset,0,128);
+    sizeOffset = constrain (sizeOffset,0,255);
 
     float vx = speed * (noise(tx) * 2 - 1);
     float vy = speed * (noise(ty) * 2 - 1);
@@ -70,7 +70,6 @@ class Parasite {
         if (host.energy == 0) {
           killCount++;
           host.energy = -1;
-          println(killCount);
         }
       }
     }

@@ -51,7 +51,7 @@ SoundFile coda;
 
 // initializing arrays
 Cell[] cells = new Cell[200];
-Parasite[] parasites = new Parasite[1];
+Parasite[] parasites = new Parasite[10];
 Antibody[] antibodies = new Antibody[10];
 
 // creating the meter to display antibody stock
