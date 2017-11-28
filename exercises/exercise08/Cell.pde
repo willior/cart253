@@ -27,8 +27,6 @@ class Cell {
 
   int energyOffset;
 
-  float killSFXseed;
-
   Cell(int tempX, int tempY, int tempSize) {
     x = tempX;
     y = tempY;
@@ -49,36 +47,6 @@ class Cell {
 
     // if a cell falls to 1 energy or below, the kill sound picker is run
     else if (energy <= 1) {
-
-      // picks a kill sound effect at random from the library
-      //killSFXseed = random(0, 9);
-      //if ((killSFXseed >= 0) && (killSFXseed <= 1)) {
-      //  kill1.play();
-      //}
-      //if ((killSFXseed > 1) && (killSFXseed <= 2)) {
-      //  kill2.play();
-      //}
-      //if ((killSFXseed > 2) && (killSFXseed <= 3)) {
-      //  kill3.play();
-      //}
-      //if ((killSFXseed > 3) && (killSFXseed <= 4)) {
-      //  kill4.play();
-      //}
-      //if ((killSFXseed > 4) && (killSFXseed <= 5)) {
-      //  kill5.play();
-      //}
-      //if ((killSFXseed > 5) && (killSFXseed <= 6)) {
-      //  kill6.play();
-      //}
-      //if ((killSFXseed > 6) && (killSFXseed <= 7)) {
-      //  kill7.play();
-      //}
-      //if ((killSFXseed > 7) && (killSFXseed <= 8)) {
-      //  kill8.play();
-      //}
-      //if ((killSFXseed > 8) && (killSFXseed <= 9)) {
-      //  kill9.play();
-      //}
 
       // energy is ticked down once again in order to trigger the previous if statement (energy <= 0) on next update(), then breaks out of the function
       energy = -1;
