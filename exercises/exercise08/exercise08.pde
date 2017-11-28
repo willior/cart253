@@ -314,6 +314,16 @@ void keyPressed() {
       }
     }
   }
+  
+  if (key =='3') {
+    if (meter.stock > 0) {
+      meter.stock--;
+      for (int p = 0; p < 10; p++) {
+        parasites[p].stun = true;
+      }
+    }
+  }
+  
 }
 
 // mouse clicked function
