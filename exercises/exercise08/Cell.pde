@@ -36,8 +36,8 @@ class Cell {
 
   void update() {
     
-    // draws a kill marker at the spot where the update function sees the Cell at less than 0 (a state i will refer to as "confirmed dead")
-    // terminates the function if energy is less than 0, ie. the cell is "confirmed dead"
+    // draws a kill marker at the spot where the update function sees the Cell at 0 or less ("confirmed dead")
+    // makes sure the cell's energy is below 0 ("confirmed dead") so that it no longer is capable of feeding a parasite before breaking out of the function
     if (energy <= 0) {
       strokeWeight(1);
       stroke(255, 0, 0);
