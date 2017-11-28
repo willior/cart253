@@ -56,19 +56,29 @@ class Parasite {
     }
   }
 
+  // parasite attack function
   void attack(Cell host) {
 
+    // parasite hitbox logic
     if ((x == host.x && y == host.y) || (x <= host.x + (10+(sizeOffset/4)) && y <= host.y + (10+(sizeOffset/4)) && (x >= host.x - (10+(sizeOffset/4)) && y >= host.y - (10+(sizeOffset/4))))) {
       
+      // breaks out of function if host cell is "confirmed dead" (ie, less than 0)
       if (host.energy < 0) {
         return;
       }
       
-        else {
+      // else runs the attack function
+      else {
         
+        // drains energy from host cell
         host.energy -= drainEnergy;
-        host.energy = constrain(energy, 0, 255);
         
+        // constrains energy to not go below 0
+        // for clarification, a cell whose energy = 0 at this point in the program flow is known [semantically] as "killed", ie. they die in the current cycle
+        // cells whose energy level is LESS than 0 at any point are known [semantically] as "confirmed dead"
+
+        host.energy = constrain(energy, 0, 255);
+
         if (host.energy == 0) {
           
           // picks a kill sound at random form the library
@@ -101,7 +111,11 @@ class Parasite {
             kill9.play();
           }
           
+          // updates parasite kill count
           killCount++;
+          
+          // updates the energy of the "killed" cell (host.energy = 0) to "confirmed dead" cell (host.energy = -1)
+          // which prevents "killed" logic from running anymore
           host.energy = -1;
         }
       }

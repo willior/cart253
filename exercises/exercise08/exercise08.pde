@@ -304,16 +304,23 @@ void keyPressed() {
     if (meter.stock > 0) {
       meter.stock--;
       bar.eLevel = 110;
+      
+      // makes sure the harmonic tone for herding plays after rejuvinating herding energy if the mouse is already pressed
+      if (mousePressed == true) {
+        
+        // prevents more than 1 instance of the tone from playing at once
+        herd.stop();
+        herd.loop();
+      }
     }
   }
-  
 }
 
 // mouse clicked function
 void mousePressed() {
 
   // plays a harmonic tone
-  herd.play();
+  herd.loop();
   // plays non-harmonic noise
   empty.play();
 }

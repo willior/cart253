@@ -35,9 +35,10 @@ class Cell {
   }
 
   void update() {
-    // draws a kill marker at the spot where the update function sees the Cell at 0 or less energy
-    // terminates the function if energy is less than 0
-    if (energy < 0) {
+    
+    // draws a kill marker at the spot where the update function sees the Cell at less than 0 (a state i will refer to as "confirmed dead")
+    // terminates the function if energy is less than 0, ie. the cell is "confirmed dead"
+    if (energy <= 0) {
       strokeWeight(1);
       stroke(255, 0, 0);
       line(x-5, y-5, x+5, y+5);
@@ -46,7 +47,7 @@ class Cell {
     }
 
     // behaviour for cells with energy remaining
-    else if (energy >= 0) {
+    else if (energy > 0) {
 
       vx = speed * (noise(tx) * 2 - 1) + ((mouseX) - (width/2)) / (width/10);
       vy = speed * (noise(ty) * 2 - 1) + ((mouseY) - (width/2)) / (width/10);
@@ -87,15 +88,20 @@ class Cell {
         y -= height;
       }
 
-      // energy 
+      // drains cell energy naturally
       energy += moveEnergy;
+      
+      // constrains energy to not fall below 0
+      // if it does land at 0, this allows it to be eaten by a parasite in range, as parasites ignore "confirmed dead" (energy < 0) cell "corpses"
+      // however, if a parasite does not eat it, it will most likely die naturally anyway
       energy = constrain(energy, 0, maxEnergy);
+      
+      // updates the energyOffset variable, used to colour the Cells
       energyOffset = maxEnergy-energy;
-
     }
   }
 
-  // collision functions; breaks out if either Cell is dead
+  // collision functions; breaks out if either Cell is confirmed dead
   void collide(Cell other) {
     if (energy <= 0 || other.energy <= 0) {
       return;
@@ -104,7 +110,7 @@ class Cell {
     // collision detection logic
     if ((x == other.x && y == other.y) || (x <= other.x + 10 && y <= other.y + 10) && (x >= other.x - 10 && y >= other.y - 10)) {
       energy += collideEnergy;
-      energy = constrain(energy, -1, maxEnergy);
+      energy = constrain(energy, 0, maxEnergy);
     }
   }
 
