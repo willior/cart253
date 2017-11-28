@@ -154,6 +154,7 @@ void setup() {
 
 void draw() {
   background(25+globalKillCount);
+  println("globalKillCount=",globalKillCount);
 
   // resets variable to store the amount of dead cells
   globalKillCount = 0;
@@ -176,7 +177,7 @@ void draw() {
     cells[i].display();
 
     // checks to see how many cells are dead
-    if (cells[i].energy == 0) {
+    if (cells[i].energy <= 0) {
       globalKillCount++;
     }
 
