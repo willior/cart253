@@ -67,6 +67,9 @@ color energyStroke = color(0);
 int time = 0;
 int score = 0;
 
+// variable for parasite stun timer
+int stunTime;
+
 // global variables for velocities
 float vx;
 float vy;
@@ -111,8 +114,6 @@ void setup() {
 
   coda = new SoundFile(this, "coda.mp3");
 
-
-
   // plays the background music in a loop
   bgm.loop();
 
@@ -152,6 +153,17 @@ void setup() {
 
 void draw() {
   background(25+globalKillCount);
+
+  // behaviour for the parasite stun timer
+  stunTime--;
+  stunTime = constrain(stunTime, 0, 100);
+
+  // returns parasite stun state as false if stunTimer is 0
+  if (stunTime == 0) {
+    for (int p = 0; p < 10; p++) {
+      parasites[p].stun = false;
+    }
+  }
 
   // resets variable to store the amount of dead cells
   globalKillCount = 0;
@@ -298,33 +310,39 @@ void keyPressed() {
       return;
     }
   }
-  
+
   // energy recharge (uses 1 hyper stock)
   if (key =='2') {
     if (meter.stock > 0) {
       meter.stock--;
       bar.eLevel = 110;
-      
+
       // makes sure the harmonic tone for herding plays after rejuvinating herding energy if the mouse is already pressed
       if (mousePressed == true) {
-        
+
         // prevents more than 1 instance of the tone from playing at once
         herd.stop();
         herd.loop();
       }
     }
   }
-  
+
+  // parasite stun ability (uses 1 hyper stock)
   if (key =='3') {
     if (meter.stock > 0) {
       meter.stock--;
-      for (int p = 0; p < 10; p++) {
-        parasites[p].stun = true;
+      
+      // sets the stun time to 100, and keeps the parasites stunned while stunTime is greater than 0
+      stunTime = 100;
+      if (stunTime >= 1) {
+        for (int p = 0; p < 10; p++) {
+          parasites[p].stun = true;
+        }
       }
     }
   }
-  
 }
+
 
 // mouse clicked function
 void mousePressed() {
@@ -340,5 +358,5 @@ void mouseReleased() {
 
   // stops both harmonic tone and non-harmonic noise
   herd.stop();
-  empty.stop();  
+  empty.stop();
 }
