@@ -131,10 +131,7 @@ class Cell {
       energy += moveEnergy;
       energy = constrain(energy, 0, maxEnergy);
       energyOffset = maxEnergy-energy;
-      if (energy == 0) {
-        return;
-      }
-      
+
     }
   }
 

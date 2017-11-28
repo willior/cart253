@@ -21,7 +21,6 @@
 
 // sound library
 import processing.sound.*;
-SoundFile pop;
 SoundFile bgm;
 
 SoundFile bloom1;
@@ -85,7 +84,6 @@ void setup() {
 
   size(800, 600);
 
-  pop = new SoundFile(this, "pop.wav");
   bgm = new SoundFile(this, "bgm.mp3");
 
   bloom1 = new SoundFile(this, "bloom1.wav");
@@ -288,7 +286,6 @@ void keyPressed() {
       if (antibodySFXseed == 4) {
         antibodySFXseed = 0;
       }
-      // pop.play();
       meter.stock--;
 
       // releases 10 antibodies at the location of the cursor when the '1' key is pressed.
