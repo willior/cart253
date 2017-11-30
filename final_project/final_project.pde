@@ -165,7 +165,8 @@ void setup() {
 
 void draw() {
   
-  background(25+globalKillCount);
+  background(255);
+  // background(25+globalKillCount);
   
   // changes the boolean run value to true value on mousePressed
   if (mousePressed == true) {
