@@ -54,7 +54,7 @@ SoundFile empty;
 SoundFile coda;
 
 // initializing arrays
-Cell[] cells = new Cell[200];
+Cell[] cells = new Cell[255];
 Parasite[] parasites = new Parasite[10];
 Antibody[] antibodies = new Antibody[10];
 
@@ -213,7 +213,7 @@ void draw() {
     }
 
     // checks to see if all 200 cells are dead; if so, the loop ends (reset with the 'r' key)
-    if (globalKillCount == 200) {
+    if (globalKillCount == 255) {
       int score = (millis() - time);
       println("your score: ", score);
       println("please press the 'R' key to begin again");

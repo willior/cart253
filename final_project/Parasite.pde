@@ -41,7 +41,7 @@ class Parasite {
 
       // created a new variable, sizeOffset, to modulate both the parasite hitbox and size based off each parasite's kill count
       sizeOffset = killCount/4;
-      sizeOffset =+ eatCount*4;
+      sizeOffset += eatCount*4;
 
       // constrains the sizeOffset variable to remain within a reasonable range; otherwise, the parasites become too big and the game becomes impossible very quickly
       sizeOffset = constrain (sizeOffset, 0, 255);
