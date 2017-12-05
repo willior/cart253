@@ -1,5 +1,6 @@
-// final project //<>//
-// objective: survive
+// will graham-simpkins //<>//
+// cart253
+// final project
 //
 // a game where parasites (blue) drain energy from your cells (red).
 // you are given 3 hyper stocks to start with, and receive an additional one every 3 seconds (max 6).
@@ -11,18 +12,13 @@
 // energy recharges over time.
 // press '2' to instantly recharge your herding energy (expends one hyper stock).
 // press '3' to stun the parasites for a short amount of time (expends one hyper stock).
+// disable parasites by feeding them cells while they are stunned.
 // overlapping cells heal each other slowly. the more overlapping, the faster the healing.
 // noise() function regulates objects' movement, among other factors.
 // which quadrant of the screen your cursor is in determines wind direction, influence cell movement.
 // used a timer to track "score"; the timer resets when the game is reset by pressing 'R'.
 // click on the splash screen to start the game.
 // have fun!!
-//
-// sound elements:
-// the percussion background track was generated using a midi-synced Korg es2 and Eleketron Analog RYTM.
-// the rhythms are stochastically modified based on a number of randomly modulating control voltages.
-// the melodic elements were generated on a DSI Prophet '08 analog synthesizer.
-// all sound effects recorded digitally and edited with Adobe Audition.
 
 // sound library
 import processing.sound.*;
