@@ -92,9 +92,9 @@ float vy;
 
 // initializing the number that determines Antibody release sound effects
 // not actually a "seed" in terms of randomness but you get the idea
-float antibodySFXseed = 0;
-float rechargeSFXseed = 0;
-float stunSFXseed = 0;
+int antibodySFXseed = 0;
+int rechargeSFXseed = 0;
+int stunSFXseed = 0;
 
 // boolean to determine whether energy remains or not; not yet used
 boolean depleted;
@@ -373,7 +373,27 @@ void keyPressed() {
     if (meter.stock > 0) {
       meter.stock--;
       bar.eLevel = 110;
-      recharge.play();
+      
+      if ((rechargeSFXseed >= 0) && (rechargeSFXseed < 1)) {
+          recharge1.play();
+        }
+        if ((rechargeSFXseed >= 1) && (rechargeSFXseed < 2)) {
+          recharge2.play();
+        }
+        if ((rechargeSFXseed >= 2) && (rechargeSFXseed < 3)) {
+          recharge3.play();
+        }
+        if ((rechargeSFXseed >= 3) && (rechargeSFXseed <= 4)) {
+          recharge4.play();
+        }
+
+        // variable used to cycle sequentially through sound effects
+        rechargeSFXseed++;
+        if (rechargeSFXseed == 4) {
+          rechargeSFXseed = 0;
+        }
+      
+      // recharge1.play();
 
       // makes sure the harmonic tone for herding plays after rejuvinating herding energy if the mouse is already pressed
       if (mousePressed == true) {
@@ -389,7 +409,28 @@ void keyPressed() {
   if (key =='3') {
     if (meter.stock > 0) {
       meter.stock--;
-      stun.play();
+      
+      if ((stunSFXseed >= 0) && (stunSFXseed < 1)) {
+          stun1.play();
+        }
+        if ((stunSFXseed >= 1) && (stunSFXseed < 2)) {
+          stun2.play();
+        }
+        if ((stunSFXseed >= 2) && (stunSFXseed < 3)) {
+          stun3.play();
+        }
+        if ((stunSFXseed >= 3) && (stunSFXseed <= 4)) {
+          stun4.play();
+        }
+
+        // variable used to cycle sequentially through sound effects
+        stunSFXseed++;
+        if (stunSFXseed == 4) {
+          stunSFXseed = 0;
+        }
+      
+      
+      //stun1.play();
       
       // sets the stun time to 100, and keeps the parasites stunned while stunTime is greater than 0
       stunTime = 100;
