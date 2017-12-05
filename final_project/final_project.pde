@@ -65,6 +65,7 @@ Cell[] cells = new Cell[255];
 Parasite[] parasites = new Parasite[10];
 Antibody[] antibodies = new Antibody[10];
 
+
 // creating the meter to display antibody stock
 Hyper meter;
 color hyperEmpty = color(255);
@@ -211,14 +212,22 @@ void draw() {
     }
   }
 
-  // resets variable to store the amount of dead cells
+  // resets variable to store the amount of dead cells/disabled parasites
   globalKillCount = 0;
+  disableCount = 0;
 
   // dirty way of giving the player a stock every 3 seconds
   if (millis() % 3000 <= 20) {
     meter.stock++;
   }
-
+  
+  //   checks to see how many parasites are disabled
+  //for (int p = 0; p < parasites.length; p++) {
+  //  if (parasites[p].eatCount > 50) {
+  //    disableCount++;
+  //  }
+  //}
+  
   // cells update
   for (int i = 0; i < cells.length; i++) {
     cells[i].update();
