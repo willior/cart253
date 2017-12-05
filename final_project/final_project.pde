@@ -2,7 +2,7 @@
 // objective: survive
 //
 // a game where parasites (blue) drain energy from your cells (red).
-// you are given 3 hyper stocks to start with, and receive an additional one every 3 seconds.
+// you are given 3 hyper stocks to start with, and receive an additional one every 3 seconds (max 6).
 // hyper stocks (the red squares) are spent to use abilities (the '1', '2', and '3' keys).
 // you can store a maximum of 6 hyper stocks at any given moment.
 // release antibodies (yellow) at the location of your cursor by pressing your '1' key (expends one hyper stock)
@@ -193,7 +193,7 @@ void setup() {
 void draw() {
   
   background(255);
-  // background(25+globalKillCount);
+  // background(255-globalKillCount);
   // splash screen goes here
   
   // changes the boolean run value to true value on mousePressed (starts the game)

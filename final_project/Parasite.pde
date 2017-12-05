@@ -110,28 +110,28 @@ class Parasite {
               kill1.play();
             }
             if ((killSFXseed > 1) && (killSFXseed <= 2)) {
-              kill2.play();
+            //  kill2.play();
             }
             if ((killSFXseed > 2) && (killSFXseed <= 3)) {
-              kill3.play();
+            //  kill3.play();
             }
             if ((killSFXseed > 3) && (killSFXseed <= 4)) {
               kill4.play();
             }
             if ((killSFXseed > 4) && (killSFXseed <= 5)) {
-              kill5.play();
+            //  kill5.play();
             }
             if ((killSFXseed > 5) && (killSFXseed <= 6)) {
-              kill6.play();
+            //  kill6.play();
             }
             if ((killSFXseed > 6) && (killSFXseed <= 7)) {
               kill7.play();
             }
             if ((killSFXseed > 7) && (killSFXseed <= 8)) {
-              kill8.play();
+            //  kill8.play();
             }
             if ((killSFXseed > 8) && (killSFXseed <= 9)) {
-              kill9.play();
+            //  kill9.play();
             }
 
             // updates parasite kill count
@@ -205,6 +205,7 @@ class Parasite {
               disable.play();
             }
             else if (eatCount <= 50) {
+              // sound file went here
             }
 
             // updates the energy of the "killed" cell (host.energy = 0) to "confirmed dead" cell (host.energy = -1)
