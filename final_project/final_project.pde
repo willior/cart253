@@ -51,6 +51,17 @@ SoundFile heal4;
 SoundFile herd;
 SoundFile empty;
 
+SoundFile recharge1;
+SoundFile recharge2;
+SoundFile recharge3;
+SoundFile recharge4;
+SoundFile stun1;
+SoundFile stun2;
+SoundFile stun3;
+SoundFile stun4;
+SoundFile disable;
+SoundFile eat;
+
 SoundFile coda;
 
 // initializing arrays
@@ -82,12 +93,17 @@ float vy;
 // initializing the number that determines Antibody release sound effects
 // not actually a "seed" in terms of randomness but you get the idea
 float antibodySFXseed = 0;
+float rechargeSFXseed = 0;
+float stunSFXseed = 0;
 
 // boolean to determine whether energy remains or not; not yet used
 boolean depleted;
 
 // variable that keeps track of the amount of cells currently dead
 int globalKillCount;
+
+// variable that keeps track of the amount of parasites disabled
+int disableCount;
 
 // boolean to determine whether game should run or not (for splash screen)
 boolean run;
@@ -120,6 +136,17 @@ void setup() {
 
   herd = new SoundFile(this, "herd.wav");
   empty = new SoundFile(this, "empty.wav");
+  
+  recharge1 = new SoundFile(this, "recharge1.wav");
+  recharge2 = new SoundFile(this, "recharge2.wav");
+  recharge3 = new SoundFile(this, "recharge3.wav");
+  recharge4 = new SoundFile(this, "recharge4.wav");
+  stun1 = new SoundFile(this, "stun1.wav");
+  stun2 = new SoundFile(this, "stun2.wav");
+  stun3 = new SoundFile(this, "stun3.wav");
+  stun4 = new SoundFile(this, "stun4.wav");
+  eat = new SoundFile(this, "eat.wav");
+  disable = new SoundFile(this, "disable.wav");
 
   coda = new SoundFile(this, "coda.mp3");
   
@@ -167,8 +194,9 @@ void draw() {
   
   background(255);
   // background(25+globalKillCount);
+  // splash screen goes here
   
-  // changes the boolean run value to true value on mousePressed
+  // changes the boolean run value to true value on mousePressed (starts the game)
   if (mousePressed == true) {
     run = true;
   }  
@@ -297,7 +325,7 @@ void draw() {
 
 void keyPressed() {
 
-  // reset button
+  // reset button ('r')
   if (key == 'r') {
     bgm.stop();
     coda.stop(); 
@@ -345,6 +373,7 @@ void keyPressed() {
     if (meter.stock > 0) {
       meter.stock--;
       bar.eLevel = 110;
+      recharge.play();
 
       // makes sure the harmonic tone for herding plays after rejuvinating herding energy if the mouse is already pressed
       if (mousePressed == true) {
@@ -360,6 +389,7 @@ void keyPressed() {
   if (key =='3') {
     if (meter.stock > 0) {
       meter.stock--;
+      stun.play();
       
       // sets the stun time to 100, and keeps the parasites stunned while stunTime is greater than 0
       stunTime = 100;

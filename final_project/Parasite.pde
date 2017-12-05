@@ -199,8 +199,14 @@ class Parasite {
               kill9.play();
             }
 
-            // updates parasite eat count
+            // updates parasite eat count and plays appropriate sound effect
             eatCount++;
+            if (eatCount > 50) {
+              disable.play();
+            }
+            else if (eatCount <= 50) {
+              eat.play();
+            }
 
             // updates the energy of the "killed" cell (host.energy = 0) to "confirmed dead" cell (host.energy = -1)
             // which prevents "killed" logic from running anymore
