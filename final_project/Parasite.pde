@@ -205,7 +205,6 @@ class Parasite {
               disable.play();
             }
             else if (eatCount <= 50) {
-              eat.play();
             }
 
             // updates the energy of the "killed" cell (host.energy = 0) to "confirmed dead" cell (host.energy = -1)
