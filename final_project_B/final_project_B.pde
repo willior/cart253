@@ -20,6 +20,9 @@
 // click on the splash screen to start the game.
 // have fun!!
 
+// image library
+PImage bossImage;
+
 // sound library
 import processing.sound.*;
 SoundFile bgm;
@@ -68,6 +71,9 @@ Antibody[] antibodies = new Antibody[10];
 // initializing boss
 Boss boss;
 
+// background
+color BG = color(255,255,255);
+
 // creating the meter to display antibody stock
 Hyper meter;
 color hyperEmpty = color(255);
@@ -89,7 +95,7 @@ int stunTime;
 float vx;
 float vy;
 
-// initializing the number that determines Antibody release sound effects
+// initializing the variables that determine sequential order of certain sound effects
 // not actually a "seed" in terms of randomness but you get the idea
 int antibodySFXseed = 0;
 int rechargeSFXseed = 0;
@@ -104,12 +110,18 @@ int globalKillCount;
 // variable that keeps track of the amount of parasites disabled
 int disableCount;
 
+// boss intro timer
+int bossApproach = 100;
+int bossIntro = 1;
+
 // boolean to determine whether game should run or not (for splash screen)
 boolean run;
 
 void setup() {
 
   size(800, 600);
+  
+  bossImage = loadImage("boss.png");
 
   bgm = new SoundFile(this, "bgm.mp3");
 
@@ -193,8 +205,7 @@ void setup() {
 // parasites/antibodies display
 
 void draw() {
-
-  background(255);
+  background(BG);
   // background(255-globalKillCount);
   // splash screen goes here
 
@@ -287,7 +298,29 @@ void draw() {
     }
 
     // boss functions; only runs if all parasites are disabled
-    if (disableCount == 10) {    
+    if (disableCount == 10) {
+      
+      // boss intro
+      if (bossIntro == 1) {
+        for (int i = 1000; i > 0; i--) {
+          //background(BG);
+          //stroke(0,0,0);
+          //strokeWeight(4);
+          //fill(255, 0, 0);
+          //textSize(96); // Font size
+          //textAlign(CENTER, CENTER); // Center align both horizontally and vertically
+          //textLeading(128); // Line height for text
+          //text("THE STRAIN HAS BEGUN TO MUTATE\nFIGHT BACK THE INFECTION", width/2, height/2);
+          image (bossImage,0,0);
+          bossApproach--;
+          BG -= 2;
+          if (bossApproach == 0) {
+            bossIntro = 0;
+          }
+        }
+      }
+        
+        
       boss.update();
       for (int i = 0; i < cells.length; i++) {
         boss.attack(cells[i]);
@@ -341,6 +374,7 @@ void draw() {
     // regenerates energy over time, constrains their values, displays energy bar
     bar.eLevel += 1;
     bar.eLevel = constrain(bar.eLevel, 0, 110);
+    
     // println(bar.eLevel);
     bar.display();
 
@@ -417,13 +451,13 @@ void keyPressed() {
       if (rechargeSFXseed == 0) {
         recharge1.play();
       }
-      if (rechargeSFXseed >= 1) {
+      if (rechargeSFXseed == 1) {
         recharge2.play();
       }
-      if (rechargeSFXseed >= 2) {
+      if (rechargeSFXseed == 2) {
         recharge3.play();
       }
-      if (rechargeSFXseed >= 3) {
+      if (rechargeSFXseed == 3) {
         recharge4.play();
       }
 
@@ -448,16 +482,16 @@ void keyPressed() {
     if (meter.stock > 0) {
       meter.stock--;
 
-      if ((stunSFXseed >= 0) && (stunSFXseed < 1)) {
+      if (stunSFXseed == 0) {
         stun1.play();
       }
-      if ((stunSFXseed >= 1) && (stunSFXseed < 2)) {
+      if (stunSFXseed == 1) {
         stun2.play();
       }
-      if ((stunSFXseed >= 2) && (stunSFXseed < 3)) {
+      if (stunSFXseed == 2) {
         stun3.play();
       }
-      if ((stunSFXseed >= 3) && (stunSFXseed <= 4)) {
+      if (stunSFXseed == 3) {
         stun4.play();
       }
 
@@ -466,6 +500,7 @@ void keyPressed() {
       if (stunSFXseed == 4) {
         stunSFXseed = 0;
       }
+      
       // sets the stun time to 100, and keeps the parasites/boss stunned while stunTime is greater than 0
       stunTime = 96;
       if ((stunTime >= 1)&&(disableCount<10)) {
