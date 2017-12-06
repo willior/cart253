@@ -93,19 +93,25 @@ class Antibody {
       // sound picker for heal release
       // sound only plays if cell is dead and antibody is alive
       if ((patient.energy <= 0) && (energy > 0)) {
-        if (healSFXseed == 0) {
-          heal1.play();
+        
+        // added heal SFX now only play 50% of the time
+        float coinFlip = random (-1,1);
+        if (coinFlip < 0) {
         }
-        if (healSFXseed == 1) {
-          heal2.play();
+        else {
+          if (healSFXseed == 0) {
+            heal1.play();
+          }
+          if (healSFXseed == 1) {
+            heal2.play();
+          }
+          if (healSFXseed == 2) {
+            heal3.play();
+          }
+          if (healSFXseed == 3) {
+            heal4.play();
+          }
         }
-        if (healSFXseed == 2) {
-          heal3.play();
-        }
-        if (healSFXseed == 3) {
-          heal4.play();
-        }
-
         // variable used to cycle sequentially through sound effects
         healSFXseed++;
         if (healSFXseed == 4) {
