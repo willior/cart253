@@ -39,6 +39,10 @@ class Parasite {
 
   void update() {
     
+    if (bossApproach > 0){
+      return;
+    }
+    
     // sets default parasite colour (blue)
     fill = color(0, 0, 255);
     
@@ -211,8 +215,15 @@ class Parasite {
               kill9.play();
             }
 
-            // updates parasite eat count and plays appropriate sound effect
+            // updates parasite eat count
             eatCount++;
+            
+            // visual feedback for feeding parasites (draws a red ellipse on eat frame)
+            stroke(255);
+            fill(255,0,0,255);
+            ellipse(x, y, 20+(sizeOffset), 20+(sizeOffset));
+            
+            // plays sound effect once disabled
             if (eatCount > 50) {
               disable.play();
             }

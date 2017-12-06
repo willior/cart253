@@ -31,6 +31,10 @@ class Antibody {
   }
 
   void update() {
+    
+    if (bossApproach > 0){
+      return;
+    }
 
     // terminates the function if energy is less than 0
     if (energy <= 0) {

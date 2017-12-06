@@ -110,18 +110,24 @@ int globalKillCount;
 // variable that keeps track of the amount of parasites disabled
 int disableCount;
 
-// boss intro timer
-int bossApproach = 100;
-int bossIntro = 1;
+// variables for boss intro
+int bossApproach;
+int bossIntro;
 
 // boolean to determine whether game should run or not (for splash screen)
 boolean run;
+
+boolean incoming;
 
 void setup() {
 
   size(800, 600);
   
+  // boss intro
   bossImage = loadImage("boss.png");
+  bossIntro = 1;
+  bossApproach = 0;
+  incoming = false;
 
   bgm = new SoundFile(this, "bgm.mp3");
 
@@ -232,8 +238,8 @@ void draw() {
     // resets variable to store the amount of dead cells
     globalKillCount = 0;
 
-    // dirty way of giving the player a stock every 3 seconds
-    if (millis() % 1500 <= 15) {
+    // dirty way of giving the player a stock every 1.5 seconds
+    if (millis() % 1000 <= 20) {
       meter.stock++;
     }
 
@@ -287,7 +293,9 @@ void draw() {
     }
     
     // resets variable storing disabled parasite information
-    disableCount = 0;
+    if (disableCount < 10){
+      disableCount = 0;
+    }
 
     // checks to see how many parasites are disabled
     for (int p = 0; p < parasites.length; p++) {
@@ -299,28 +307,15 @@ void draw() {
 
     // boss functions; only runs if all parasites are disabled
     if (disableCount == 10) {
-      
-      // boss intro
-      if (bossIntro == 1) {
-        for (int i = 1000; i > 0; i--) {
-          //background(BG);
-          //stroke(0,0,0);
-          //strokeWeight(4);
-          //fill(255, 0, 0);
-          //textSize(96); // Font size
-          //textAlign(CENTER, CENTER); // Center align both horizontally and vertically
-          //textLeading(128); // Line height for text
-          //text("THE STRAIN HAS BEGUN TO MUTATE\nFIGHT BACK THE INFECTION", width/2, height/2);
-          image (bossImage,0,0);
-          bossApproach--;
-          BG -= 2;
-          if (bossApproach == 0) {
-            bossIntro = 0;
-          }
-        }
+      image(bossImage,0,0);
+      for (bossApproach = 1000; bossApproach > 0; bossApproach--){
+        
+        
       }
-        
-        
+      bossIntro = 0;
+    }
+    
+    if (bossIntro == 0) {
       boss.update();
       for (int i = 0; i < cells.length; i++) {
         boss.attack(cells[i]);

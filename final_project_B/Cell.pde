@@ -36,6 +36,10 @@ class Cell {
 
   void update() {
     
+    if (bossApproach > 0){
+      return;
+    }
+    
     // draws a kill marker at the spot where the update function sees the Cell at 0 or less ("confirmed dead")
     // makes sure the cell's energy is below 0 ("confirmed dead") so that it no longer is capable of feeding a parasite before breaking out of the function
     if (energy <= 0) {

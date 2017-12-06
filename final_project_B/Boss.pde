@@ -32,6 +32,10 @@ class Boss {
   }
   
   void update() {
+    
+    if (bossApproach > 0){
+      return;
+    }
       
     if (eatCount > 500) {
       
