@@ -128,6 +128,8 @@ void setup() {
   bossIntro = 1;
   bossApproach = 0;
   incoming = false;
+  
+  disableCount= 0;
 
   bgm = new SoundFile(this, "bgm.mp3");
 
@@ -293,7 +295,7 @@ void draw() {
     }
     
     // resets variable storing disabled parasite information
-    if (disableCount < 10){
+    if (disableCount <= 10){
       disableCount = 0;
     }
 
@@ -301,21 +303,38 @@ void draw() {
     for (int p = 0; p < parasites.length; p++) {
       if (parasites[p].eatCount > 50) {
         disableCount++;
+        disableCount = constrain(disableCount,0,11);
         println(disableCount);
       }
     }
-
-    // boss functions; only runs if all parasites are disabled
-    if (disableCount == 10) {
-      image(bossImage,0,0);
-      for (bossApproach = 1000; bossApproach > 0; bossApproach--){
-        
-        
-      }
-      bossIntro = 0;
-    }
     
-    if (bossIntro == 0) {
+    // boss intro screen runs after all parasites are disabled
+    // logic determining length and the variable that determines the pause of each class's update() function
+    if (disableCount == 10) {
+      
+      // clause to escape from intro screen
+      if (bossApproach < 0) {
+        bossIntro = -1;
+        disableCount++;
+      }
+      
+      // variable determining amount of time boss intro screen is
+      if (bossIntro == 1) {
+        bossApproach = 256;
+      }
+      
+      // the intro screen itself
+      if (bossApproach > 0){
+        image(bossImage,0,0);
+        bossIntro = 0;
+        bossApproach--;
+        bossApproach--;
+        bossApproach--;
+      }
+    }
+
+    // boss functions; runs after boss intro
+    if (bossIntro == -1) {
       boss.update();
       for (int i = 0; i < cells.length; i++) {
         boss.attack(cells[i]);
@@ -503,10 +522,10 @@ void keyPressed() {
           parasites[p].stun = true;
         }
       }
-      if ((stunTime >= 1)&&(disableCount==10)) {
+      if ((stunTime >= 1)&&(disableCount>=10)) {
         
         // halved stun time against the boss
-        stunTime = 50;
+        stunTime = 64;
         for (int p = 0; p < 10; p++) {
           boss.stun = true;
         }

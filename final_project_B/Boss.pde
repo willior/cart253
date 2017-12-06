@@ -205,6 +205,13 @@ class Boss {
 
             // updates parasite eat count and plays appropriate sound effect
             eatCount++;
+            
+            // visual feedback
+            stroke(255);
+            fill(255-(eatCount/4),0,0,32);
+            ellipse(x, y, 128+(sizeOffset/2), 128+(sizeOffset));
+            ellipse(x, y, 128+(sizeOffset), 128+(sizeOffset/2));
+            
             if (eatCount > 500) {
               disable.play();
             }
