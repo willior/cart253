@@ -47,7 +47,7 @@ class Boss {
 
       // created a new variable, sizeOffset, to modulate both the parasite hitbox and size based off each parasite's kill count
       sizeOffset = killCount/4;
-      sizeOffset += eatCount*4;
+      sizeOffset += eatCount*2;
 
       // constrains the sizeOffset variable to remain within a reasonable range; otherwise, the parasites become too big and the game becomes impossible very quickly
       sizeOffset = constrain (sizeOffset, 0, 512);
@@ -208,8 +208,9 @@ class Boss {
             
             // visual feedback
             stroke(255);
-            fill(255-(eatCount/4),0,0,32);
+            fill(255-(eatCount%2),127-eatCount%20,eatCount%8,12);
             ellipse(x, y, 128+(sizeOffset/2), 128+(sizeOffset));
+            fill(255-(eatCount%9),eatCount%6,192-eatCount%30,12);
             ellipse(x, y, 128+(sizeOffset), 128+(sizeOffset/2));
             
             if (eatCount > 500) {
