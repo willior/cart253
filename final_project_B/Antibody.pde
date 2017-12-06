@@ -21,7 +21,7 @@ class Antibody {
 
   int energyOffset;
 
-  float healSFXseed = 0;
+  int healSFXseed = 0;
 
   Antibody(int tempX, int tempY, int tempSize) {
     x = tempX;
@@ -89,16 +89,16 @@ class Antibody {
       // sound picker for heal release
       // sound only plays if cell is dead and antibody is alive
       if ((patient.energy <= 0) && (energy > 0)) {
-        if ((healSFXseed >= 0) && (healSFXseed < 1)) {
+        if (healSFXseed == 0) {
           heal1.play();
         }
-        if ((healSFXseed >= 1) && (healSFXseed < 2)) {
+        if (healSFXseed == 1) {
           heal2.play();
         }
-        if ((healSFXseed >= 2) && (healSFXseed < 3)) {
+        if (healSFXseed == 2) {
           heal3.play();
         }
-        if ((healSFXseed >= 3) && (healSFXseed <= 4)) {
+        if (healSFXseed == 3) {
           heal4.play();
         }
 
@@ -113,6 +113,7 @@ class Antibody {
       collideEnergy = energy;
       patient.energy += collideEnergy;
       patient.energy = constrain(energy, 0, maxEnergy);
+      energy--;
     }
   }
   

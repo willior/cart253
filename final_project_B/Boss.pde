@@ -229,6 +229,6 @@ class Boss {
     }
     stroke(127, 0, 127);
     ellipseMode(CENTER);
-    ellipse(x+15, y+15, 128+(sizeOffset), 128+(sizeOffset));
+    ellipse(x+15, y+15, 128+(sizeOffset/2), 128+(sizeOffset/2));
   }
 }
