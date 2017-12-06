@@ -23,8 +23,10 @@ class Parasite {
 
   boolean stun;
 
-  color fill = color(0, 0, 255);
+  // parasite colours
+  color fill;
   color fed = color(255,0,255);
+  color stunned = color(0,255,255);
 
   Parasite(int tempX, int tempY, int tempSize) {
     x = tempX;
@@ -34,7 +36,13 @@ class Parasite {
 
   void update() {
     
+    // sets default parasite colour (blue)
+    fill = color(0, 0, 255);
+    
     if (eatCount > 50) {
+      
+      
+      
     }
 
     else if (stun == false) {
@@ -67,7 +75,8 @@ class Parasite {
     }
     else if (stun == true) {
       
-
+      // changes parasite colour while stunned
+      fill = stunned;
       
     }
   }

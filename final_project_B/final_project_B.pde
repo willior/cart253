@@ -135,7 +135,7 @@ void setup() {
 
   herd = new SoundFile(this, "herd.wav");
   empty = new SoundFile(this, "empty.wav");
-  
+
   recharge1 = new SoundFile(this, "recharge1.wav");
   recharge2 = new SoundFile(this, "recharge2.wav");
   recharge3 = new SoundFile(this, "recharge3.wav");
@@ -148,7 +148,7 @@ void setup() {
   disable = new SoundFile(this, "disable.wav");
 
   coda = new SoundFile(this, "coda.mp3");
-  
+
   // boolean to prevent the game from running on setup()
   run = false;
 
@@ -162,7 +162,7 @@ void setup() {
 
   // instantiates the Energy bar for herding cells
   bar = new Energy(110, 10, 50, (height - 30), eLevel, 0, energyEmpty, energyStroke);
-  
+
   // and boss
   boss = new Boss(width/2, height/2, 200);
 
@@ -182,8 +182,6 @@ void setup() {
     parasites[p] = new Parasite(x * 20, y * 20, 20);
     antibodies[p] = new Antibody (x, y, 20);
   }
-  
-
 }
 
 // flow:
@@ -195,11 +193,11 @@ void setup() {
 // parasites/antibodies display
 
 void draw() {
-  
+
   background(255);
   // background(255-globalKillCount);
   // splash screen goes here
-  
+
   // changes the boolean run value to true value on mousePressed (starts the game)
   if (mousePressed == true) {
     run = true;
@@ -208,146 +206,164 @@ void draw() {
   // runs the main code in draw() on mousePressed
   if (run == true) {
 
-  // behaviour for the parasite stun timer
-  stunTime--;
-  stunTime = constrain(stunTime, 0, 100);
+    // behaviour for the parasite stun timer
+    stunTime--;
+    stunTime = constrain(stunTime, 0, 100);
 
-  // returns parasite stun state as false if stunTimer is 0
-  if (stunTime == 0) {
-    for (int p = 0; p < 10; p++) {
-      parasites[p].stun = false;
-    }
-    boss.stun = false;
-  }
-
-  // resets variable to store the amount of dead cells/disabled parasites
-  globalKillCount = 0;
-  disableCount = 0;
-
-  // dirty way of giving the player a stock every 3 seconds
-  if (millis() % 1000 <= 20) {
-    meter.stock++;
-  }
-
-  // checks to see how many parasites are disabled
-  for (int p = 0; p < parasites.length; p++) {
-    if (parasites[p].eatCount > 50) {
-      disableCount++;
-    }
-  }
-  
-  // monitoring disableCount
-  //while (disableCount < 10) {println(disableCount);}
-
-  // cells update
-  for (int i = 0; i < cells.length; i++) {
-    cells[i].update();
-
-    // cell collision
-    for (int j = 0; j < cells.length; j++) {
-      if (j != i) {
-        cells[i].collide(cells[j]);
+    // returns parasite stun state as false if stunTimer is 0
+    if (stunTime == 0) {
+      for (int p = 0; p < 10; p++) {
+        parasites[p].stun = false;
       }
-    }
-    cells[i].display();
-
-    // checks to see how many cells are dead
-    if (cells[i].energy <= 0) {
-      globalKillCount++;
+      boss.stun = false;
     }
 
-    // checks to see if all 255 cells are dead; if so, the loop ends (reset with the 'r' key)
-    if (globalKillCount == 255) {
-      int score = (millis() - time);
-      println("your score: ", score);
-      println("please press the 'R' key to begin again");
-      background(0, 0, 0);
-      bgm.stop();
-      coda.play();
-      for (int d = 0; d < parasites.length; d++) {
-        parasites[d].display(); 
-        {
-          ellipseMode(CENTER);
-          for (int e = 0; e < 10; e++) {
-            fill(255, 0, 0, 32); 
-            stroke(0, 0, 0, 32);
-            ellipse(parasites[d].x+e*16-400, parasites[d].y+e*16-400, 84+(parasites[d].killCount/2), 84+(parasites[d].killCount/2));
-            fill(255, 0, 0, 32); 
-            stroke(255, 255, 255, 127);
-            ellipse(parasites[d].x+e*24, parasites[d].y+e*24, 168+(parasites[d].killCount/2), 168+(parasites[d].killCount/2));
-          }
+    // resets variable to store the amount of dead cells
+    globalKillCount = 0;
+
+    // dirty way of giving the player a stock every 3 seconds
+    if (millis() % 1000 <= 20) {
+      meter.stock++;
+    }
+
+    // cells update
+    for (int i = 0; i < cells.length; i++) {
+      cells[i].update();
+
+      // cell collision
+      for (int j = 0; j < cells.length; j++) {
+        if (j != i) {
+          cells[i].collide(cells[j]);
         }
       }
-      fill(255, 255, 255);
-      textSize(256); // Font size
-      textAlign(CENTER, CENTER); // Center align both horizontally and vertically
-      textLeading(192); // Line height for text
-      text("game\nover", width/2, height/2); // Note that \n means "new line"
-      run = false;
-      noLoop();
-    }
-  }
-  
-  if (disableCount == 10) {
-    boss.update();
-    for (int i = 0; i < cells.length; i++) {
-      boss.attack(cells[i]);
-    }
-    boss.display();
-  }
+      cells[i].display();
 
-  // using the same nested for loops for both parasites and antibodies, there are both 10 of them
-  for (int p = 0; p < parasites.length; p++) {
-    parasites[p].update();
-    antibodies[p].update();
-    for (int j = 0; j < cells.length; j++) {
-      if (j != p) {
-        parasites[p].attack(cells[j]);
-        antibodies[p].heal(cells[j]);
+      // checks to see how many cells are dead
+      if (cells[i].energy <= 0) {
+        globalKillCount++;
+      }
+
+      // checks to see if all 255 cells are dead; if so, the loop ends (reset with the 'r' key)
+      if (globalKillCount == 255) {
+        int score = (millis() - time);
+        println("your score: ", score);
+        println("please press the 'R' key to begin again");
+        background(0, 0, 0);
+        bgm.stop();
+        coda.play();
+        for (int d = 0; d < parasites.length; d++) {
+          parasites[d].display(); 
+          {
+            ellipseMode(CENTER);
+            for (int e = 0; e < 10; e++) {
+              fill(255, 0, 0, 32); 
+              stroke(0, 0, 0, 32);
+              ellipse(parasites[d].x+e*16-400, parasites[d].y+e*16-400, 84+(parasites[d].killCount/2), 84+(parasites[d].killCount/2));
+              fill(255, 0, 0, 32); 
+              stroke(255, 255, 255, 127);
+              ellipse(parasites[d].x+e*24, parasites[d].y+e*24, 168+(parasites[d].killCount/2), 168+(parasites[d].killCount/2));
+            }
+          }
+        }
+        fill(255, 255, 255);
+        textSize(256); // Font size
+        textAlign(CENTER, CENTER); // Center align both horizontally and vertically
+        textLeading(192); // Line height for text
+        text("game\nover", width/2, height/2); // Note that \n means "new line"
+        run = false;
+        noLoop();
+      }
+    }
+    
+    // resets variable storing disabled parasite information
+    disableCount = 0;
+
+    // checks to see how many parasites are disabled
+    for (int p = 0; p < parasites.length; p++) {
+      if (parasites[p].eatCount > 50) {
+        disableCount++;
+        println(disableCount);
       }
     }
 
-    // displays parasites and antibodies
-    parasites[p].display();   
-    antibodies[p].display();
-  }
-
-  // drains energy when mouse is held
-  // for some reason, this would not work when embedded into the Energy class's update() function, so it goes here
-  if (mousePressed == true) {
-
-    // drains energy from the meter
-    bar.eLevel -= 1.5;
-
-    // stops the harmonic tone once energy becomes depleted
-    if (bar.eLevel < 1.5) {
-      herd.stop();
-      depleted = true;
-    } 
-
-    // the depleted boolean value is not yet used
-    else {
-      depleted = false;
+    // boss functions; only runs if all parasites are disabled
+    if (disableCount == 10) {    
+      boss.update();
+      for (int i = 0; i < cells.length; i++) {
+        boss.attack(cells[i]);
+      }
+      boss.display();
     }
+
+    // parasite functions; only runs if all parasites are not disabled
+    else if (disableCount < 10) { 
+      for (int p = 0; p < parasites.length; p++) {
+        parasites[p].update();
+        for (int j = 0; j < cells.length; j++) {
+          if (j != p) {
+            parasites[p].attack(cells[j]);
+          }
+        }
+        parasites[p].display();
+      }
+    }
+
+    // antibody functions
+    for (int a = 0; a < antibodies.length; a++) {
+      antibodies[a].update();
+      for (int j = 0; j < cells.length; j++) {
+        if (j != a) {
+          antibodies[a].heal(cells[j]);
+        }
+      }
+      antibodies[a].display();
+    }
+
+    // drains energy when mouse is held
+    // for some reason, this would not work when embedded into the Energy class's update() function, so it goes here
+    if (mousePressed == true) {
+
+      // drains energy from the meter
+      bar.eLevel -= 1.5;
+
+      // stops the harmonic tone once energy becomes depleted
+      if (bar.eLevel < 1.5) {
+        herd.stop();
+        depleted = true;
+      } 
+
+      // the depleted boolean value is not yet used
+      else {
+        depleted = false;
+      }
+    }
+
+    // regenerates energy over time, constrains their values, displays energy bar
+    bar.eLevel += 1;
+    bar.eLevel = constrain(bar.eLevel, 0, 110);
+    // println(bar.eLevel);
+    bar.display();
+
+    // displays ability stocks
+    meter.display();
   }
 
-  // regenerates energy over time, constrains their values, displays energy bar
-  bar.eLevel += 1;
-  bar.eLevel = constrain(bar.eLevel, 0, 110);
-  // println(bar.eLevel);
-  bar.display();
-
-  // displays ability stocks
-  meter.display();
-  }
-  
   // breaks out of draw() until mouseClicked
   while (run == false) {
-  return;
+    return;
   }
 }
 
 void keyPressed() {
+  
+  // disable all parasites button ('b')
+  // quick way to skip to the boss for testing purposes
+  if (key == 'b') {
+    for (int b = 0; b < 10; b++) {
+      
+      parasites[b].eatCount = 51;
+    } 
+  }
 
   // reset button ('r')
   if (key == 'r') {
@@ -397,26 +413,26 @@ void keyPressed() {
     if (meter.stock > 0) {
       meter.stock--;
       bar.eLevel = 110;
-      
-      if ((rechargeSFXseed >= 0) && (rechargeSFXseed < 1)) {
-          recharge1.play();
-        }
-        if ((rechargeSFXseed >= 1) && (rechargeSFXseed < 2)) {
-          recharge2.play();
-        }
-        if ((rechargeSFXseed >= 2) && (rechargeSFXseed < 3)) {
-          recharge3.play();
-        }
-        if ((rechargeSFXseed >= 3) && (rechargeSFXseed <= 4)) {
-          recharge4.play();
-        }
 
-        // variable used to cycle sequentially through sound effects
-        rechargeSFXseed++;
-        if (rechargeSFXseed == 4) {
-          rechargeSFXseed = 0;
-        }
-      
+      if ((rechargeSFXseed >= 0) && (rechargeSFXseed < 1)) {
+        recharge1.play();
+      }
+      if ((rechargeSFXseed >= 1) && (rechargeSFXseed < 2)) {
+        recharge2.play();
+      }
+      if ((rechargeSFXseed >= 2) && (rechargeSFXseed < 3)) {
+        recharge3.play();
+      }
+      if ((rechargeSFXseed >= 3) && (rechargeSFXseed <= 4)) {
+        recharge4.play();
+      }
+
+      // variable used to cycle sequentially through sound effects
+      rechargeSFXseed++;
+      if (rechargeSFXseed == 4) {
+        rechargeSFXseed = 0;
+      }
+
       // recharge1.play();
 
       // makes sure the harmonic tone for herding plays after rejuvinating herding energy if the mouse is already pressed
@@ -433,34 +449,38 @@ void keyPressed() {
   if (key =='3') {
     if (meter.stock > 0) {
       meter.stock--;
-      
-      if ((stunSFXseed >= 0) && (stunSFXseed < 1)) {
-          stun1.play();
-        }
-        if ((stunSFXseed >= 1) && (stunSFXseed < 2)) {
-          stun2.play();
-        }
-        if ((stunSFXseed >= 2) && (stunSFXseed < 3)) {
-          stun3.play();
-        }
-        if ((stunSFXseed >= 3) && (stunSFXseed <= 4)) {
-          stun4.play();
-        }
 
-        // variable used to cycle sequentially through sound effects
-        stunSFXseed++;
-        if (stunSFXseed == 4) {
-          stunSFXseed = 0;
-        }
-      
-      
-      //stun1.play();
-      
-      // sets the stun time to 100, and keeps the parasites stunned while stunTime is greater than 0
+      if ((stunSFXseed >= 0) && (stunSFXseed < 1)) {
+        stun1.play();
+      }
+      if ((stunSFXseed >= 1) && (stunSFXseed < 2)) {
+        stun2.play();
+      }
+      if ((stunSFXseed >= 2) && (stunSFXseed < 3)) {
+        stun3.play();
+      }
+      if ((stunSFXseed >= 3) && (stunSFXseed <= 4)) {
+        stun4.play();
+      }
+
+      // variable used to cycle sequentially through sound effects
+      stunSFXseed++;
+      if (stunSFXseed == 4) {
+        stunSFXseed = 0;
+      }
+      // sets the stun time to 100, and keeps the parasites/boss stunned while stunTime is greater than 0
       stunTime = 100;
-      if (stunTime >= 1) {
+      if ((stunTime >= 1)&&(disableCount<10)) {
         for (int p = 0; p < 10; p++) {
           parasites[p].stun = true;
+        }
+      }
+      if ((stunTime >= 1)&&(disableCount==10)) {
+        
+        // halved stun time against the boss
+        stunTime = 50;
+        for (int p = 0; p < 10; p++) {
+          boss.stun = true;
         }
       }
     }

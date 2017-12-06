@@ -46,7 +46,7 @@ class Boss {
       sizeOffset += eatCount*4;
 
       // constrains the sizeOffset variable to remain within a reasonable range; otherwise, the parasites become too big and the game becomes impossible very quickly
-      sizeOffset = constrain (sizeOffset, 0, 255);
+      sizeOffset = constrain (sizeOffset, 0, 512);
 
       float vx = speed * (noise(tx) * 2 - 1);
       float vy = speed * (noise(ty) * 2 - 1);
@@ -68,13 +68,11 @@ class Boss {
       }
     }
     else if (stun == true) {
-      
 
-      
     }
   }
 
-  // parasite attack function
+  // boss attack function
   void attack(Cell host) {
     
     // overrides attack function by returning if "fed"
@@ -84,7 +82,7 @@ class Boss {
 
     if (stun == false) {
 
-      // parasite hitbox logic
+      // boss hitbox logic
       if ((x == host.x && y == host.y) || (x <= host.x + (10+(sizeOffset/4)) && y <= host.y + (10+(sizeOffset/4)) && (x >= host.x - (10+(sizeOffset/4)) && y >= host.y - (10+(sizeOffset/4))))) {
 
         // breaks out of function if host cell is "confirmed dead" (ie, less than 0)
@@ -136,7 +134,7 @@ class Boss {
             //  kill9.play();
             }
 
-            // updates parasite kill count
+            // updates boss kill count
             killCount++;
 
             // updates the energy of the "killed" cell (host.energy = 0) to "confirmed dead" cell (host.energy = -1)
@@ -147,7 +145,7 @@ class Boss {
       }
     }
     
-    // hitbox behaviour while parasites stunned
+    // hitbox behaviour while boss stunned
     else if (stun == true) {
       
       if ((x == host.x && y == host.y) || (x <= host.x + (10+(sizeOffset/4)) && y <= host.y + (10+(sizeOffset/4)) && (x >= host.x - (10+(sizeOffset/4)) && y >= host.y - (10+(sizeOffset/4))))) {
@@ -231,6 +229,6 @@ class Boss {
     }
     stroke(127, 0, 127);
     ellipseMode(CENTER);
-    ellipse(x+15, y+15, 255+(sizeOffset), 255+(sizeOffset));
+    ellipse(x+15, y+15, 128+(sizeOffset), 128+(sizeOffset));
   }
 }
