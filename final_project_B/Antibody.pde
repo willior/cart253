@@ -7,7 +7,7 @@
 class Antibody {
 
   int maxEnergy = 255;
-  float moveEnergy = -2;
+  int moveEnergy = -2;
   int collideEnergy;
   int size;
   int energy;

@@ -27,6 +27,9 @@ class Parasite {
   color fill;
   color fed = color(255,0,255);
   color stunned = color(0,255,255);
+  
+  // variable used to get stunned parasites to shake
+  int stunOffset = 0;
 
   Parasite(int tempX, int tempY, int tempSize) {
     x = tempX;
@@ -235,6 +238,18 @@ class Parasite {
     }
     stroke(127, 0, 127);
     ellipseMode(CENTER);
-    ellipse(x+15, y+15, 20+(sizeOffset), 20+(sizeOffset));
+    
+    // vibrates the parasite if stunned
+    if ((stun == true)&&(stunOffset == 1)&&(eatCount < 50)) {
+      ellipse(x+1, y, 20+(sizeOffset), 20+(sizeOffset));
+      stunOffset--;
+    }
+    else if ((stun == true)&&(stunOffset == 0)&&(eatCount < 50)) {
+      ellipse(x-1, y, 20+(sizeOffset), 20+(sizeOffset));
+      stunOffset++;
+    }
+    else {
+    ellipse(x, y, 20+(sizeOffset), 20+(sizeOffset));
+    }
   }
 }

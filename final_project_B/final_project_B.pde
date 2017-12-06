@@ -222,7 +222,7 @@ void draw() {
     globalKillCount = 0;
 
     // dirty way of giving the player a stock every 3 seconds
-    if (millis() % 1000 <= 20) {
+    if (millis() % 1500 <= 15) {
       meter.stock++;
     }
 
@@ -379,16 +379,16 @@ void keyPressed() {
     if (meter.stock > 0) {
 
       // sound picker for antibody release
-      if ((antibodySFXseed >= 0) && (antibodySFXseed < 1)) {
+      if (antibodySFXseed == 0) {
         bloom1.play();
       }
-      if ((antibodySFXseed >= 1) && (antibodySFXseed < 2)) {
+      if (antibodySFXseed == 1) {
         bloom2.play();
       }
-      if ((antibodySFXseed >= 2) && (antibodySFXseed < 3)) {
+      if (antibodySFXseed == 2) {
         bloom3.play();
       }
-      if ((antibodySFXseed >= 3) && (antibodySFXseed <= 4)) {
+      if (antibodySFXseed == 3) {
         bloom4.play();
       }
       antibodySFXseed++;
@@ -414,16 +414,16 @@ void keyPressed() {
       meter.stock--;
       bar.eLevel = 110;
 
-      if ((rechargeSFXseed >= 0) && (rechargeSFXseed < 1)) {
+      if (rechargeSFXseed == 0) {
         recharge1.play();
       }
-      if ((rechargeSFXseed >= 1) && (rechargeSFXseed < 2)) {
+      if (rechargeSFXseed >= 1) {
         recharge2.play();
       }
-      if ((rechargeSFXseed >= 2) && (rechargeSFXseed < 3)) {
+      if (rechargeSFXseed >= 2) {
         recharge3.play();
       }
-      if ((rechargeSFXseed >= 3) && (rechargeSFXseed <= 4)) {
+      if (rechargeSFXseed >= 3) {
         recharge4.play();
       }
 
@@ -432,8 +432,6 @@ void keyPressed() {
       if (rechargeSFXseed == 4) {
         rechargeSFXseed = 0;
       }
-
-      // recharge1.play();
 
       // makes sure the harmonic tone for herding plays after rejuvinating herding energy if the mouse is already pressed
       if (mousePressed == true) {
@@ -469,7 +467,7 @@ void keyPressed() {
         stunSFXseed = 0;
       }
       // sets the stun time to 100, and keeps the parasites/boss stunned while stunTime is greater than 0
-      stunTime = 100;
+      stunTime = 96;
       if ((stunTime >= 1)&&(disableCount<10)) {
         for (int p = 0; p < 10; p++) {
           parasites[p].stun = true;
@@ -494,7 +492,7 @@ void mousePressed() {
   // plays a harmonic tone
   herd.loop();
   // plays non-harmonic noise
-  empty.play();
+  empty.loop();
 }
 
 // mouse released function
