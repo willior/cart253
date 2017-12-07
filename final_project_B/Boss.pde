@@ -238,10 +238,10 @@ class Boss {
       // boss tails
       float tailMod;
       if (stun == true) {
-        tailMod = frameCount / 64.0;
+        tailMod = frameCount / 24.0;
       }
       else {
-        tailMod = frameCount / 16.0;
+        tailMod = frameCount / 96.0;
       }
       for (int i = 0; i < 4; i++) {
         stroke(0);

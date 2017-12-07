@@ -59,7 +59,7 @@ class Parasite {
       sizeOffset += eatCount*4;
 
       // constrains the sizeOffset variable to remain within a reasonable range; otherwise, the parasites become too big and the game becomes impossible very quickly
-      sizeOffset = constrain (sizeOffset, 0, 255);
+      sizeOffset = constrain (sizeOffset, 0, 512);
 
       float vx = speed * (noise(tx) * 2 - 1);
       float vy = speed * (noise(ty) * 2 - 1);
@@ -250,8 +250,20 @@ class Parasite {
     stroke(127, 0, 127);
     ellipseMode(CENTER);
     
-    // vibrates the parasite if stunned
-    if ((stun == true)&&(stunOffset == 1)&&(eatCount < 50)) {
+    // vibrates the parasite if stunned:
+    // in this logic chain, the first two if statements are for when the stun is almost over...
+    // ...vibrating the parasite with more intensity as a visual cue for when your stun is running out
+    if ((stun == true)&&(stunOffset == 1)&&(eatCount < 50)&&(stunTime<32)) {
+      ellipse(x+2, y+1, 20+(sizeOffset), 20+(sizeOffset));
+      stunOffset--;
+    }
+    else if ((stun == true)&&(stunOffset == 0)&&(eatCount < 50)&&(stunTime<32)) {
+      ellipse(x-2, y-1, 20+(sizeOffset), 20+(sizeOffset));
+      stunOffset++;
+    }
+    
+    // the next two if statements are for the normal stun (vibrates left and right; offset = 1 pixel)
+    else if ((stun == true)&&(stunOffset == 1)&&(eatCount < 50)) {
       ellipse(x+1, y, 20+(sizeOffset), 20+(sizeOffset));
       stunOffset--;
     }
@@ -259,6 +271,8 @@ class Parasite {
       ellipse(x-1, y, 20+(sizeOffset), 20+(sizeOffset));
       stunOffset++;
     }
+    
+    // if the parasite is not stunned, it is drawn normally
     else {
     ellipse(x, y, 20+(sizeOffset), 20+(sizeOffset));
     }
