@@ -263,7 +263,7 @@ void draw() {
       }
 
       // checks to see if all 255 cells are dead; if so, the loop ends (reset with the 'r' key)
-      if (globalKillCount == 255) {
+      if ((globalKillCount == 255)&&(disableCount<10)) {
         int score = (millis() - time);
         println("your score: ", score);
         println("please press the 'R' key to begin again");

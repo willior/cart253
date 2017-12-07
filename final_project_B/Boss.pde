@@ -234,13 +234,39 @@ class Boss {
   
   void display() {
     if (eatCount <= 500) {
-      fill(255,0,0,96); 
+      
+      // boss tails
+      float tailMod;
+      if (stun == true) {
+        tailMod = frameCount / 100;
+      }
+      else {
+        tailMod = frameCount / 200;
+      }
+      for (int i = 0; i < 8; i++) {
+        stroke(0);
+        fill(255,8);
+        bezier(
+        
+        // starting anchor coordinates
+        x,y,
+        
+        // control points for curves:
+        // 1 (x, y)
+        width/2, noise(1, i, tailMod)*height, 
+        // 2 (x, y)
+        noise(2, i, tailMod)*width, noise(4, i, tailMod)*height, 
+        
+        // ending anchor coordinates
+        noise(3, i, tailMod)*width, noise(5, i, tailMod)*height);
+      } 
     }
     else if (eatCount > 500) {
       fill (fed, 96);
     }
     stroke(127, 0, 127);
     ellipseMode(CENTER);
+    fill(255-(eatCount/4),0,0,16);
     
     if(stun == true) {
       ellipse(x, y, 128+(sizeOffset/2), 128+(sizeOffset/2));
