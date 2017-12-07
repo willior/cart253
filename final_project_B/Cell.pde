@@ -108,7 +108,7 @@ class Cell {
 
   // collision functions; breaks out if either Cell is confirmed dead
   void collide(Cell other) {
-    if (energy <= 0 || other.energy <= 0) {
+    if (energy <= 0) {
       return;
     }
 

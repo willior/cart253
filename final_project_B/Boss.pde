@@ -238,10 +238,10 @@ class Boss {
       // boss tails
       float tailMod;
       if (stun == true) {
-        tailMod = frameCount / 100;
+        tailMod = frameCount / 50;
       }
       else {
-        tailMod = frameCount / 200;
+        tailMod = frameCount / 100;
       }
       for (int i = 0; i < 8; i++) {
         stroke(0);
@@ -253,7 +253,7 @@ class Boss {
         
         // control points for curves:
         // 1 (x, y)
-        width/2, noise(1, i, tailMod)*height, 
+        noise(6, i, tailMod)*width, noise(1, i, tailMod)*height, 
         // 2 (x, y)
         noise(2, i, tailMod)*width, noise(4, i, tailMod)*height, 
         
