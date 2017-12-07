@@ -3,7 +3,7 @@
 // a class that defines the boss that appears when all parasites have been disabled
 class Boss {
 
-  int drainEnergy = 32;
+  int drainEnergy = 64;
   int size;
   int energy;
 
@@ -107,6 +107,9 @@ class Boss {
           host.energy = constrain(energy, 0, 255);
 
           if (host.energy == 0) {
+            
+            // boss heals itself
+            eatCount--;
 
             // picks a kill sound at random form the library
             killSFXseed = random(0, 9);
@@ -238,13 +241,14 @@ class Boss {
       // boss tails
       float tailMod;
       if (stun == true) {
-        tailMod = frameCount / 24.0;
+        tailMod = frameCount / 16.0;
       }
       else {
-        tailMod = frameCount / 96.0;
+        tailMod = frameCount / (16.0+eatCount/2);
       }
       for (int i = 0; i < 4; i++) {
-        stroke(0);
+        strokeWeight(2);
+        stroke((eatCount/2),(255-eatCount/4),0,127);
         fill(255,8);
         int bx = x;
         int by = y;
@@ -278,16 +282,17 @@ class Boss {
     else if (eatCount > 512) {
       fill (fed, 96);
     }
-    stroke(127, 0, 127);
+    strokeWeight(1);
+    stroke(127, 127, 127);
     ellipseMode(CENTER);
     
     
     if(stun == true) {
-      fill(192,96,0,64);
+      fill(eatCount/2,127,0,64);
       ellipse(x, y, 128+(sizeOffset/2), 128+(sizeOffset/2));
     }
     else {
-      fill((eatCount/2),255,0,127);
+      fill((eatCount/2),(255-eatCount/4),0,128);
       ellipse(x, y, 128+(sizeOffset/2), 128+(sizeOffset/2));
     }
   }

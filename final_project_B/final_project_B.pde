@@ -26,6 +26,7 @@ PImage bossImage;
 // sound library
 import processing.sound.*;
 SoundFile bgm;
+SoundFile carlos;
 
 SoundFile bloom1;
 SoundFile bloom2;
@@ -46,6 +47,10 @@ SoundFile heal1;
 SoundFile heal2;
 SoundFile heal3;
 SoundFile heal4;
+SoundFile heal1b;
+SoundFile heal2b;
+SoundFile heal3b;
+SoundFile heal4b;
 
 SoundFile herd;
 SoundFile empty;
@@ -53,8 +58,10 @@ SoundFile empty;
 SoundFile recharge1;
 SoundFile recharge2;
 SoundFile recharge3;
+SoundFile recharge3b;
 SoundFile recharge4;
 SoundFile stun1;
+SoundFile stun1b;
 SoundFile stun2;
 SoundFile stun3;
 SoundFile stun4;
@@ -132,6 +139,7 @@ void setup() {
   disableCount= 0;
 
   bgm = new SoundFile(this, "bgm.mp3");
+  carlos = new SoundFile(this, "carlos.mp3");
 
   bloom1 = new SoundFile(this, "bloom1.wav");
   bloom2 = new SoundFile(this, "bloom2.wav");
@@ -152,6 +160,10 @@ void setup() {
   heal2 = new SoundFile(this, "heal2.wav");
   heal3 = new SoundFile(this, "heal3.wav");
   heal4 = new SoundFile(this, "heal4.wav");
+  heal1b = new SoundFile(this, "heal1b.wav");
+  heal2b = new SoundFile(this, "heal2b.wav");
+  heal3b = new SoundFile(this, "heal3b.wav");
+  heal4b = new SoundFile(this, "heal4b.wav");
 
   herd = new SoundFile(this, "herd.wav");
   empty = new SoundFile(this, "empty.wav");
@@ -159,8 +171,10 @@ void setup() {
   recharge1 = new SoundFile(this, "recharge1.wav");
   recharge2 = new SoundFile(this, "recharge2.wav");
   recharge3 = new SoundFile(this, "recharge3.wav");
+  recharge3b = new SoundFile(this, "recharge3b.wav");
   recharge4 = new SoundFile(this, "recharge4.wav");
   stun1 = new SoundFile(this, "stun1.wav");
+  stun1b = new SoundFile(this, "stun1b.wav");
   stun2 = new SoundFile(this, "stun2.wav");
   stun3 = new SoundFile(this, "stun3.wav");
   stun4 = new SoundFile(this, "stun4.wav");
@@ -213,7 +227,10 @@ void setup() {
 // parasites/antibodies display
 
 void draw() {
-  background(BG);
+  if (disableCount<10){
+    background(BG);}
+  if (disableCount>10){
+    background(0);}
   // background(255-globalKillCount);
   // splash screen goes here
 
@@ -321,6 +338,8 @@ void draw() {
       // variable determining amount of time boss intro screen is
       if (bossIntro == 1) {
         bossApproach = 256;
+        bgm.stop();
+        carlos.play();
       }
       
       // the intro screen itself
@@ -417,6 +436,7 @@ void keyPressed() {
   if (key == 'r') {
     bgm.stop();
     coda.stop(); 
+    carlos.stop();
     setup();
     time = millis();
     loop();
@@ -427,21 +447,26 @@ void keyPressed() {
     if (meter.stock > 0) {
 
       // sound picker for antibody release
-      if (antibodySFXseed == 0) {
-        bloom1.play();
+      if(disableCount<10){
+        if (antibodySFXseed == 0) {
+          bloom1.play();
+        }
+        if (antibodySFXseed == 1) {
+          bloom2.play();
+        }
+        if (antibodySFXseed == 2) {
+          bloom3.play();
+        }
+        if (antibodySFXseed == 3) {
+          bloom4.play();
+        }
+        antibodySFXseed++;
+        if (antibodySFXseed == 4) {
+          antibodySFXseed = 0;
+        }
       }
-      if (antibodySFXseed == 1) {
-        bloom2.play();
-      }
-      if (antibodySFXseed == 2) {
-        bloom3.play();
-      }
-      if (antibodySFXseed == 3) {
-        bloom4.play();
-      }
-      antibodySFXseed++;
-      if (antibodySFXseed == 4) {
-        antibodySFXseed = 0;
+      if(disableCount>10){
+        
       }
       meter.stock--;
 
@@ -496,8 +521,11 @@ void keyPressed() {
     if (meter.stock > 0) {
       meter.stock--;
 
-      if (stunSFXseed == 0) {
+      if ((stunSFXseed == 0)&&(disableCount<10)) {
         stun1.play();
+      }
+      else if ((stunSFXseed == 0)&&(disableCount>10)){
+        stun1b.play();
       }
       if (stunSFXseed == 1) {
         stun2.play();

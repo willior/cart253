@@ -44,7 +44,7 @@ class Cell {
     // makes sure the cell's energy is below 0 ("confirmed dead") so that it no longer is capable of feeding a parasite before breaking out of the function
     if (energy <= 0) {
       strokeWeight(1);
-      stroke(255, 0, 0);
+      stroke(255, 0, 0, 127);
       line(x-5, y-5, x+5, y+5);
       line(x-5, y+5, x+5, y-5);
       energy = -1;
