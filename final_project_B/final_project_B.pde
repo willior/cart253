@@ -409,7 +409,7 @@ void keyPressed() {
   if (key == 'b') {
     for (int b = 0; b < 10; b++) {
       
-      parasites[b].eatCount = 51;
+      parasites[b].eatCount = 64;
     } 
   }
 
