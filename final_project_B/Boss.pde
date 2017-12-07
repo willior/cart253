@@ -238,16 +238,17 @@ class Boss {
       // boss tails
       float tailMod;
       if (stun == true) {
-        tailMod = frameCount / 50;
+        tailMod = frameCount / 64.0;
       }
       else {
-        tailMod = frameCount / 100;
+        tailMod = frameCount / 16.0;
       }
       for (int i = 0; i < 4; i++) {
         stroke(0);
         fill(255,8);
         int bx = x;
         int by = y;
+        
         // starting anchor coordinates
         if (i == 0){
           bx = x-5; by = y-5;
@@ -266,7 +267,7 @@ class Boss {
         bx,by,
         // control points for curves:
         // 1 (x, y)
-        noise(6, i*4, tailMod)*width, noise(1, i*4, tailMod)*height, 
+        noise(0, i*4, tailMod)*width, noise(1, i*4, tailMod)*height, 
         // 2 (x, y)
         noise(2, i*4, tailMod)*width, noise(4, i*4, tailMod)*height, 
         
