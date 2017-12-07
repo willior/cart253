@@ -3,7 +3,7 @@
 // a class that defines the boss that appears when all parasites have been disabled
 class Boss {
 
-  int drainEnergy = 20;
+  int drainEnergy = 32;
   int size;
   int energy;
 
@@ -37,7 +37,7 @@ class Boss {
       return;
     }
       
-    if (eatCount > 500) {
+    if (eatCount > 512) {
       
       // you win?
       
@@ -80,7 +80,7 @@ class Boss {
   void attack(Cell host) {
     
     // overrides attack function by returning if "fed"
-    if (eatCount > 500) {
+    if (eatCount > 512) {
       return;
     }
 
@@ -213,10 +213,10 @@ class Boss {
             fill(255-(eatCount%9),eatCount%6,192-eatCount%30,12);
             ellipse(x, y, 128+(sizeOffset), 128+(sizeOffset/2));
             
-            if (eatCount > 500) {
+            if (eatCount > 512) {
               disable.play();
             }
-            else if (eatCount <= 500) {
+            else if (eatCount <= 512) {
               // sound file went here
             }
 
@@ -233,7 +233,7 @@ class Boss {
   }
   
   void display() {
-    if (eatCount <= 500) {
+    if (eatCount <= 512) {
       
       // boss tails
       float tailMod;
@@ -275,7 +275,7 @@ class Boss {
         noise(3, i*4, tailMod)*width, noise(5, i*4, tailMod)*height);
       } 
     }
-    else if (eatCount > 500) {
+    else if (eatCount > 512) {
       fill (fed, 96);
     }
     stroke(127, 0, 127);

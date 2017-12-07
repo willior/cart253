@@ -4,7 +4,7 @@
 
 class Parasite {
 
-  int drainEnergy = 20;
+  int drainEnergy = 24;
   int size;
   int energy;
 
@@ -46,7 +46,7 @@ class Parasite {
     // sets default parasite colour (blue)
     fill = color(0, 0, 255);
     
-    if (eatCount > 50) {
+    if (eatCount > 64) {
       
       
       
@@ -92,7 +92,7 @@ class Parasite {
   void attack(Cell host) {
     
     // overrides attack function by returning if "fed"
-    if (eatCount > 50) {
+    if (eatCount > 64) {
       return;
     }
 
@@ -224,10 +224,10 @@ class Parasite {
             ellipse(x, y, 20+(sizeOffset), 20+(sizeOffset));
             
             // plays sound effect once disabled
-            if (eatCount > 50) {
+            if (eatCount > 64) {
               disable.play();
             }
-            else if (eatCount <= 50) {
+            else if (eatCount <= 64) {
               // sound file went here
             }
 
@@ -241,10 +241,10 @@ class Parasite {
   }
 
   void display() {
-    if (eatCount <= 50) {
+    if (eatCount <= 64) {
       fill(fill, 96); 
     }
-    else if (eatCount > 50) {
+    else if (eatCount > 64) {
       fill (fed, 96);
     }
     stroke(127, 0, 127);
@@ -253,21 +253,21 @@ class Parasite {
     // vibrates the parasite if stunned:
     // in this logic chain, the first two if statements are for when the stun is almost over...
     // ...vibrating the parasite with more intensity as a visual cue for when your stun is running out
-    if ((stun == true)&&(stunOffset == 1)&&(eatCount < 50)&&(stunTime<32)) {
+    if ((stun == true)&&(stunOffset == 1)&&(eatCount < 64)&&(stunTime<32)) {
       ellipse(x+2, y+1, 20+(sizeOffset), 20+(sizeOffset));
       stunOffset--;
     }
-    else if ((stun == true)&&(stunOffset == 0)&&(eatCount < 50)&&(stunTime<32)) {
+    else if ((stun == true)&&(stunOffset == 0)&&(eatCount < 64)&&(stunTime<32)) {
       ellipse(x-2, y-1, 20+(sizeOffset), 20+(sizeOffset));
       stunOffset++;
     }
     
     // the next two if statements are for the normal stun (vibrates left and right; offset = 1 pixel)
-    else if ((stun == true)&&(stunOffset == 1)&&(eatCount < 50)) {
+    else if ((stun == true)&&(stunOffset == 1)&&(eatCount < 64)) {
       ellipse(x+1, y, 20+(sizeOffset), 20+(sizeOffset));
       stunOffset--;
     }
-    else if ((stun == true)&&(stunOffset == 0)&&(eatCount < 50)) {
+    else if ((stun == true)&&(stunOffset == 0)&&(eatCount < 64)) {
       ellipse(x-1, y, 20+(sizeOffset), 20+(sizeOffset));
       stunOffset++;
     }

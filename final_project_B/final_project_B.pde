@@ -241,7 +241,7 @@ void draw() {
     globalKillCount = 0;
 
     // dirty way of giving the player a stock every 1.5 seconds
-    if (millis() % 1000 <= 20) {
+    if (millis() % 1100 <= 20) {
       meter.stock++;
     }
 
@@ -301,7 +301,7 @@ void draw() {
 
     // checks to see how many parasites are disabled
     for (int p = 0; p < parasites.length; p++) {
-      if (parasites[p].eatCount > 50) {
+      if (parasites[p].eatCount > 64) {
         disableCount++;
         disableCount = constrain(disableCount,0,11);
         println(disableCount);
@@ -371,10 +371,10 @@ void draw() {
     if (mousePressed == true) {
 
       // drains energy from the meter
-      bar.eLevel -= 1.5;
+      bar.eLevel -= 1.6;
 
       // stops the harmonic tone once energy becomes depleted
-      if (bar.eLevel < 1.5) {
+      if (bar.eLevel < 1.6) {
         herd.stop();
         depleted = true;
       } 
@@ -386,7 +386,7 @@ void draw() {
     }
 
     // regenerates energy over time, constrains their values, displays energy bar
-    bar.eLevel += 1;
+    bar.eLevel += 0.8;
     bar.eLevel = constrain(bar.eLevel, 0, 110);
     
     // println(bar.eLevel);
@@ -515,17 +515,19 @@ void keyPressed() {
         stunSFXseed = 0;
       }
       
-      // sets the stun time to 100, and keeps the parasites/boss stunned while stunTime is greater than 0
-      stunTime = 96;
+      // sets the stun time, keeps parasites/boss stunned while stunTime is greater than 0
+      // 
+      // stun behaviour versus parasites
+      stunTime = 80;
       if ((stunTime >= 1)&&(disableCount<10)) {
         for (int p = 0; p < 10; p++) {
           parasites[p].stun = true;
         }
       }
+      
+      // stun behaviour versus boss (stun is less effective)
       if ((stunTime >= 1)&&(disableCount>=10)) {
-        
-        // halved stun time against the boss
-        stunTime = 64;
+        stunTime = 48;
         for (int p = 0; p < 10; p++) {
           boss.stun = true;
         }
