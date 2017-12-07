@@ -22,6 +22,7 @@
 
 // image library
 PImage bossImage;
+PImage splash;
 
 // sound library
 import processing.sound.*;
@@ -129,7 +130,7 @@ boolean incoming;
 void setup() {
 
   size(800, 600);
-  
+  splash = loadImage("splash.png");
   // boss intro
   bossImage = loadImage("boss.png");
   bossIntro = 1;
@@ -230,9 +231,12 @@ void draw() {
   if (disableCount<10){
     background(BG);}
   if (disableCount>10){
-    background(0);}
+    background(24);}
   // background(255-globalKillCount);
   // splash screen goes here
+  if (run == false){
+    image(splash,0,0);
+  }
 
   // changes the boolean run value to true value on mousePressed (starts the game)
   if (mousePressed == true) {
