@@ -325,7 +325,7 @@ void draw() {
       if (parasites[p].eatCount > 64) {
         disableCount++;
         disableCount = constrain(disableCount,0,11);
-        println(disableCount);
+        // println(disableCount);
       }
     }
     
@@ -559,7 +559,7 @@ void keyPressed() {
       
       // stun behaviour versus boss (stun is less effective)
       if ((stunTime >= 1)&&(disableCount>=10)) {
-        stunTime = 48;
+        stunTime = 64;
         for (int p = 0; p < 10; p++) {
           boss.stun = true;
         }

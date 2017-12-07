@@ -232,7 +232,7 @@ class Boss {
     }
     
     // monitoring Boss eatCount
-    println(eatCount);
+    // println(eatCount);
   }
   
   void display() {
