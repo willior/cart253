@@ -11,8 +11,8 @@ class Boss {
   float ty = random(0, 100);
 
   float speed = 8;
-  float x;
-  float y;
+  int x;
+  int y;
 
   float killCount = 0;
   float sizeOffset;
@@ -243,22 +243,35 @@ class Boss {
       else {
         tailMod = frameCount / 100;
       }
-      for (int i = 0; i < 8; i++) {
+      for (int i = 0; i < 4; i++) {
         stroke(0);
         fill(255,8);
-        bezier(
-        
+        int bx = x;
+        int by = y;
         // starting anchor coordinates
-        x,y,
+        if (i == 0){
+          bx = x-5; by = y-5;
+        }
+        if (i == 1){
+          bx = x+5; by = y-5;
+        }
+        if (i == 2){
+          bx = x-5; by = y+5;
+        }
+        if (i == 3){
+          bx = x+5; by = y+5;
+        }
         
+        bezier(
+        bx,by,
         // control points for curves:
         // 1 (x, y)
-        noise(6, i, tailMod)*width, noise(1, i, tailMod)*height, 
+        noise(6, i*4, tailMod)*width, noise(1, i*4, tailMod)*height, 
         // 2 (x, y)
-        noise(2, i, tailMod)*width, noise(4, i, tailMod)*height, 
+        noise(2, i*4, tailMod)*width, noise(4, i*4, tailMod)*height, 
         
         // ending anchor coordinates
-        noise(3, i, tailMod)*width, noise(5, i, tailMod)*height);
+        noise(3, i*4, tailMod)*width, noise(5, i*4, tailMod)*height);
       } 
     }
     else if (eatCount > 500) {
