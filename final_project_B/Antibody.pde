@@ -1,6 +1,6 @@
 // Antibody
 //
-// a class that defines antibody objects, which are released whenever/wherever the player clicks
+// a class that defines antibody objects, 10 of which are released at the location of the cursor on pressing the '1' key
 // they heal cells they come into contact with and have the potential to revive dead cells
 // however, they do not last long and cannot be healed themself
 
@@ -94,9 +94,9 @@ class Antibody {
       // sound only plays if cell is dead and antibody is alive
       if ((patient.energy <= 0) && (energy > 0)) {
         
-        // coinFlip determines if heal SFX plays (50% chance)
-        float coinFlip = random (-1,1);
-        if (coinFlip <= 0) {
+        // coinFlip determines if heal SFX plays (10% chance)
+        float coinFlip = random (-1,9);
+        if (coinFlip >= 0) {
         }
         else {
           if (disableCount>10){

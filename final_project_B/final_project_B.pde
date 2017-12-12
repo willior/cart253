@@ -74,7 +74,7 @@ SoundFile coda;
 // initializing arrays
 Cell[] cells = new Cell[255];
 Parasite[] parasites = new Parasite[10];
-Antibody[] antibodies = new Antibody[10];
+Antibody[] antibodies = new Antibody[40];
 Minion[] minions = new Minion[4];
 
 
@@ -82,7 +82,7 @@ Minion[] minions = new Minion[4];
 Boss boss;
 
 // background
-color BG = color(255,255,255);
+color BG = color(255, 255, 255);
 
 // creating the meter to display antibody stock
 Hyper meter;
@@ -138,7 +138,7 @@ void setup() {
   bossIntro = 1;
   bossApproach = 0;
   incoming = false;
-  
+
   disableCount= 0;
 
   bgm = new SoundFile(this, "bgm.mp3");
@@ -217,7 +217,12 @@ void setup() {
     int x = floor(random(0, width));
     int y = floor(random(0, height));
     parasites[p] = new Parasite(x * 20, y * 20, 20);
-    antibodies[p] = new Antibody (x, y, 20);
+  }
+
+  for (int a = 0; a < antibodies.length; a++) {
+    int x = floor(random(0, width));
+    int y = floor(random(0, height));
+    antibodies[a] = new Antibody(x, y, 20);
   }
 }
 
@@ -230,14 +235,16 @@ void setup() {
 // parasites/antibodies display
 
 void draw() {
-  if (disableCount<10){
-    background(BG);}
-  if (disableCount>10){
-    background(24);}
+  if (disableCount<10) {
+    background(BG);
+  }
+  if (disableCount>10) {
+    background(24);
+  }
   // background(255-globalKillCount);
   // splash screen goes here
-  if (run == false){
-    image(splash,0,0);
+  if (run == false) {
+    image(splash, 0, 0);
   }
 
   // changes the boolean run value to true value on mousePressed (starts the game)
@@ -316,9 +323,9 @@ void draw() {
         noLoop();
       }
     }
-    
+
     // resets variable storing disabled parasite information
-    if (disableCount <= 10){
+    if (disableCount <= 10) {
       disableCount = 0;
     }
 
@@ -326,32 +333,33 @@ void draw() {
     for (int p = 0; p < parasites.length; p++) {
       if (parasites[p].eatCount > 64) {
         disableCount++;
-        disableCount = constrain(disableCount,0,11);
+        disableCount = constrain(disableCount, 0, 11);
         // println(disableCount);
       }
     }
-    
+
     // boss intro screen runs after all parasites are disabled
     // logic determining length and the variable that determines the pause of each class's update() function
     if (disableCount == 10) {
-      
+
       // clause to escape from intro screen
       if (bossApproach < 0) {
         bossIntro = -1;
         disableCount++;
       }
-      
+
       // variable determining amount of time boss intro screen is
       if (bossIntro == 1) {
         bossApproach = 256;
         bgm.stop();
         carlos.play();
       }
-      
+
       // the intro screen itself
-      if (bossApproach > 0){
-        image(bossImage,0,0);
+      if (bossApproach > 0) {
+        image(bossImage, 0, 0);
         bossIntro = 0;
+        bossApproach--;
         bossApproach--;
         bossApproach--;
       }
@@ -378,7 +386,7 @@ void draw() {
         parasites[p].display();
       }
     }
-    
+
     // minion functions; only runs if all parasites are disabled
     else if (disableCount > 10) {
       for (int m = 0; m < minions.length; m++) {
@@ -423,7 +431,7 @@ void draw() {
     // regenerates energy over time, constrains their values, displays energy bar
     bar.eLevel += 0.8;
     bar.eLevel = constrain(bar.eLevel, 0, 110);
-    
+
     // println(bar.eLevel);
     bar.display();
 
@@ -438,14 +446,14 @@ void draw() {
 }
 
 void keyPressed() {
-  
+
   // disable all parasites button ('b')
   // quick way to skip to the boss for testing purposes
   if (key == 'b') {
     for (int b = 0; b < 10; b++) {
-      
+
       parasites[b].eatCount = 65;
-    } 
+    }
   }
 
   // reset button ('r')
@@ -459,39 +467,98 @@ void keyPressed() {
   }
 
   // antibody release
+  // releases 10 antibodies at the location of the cursor when the '1' key is pressed
   if (key == '1') {
     if (meter.stock > 0) {
 
-      // sound picker for antibody release
-      if(disableCount<10){
+      // sound picker for antibody release (pre-boss)
+      if (disableCount<10) {
         if (antibodySFXseed == 0) {
           bloom1.play();
+
+          for (int a = 0; a < 10; a++) {
+            int x = mouseX;
+            int y = mouseY;
+            antibodies[a] = new Antibody (x, y, 20);
+          }
         }
         if (antibodySFXseed == 1) {
           bloom2.play();
+
+          for (int a = 10; a < 20; a++) {
+            int x = mouseX;
+            int y = mouseY;
+            antibodies[a] = new Antibody (x, y, 20);
+          }
         }
         if (antibodySFXseed == 2) {
           bloom3.play();
+
+          for (int a = 20; a < 30; a++) {
+            int x = mouseX;
+            int y = mouseY;
+            antibodies[a] = new Antibody (x, y, 20);
+          }
         }
         if (antibodySFXseed == 3) {
           bloom4.play();
+
+          for (int a = 30; a < 40; a++) {
+            int x = mouseX;
+            int y = mouseY;
+            antibodies[a] = new Antibody (x, y, 20);
+          }
         }
         antibodySFXseed++;
         if (antibodySFXseed == 4) {
           antibodySFXseed = 0;
         }
       }
-      if(disableCount>10){
-        
-      }
-      meter.stock--;
+      // sound picker for antibody release (during boss)
+      if (disableCount>10) {
+        if (antibodySFXseed == 0) {
+          // bloom1.play();
 
-      // releases 10 antibodies at the location of the cursor when the '1' key is pressed.
-      for (int a = 0; a < 10; a++) {
-        int x = mouseX;
-        int y = mouseY;
-        antibodies[a] = new Antibody (x, y, 20);
+          for (int a = 0; a < 10; a++) {
+            int x = mouseX;
+            int y = mouseY;
+            antibodies[a] = new Antibody (x, y, 20);
+          }
+        }
+        if (antibodySFXseed == 1) {
+          // bloom2.play();
+
+          for (int a = 10; a < 20; a++) {
+            int x = mouseX;
+            int y = mouseY;
+            antibodies[a] = new Antibody (x, y, 20);
+          }
+        }
+        if (antibodySFXseed == 2) {
+          // bloom3.play();
+
+          for (int a = 20; a < 30; a++) {
+            int x = mouseX;
+            int y = mouseY;
+            antibodies[a] = new Antibody (x, y, 20);
+          }
+        }
+        if (antibodySFXseed == 3) {
+          // bloom4.play();
+
+          for (int a = 30; a < 40; a++) {
+            int x = mouseX;
+            int y = mouseY;
+            antibodies[a] = new Antibody (x, y, 20);
+          }
+        }
+        antibodySFXseed++;
+        if (antibodySFXseed == 4) {
+          antibodySFXseed = 0;
+        }
       }
+
+      meter.stock--;
     } else {
       return;
     }
@@ -539,8 +606,7 @@ void keyPressed() {
 
       if ((stunSFXseed == 0)&&(disableCount<10)) {
         stun1.play();
-      }
-      else if ((stunSFXseed == 0)&&(disableCount>10)){
+      } else if ((stunSFXseed == 0)&&(disableCount>10)) {
         stun1b.play();
       }
       if (stunSFXseed == 1) {
@@ -558,7 +624,7 @@ void keyPressed() {
       if (stunSFXseed == 4) {
         stunSFXseed = 0;
       }
-      
+
       // sets the stun time, keeps parasites/boss stunned while stunTime is greater than 0
       // 
       // stun behaviour versus parasites
@@ -568,10 +634,10 @@ void keyPressed() {
           parasites[p].stun = true;
         }
       }
-      
+
       // stun behaviour versus boss (stun is less effective)
       if ((stunTime >= 1)&&(disableCount>=10)) {
-        stunTime = 64;
+        stunTime = 72;
         for (int p = 0; p < 10; p++) {
           boss.stun = true;
         }
