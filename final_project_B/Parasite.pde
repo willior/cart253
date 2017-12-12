@@ -31,7 +31,7 @@ class Parasite {
   // variable used to get stunned parasites to shake
   int stunOffset = 0;
 
-  Parasite(int tempX, int tempY, int tempSize) {
+  Parasite(float tempX, float tempY, int tempSize) {
     x = tempX;
     y = tempY;
     size = tempSize;
@@ -243,6 +243,9 @@ class Parasite {
   void display() {
     if (eatCount <= 64) {
       fill(fill, 96); 
+      
+      
+      
     }
     else if (eatCount > 64) {
       fill (fed, 96);

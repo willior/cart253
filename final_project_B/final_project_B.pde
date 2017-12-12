@@ -75,6 +75,8 @@ SoundFile coda;
 Cell[] cells = new Cell[255];
 Parasite[] parasites = new Parasite[10];
 Antibody[] antibodies = new Antibody[10];
+Minion[] minions = new Minion[4];
+
 
 // initializing boss
 Boss boss;
@@ -352,7 +354,6 @@ void draw() {
         bossIntro = 0;
         bossApproach--;
         bossApproach--;
-        bossApproach--;
       }
     }
 
@@ -375,6 +376,17 @@ void draw() {
           }
         }
         parasites[p].display();
+      }
+    }
+    
+    // minion functions; only runs if all parasites are disabled
+    else if (disableCount > 10) {
+      for (int m = 0; m < minions.length; m++) {
+        for (int a = 0; a < cells.length; a++) {
+          if (a != m) {
+            minions[m].attack(cells[a]);
+          }
+        }
       }
     }
 
@@ -432,7 +444,7 @@ void keyPressed() {
   if (key == 'b') {
     for (int b = 0; b < 10; b++) {
       
-      parasites[b].eatCount = 64;
+      parasites[b].eatCount = 65;
     } 
   }
 
@@ -567,7 +579,6 @@ void keyPressed() {
     }
   }
 }
-
 
 // mouse clicked function
 void mousePressed() {
