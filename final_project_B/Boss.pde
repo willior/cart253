@@ -24,6 +24,8 @@ class Boss {
   int eatCount = 0;
 
   float killSFXseed;
+  
+  float tailMod;
 
   boolean stun;
 
@@ -244,12 +246,12 @@ class Boss {
     if (eatCount <= 512) {
       
       // boss tails
-      float tailMod;
-      if (stun == true) {
-        tailMod = eatCount / 32.0;
+      if (stun == false) {
+      tailMod = frameCount / (64.0+eatCount*2);
       }
       else {
-        tailMod = frameCount / (16.0+eatCount/2);
+      //  tailMod = frameCount / (64.0+eatCount*2);
+
       }
       for (int i = 0; i < 4; i++) {
         strokeWeight(4);
