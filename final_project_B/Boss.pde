@@ -40,7 +40,7 @@ class Boss {
   
   void update() {
     
-    if (bossApproach > 0){
+    if ((bossApproach > 0) || (disableCount < 10)) {
       return;
     }
       

@@ -187,6 +187,7 @@ void setup() {
   coda = new SoundFile(this, "coda.mp3");
 
   // boolean to prevent the game from running on setup()
+  // also used for the pause function ('p')
   run = false;
 
   // plays the background music in a loop
@@ -199,9 +200,6 @@ void setup() {
 
   // instantiates the Energy bar for herding cells
   bar = new Energy(110, 10, 50, (height - 30), eLevel, 0, energyEmpty, energyStroke);
-
-  // and boss
-  boss = new Boss(width/2, height/2, 200);
 
   // instantiating cells
   for (int i = 0; i < cells.length; i++) {
@@ -219,6 +217,7 @@ void setup() {
     parasites[p] = new Parasite(x * 20, y * 20, 20);
   }
 
+  // and antibodies
   for (int a = 0; a < antibodies.length; a++) {
     int x = floor(random(0, width));
     int y = floor(random(0, height));
@@ -260,9 +259,14 @@ void draw() {
     stunTime = constrain(stunTime, 0, 100);
 
     // returns parasite stun state as false if stunTimer is 0
-    if (stunTime == 0) {
+    if ((stunTime == 0) && (disableCount < 10)) {
       for (int p = 0; p < 10; p++) {
         parasites[p].stun = false;
+      }
+    }
+    if ((stunTime == 0) && (disableCount > 10)) {
+      for (int m = 0; m < 4; m++) {
+        minions[m].stun = false;
       }
       boss.stun = false;
     }
@@ -353,6 +357,10 @@ void draw() {
         bossApproach = 256;
         bgm.stop();
         carlos.play();
+        
+      // instantiating boss - minions are instantiated within the Boss class
+      boss = new Boss(width/2, height/2, 200);     
+        
       }
 
       // the intro screen itself
@@ -464,6 +472,11 @@ void keyPressed() {
     setup();
     time = millis();
     loop();
+  }
+  
+  // pause button ('p')
+  if (key == 'p') {
+    run = false;
   }
 
   // antibody release
@@ -638,8 +651,9 @@ void keyPressed() {
       // stun behaviour versus boss (stun is less effective)
       if ((stunTime >= 1)&&(disableCount>=10)) {
         stunTime = 72;
-        for (int p = 0; p < 10; p++) {
+        for (int m = 0; m < 4; m++) {
           boss.stun = true;
+          minions[m].stun = true;
         }
       }
     }
