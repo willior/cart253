@@ -47,7 +47,7 @@ class Minion {
       return;
     }
  
-    if (eatCount > 64) {
+    if (eatCount > 128) {
       fade -= 0.3;
       y += 0.3;
     }
@@ -72,6 +72,11 @@ class Minion {
       
       // changes minion colour while stunned
       fill = stunned;
+      
+      // increases size
+      sizeOffset = killCount/4;
+      sizeOffset += eatCount*4;
+      
     }
   }
 
@@ -79,7 +84,7 @@ class Minion {
   void attack(Cell host) {
     
     // overrides attack function by returning if "fed"
-    if (eatCount > 64) {
+    if (eatCount > 128) {
       return;
     }
 
@@ -208,13 +213,13 @@ class Minion {
             // visual feedback for feeding minions (draws a red ellipse on eat frame)
             stroke(255);
             fill(255,0,0,255);
-            ellipse(x, y, 20+(sizeOffset), 20+(sizeOffset));
+            ellipse(x, y, 20+(sizeOffset/2), 20+(sizeOffset/2));
             
             // plays sound effect once disabled
-            if (eatCount > 64) {
+            if (eatCount > 128) {
               disable.play();
             }
-            else if (eatCount <= 64) {
+            else if (eatCount <= 128) {
               // sound file went here
             }
 
@@ -228,10 +233,10 @@ class Minion {
   }
 
   void display() {
-    if (eatCount <= 64) {
+    if (eatCount <= 128) {
       fill(fill, fade); 
     }
-    else if (eatCount > 64) {
+    else if (eatCount > 128) {
       fill(fed, fade);
     }
     stroke(127, 0, 127, fade);
@@ -240,30 +245,30 @@ class Minion {
     // vibrates the minion if stunned:
     // in this logic chain, the first two if statements are for when the stun is almost over...
     // ...vibrating the minion with more intensity as a visual cue for when your stun is running out
-    if ((stun == true)&&(stunOffset == 1)&&(eatCount < 64)&&(stunTime<32)) {
-      ellipse(x+2, y+1, 40+(sizeOffset), 40+(sizeOffset));
+    if ((stun == true)&&(stunOffset == 1)&&(eatCount < 128)&&(stunTime<32)) {
+      ellipse(x+2, y+1, 40+(sizeOffset/2), 40+(sizeOffset/2));
       stunOffset--;
     }
-    else if ((stun == true)&&(stunOffset == 0)&&(eatCount < 64)&&(stunTime<32)) {
-      ellipse(x-2, y-1, 40+(sizeOffset), 40+(sizeOffset));
+    else if ((stun == true)&&(stunOffset == 0)&&(eatCount < 128)&&(stunTime<32)) {
+      ellipse(x-2, y-1, 40+(sizeOffset/2), 40+(sizeOffset/2));
       stunOffset++;
     }
     
     // the next two if statements are for the normal stun (vibrates left and right; offset = 1 pixel)
-    else if ((stun == true)&&(stunOffset == 1)&&(eatCount < 64)) {
-      ellipse(x+1, y, 40+(sizeOffset), 40+(sizeOffset));
+    else if ((stun == true)&&(stunOffset == 1)&&(eatCount < 128)) {
+      ellipse(x+1, y, 40+(sizeOffset/2), 40+(sizeOffset/2));
       stunOffset--;
     }
-    else if ((stun == true)&&(stunOffset == 0)&&(eatCount < 64)) {
-      ellipse(x-1, y, 40+(sizeOffset), 40+(sizeOffset));
+    else if ((stun == true)&&(stunOffset == 0)&&(eatCount < 128)) {
+      ellipse(x-1, y, 40+(sizeOffset/2), 40+(sizeOffset/2));
       stunOffset++;
     }
     
     // if the minion is not stunned, it is drawn normally
     else {
     strokeWeight(0);
-    fill((eatCount/2),(255-eatCount/4),0,fade);
-    ellipse(x, y, 40+(sizeOffset), 40+(sizeOffset));
+    fill((eatCount*2),(127-eatCount),255,fade);
+    ellipse(x, y, 40+(sizeOffset/2), 40+(sizeOffset/2));
     }
   }
 }

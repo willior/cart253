@@ -83,10 +83,11 @@ class Parasite {
     else if (stun == true) {
       
       // changes parasite colour while stunned
-      // created a new variable, sizeOffset, to modulate both the parasite hitbox and size based off each parasite's kill count
+      fill = stunned;
+      
+      // sizeOffset changes the size of the parasite & hitbox based off of how many kills/cells fed
       sizeOffset = killCount/4;
       sizeOffset += eatCount*4;
-      fill = stunned;
       
     }
   }

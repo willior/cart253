@@ -21,6 +21,7 @@ class Boss {
   float killCount = 0;
   float sizeOffset;
   int eatCount = 0;
+  int mEatCount;
 
   float killSFXseed;
   
@@ -30,6 +31,7 @@ class Boss {
 
   color fill = color(0, 0, 255);
   color fed = color(255,0,255);
+  float fade = 128;
 
   Boss(int tempX, int tempY, int tempSize) {
     x = tempX;
@@ -39,13 +41,16 @@ class Boss {
   
   void update() {
     
+    // boss's main body increases in size as minions absorb cells
+    mEatCount = minions[0].eatCount + minions[1].eatCount + minions[2].eatCount + minions[3].eatCount;
+    
     if ((bossApproach > 0) || (disableCount < 10)) {
       return;
     }
     
     if (eatCount > 512) {
       
-      // you win?
+      fade -= 0.4;
       
     }
 
@@ -54,6 +59,7 @@ class Boss {
       // created a new variable, sizeOffset, to modulate both the parasite hitbox and size based off each parasite's kill count
       sizeOffset = killCount/4;
       sizeOffset += eatCount/2;
+      sizeOffset += mEatCount/4;
 
       // constrains the sizeOffset variable to remain within a reasonable range; otherwise, the parasites become too big and the game becomes impossible very quickly
       sizeOffset = constrain (sizeOffset, 0, 512);
@@ -78,6 +84,10 @@ class Boss {
       }
     }
     else if (stun == true) {
+      
+      sizeOffset = killCount/4;
+      sizeOffset += eatCount/2;
+      sizeOffset += mEatCount/4;
 
     }
   }
@@ -293,7 +303,7 @@ class Boss {
       } 
     }
     else if (eatCount > 512) {
-      fill (fed, 96);
+      fill (fed, fade);
     }
     strokeWeight(1);
     stroke(127, 127, 127);
@@ -301,11 +311,11 @@ class Boss {
     
     
     if(stun == true) {
-      fill(eatCount/2,127,0,64);
+      fill(eatCount/2,127,0,fade);
       ellipse(x, y, 128+(sizeOffset/2), 128+(sizeOffset/2));
     }
     else {
-      fill((eatCount/2),(255-eatCount/4),0,128);
+      fill((eatCount/2),(255-eatCount/2),0,fade);
       ellipse(x, y, 128+(sizeOffset/2), 128+(sizeOffset/2));
     }
   }
