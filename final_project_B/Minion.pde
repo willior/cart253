@@ -26,10 +26,11 @@ class Minion {
   boolean stun;
 
   // minion colours
-  color fill = color(0, 0, 255);
-  color fed = color(255,0,255);
-  color stunned = color(0,255,255);
   float fade = 128;
+  color fill = color(0, 0, 255);
+  color fed = color(255, 0, 255);
+  color stunned = color(0, 255, 255);
+  
   
   // variable used to get stunned minions to shake
   int stunOffset = 0;
@@ -61,7 +62,7 @@ class Minion {
       // minion coordinates
       // added 'count' to the Minion constructor to differentiate each instance of Minion...
       // ... allowing each one to have their own set of XY coordinates
-      for(int m=0; m<4; m++){
+      for(int m=0; m<8; m++){
         x = boss.mx[count];
         y = boss.my[count];
       }
@@ -213,7 +214,7 @@ class Minion {
             
             // visual feedback for feeding minions (draws a red ellipse on eat frame)
             stroke(255);
-            fill(255,0,0,255);
+            fill(255,0,0,fade);
             ellipse(x, y, 20+(sizeOffset/2), 20+(sizeOffset/2));
             
             // plays sound effect once disabled
@@ -240,7 +241,7 @@ class Minion {
       fill(fill, fade); 
     }
     else if (eatCount > 128) {
-      fill(fed, fade);
+      fill(fed);
     }
     stroke(127, 0, 127, fade);
     ellipseMode(CENTER);

@@ -15,8 +15,8 @@ class Boss {
   int x;
   int y;
   
-  float[] mx = new float[4];
-  float[] my = new float[4];
+  float[] mx = new float[8];
+  float[] my = new float[8];
 
   float killCount = 0;
   float sizeOffset;
@@ -28,6 +28,8 @@ class Boss {
   float tailMod;
 
   boolean stun;
+  
+  int stunOffset = 0;
 
   color fill = color(0, 0, 255);
   color fed = color(255,0,255);
@@ -50,7 +52,7 @@ class Boss {
     
     // tracking the boss's health
     energy = 512;
-    if (severCount == 4) {
+    if (severCount == 8) {
       energy = energy - eatCount;
     }
     
@@ -228,20 +230,22 @@ class Boss {
 
             // updates parasite eat count
             eatCount++;
-            println(eatCount);
+            println(energy);
             
             // visual feedback
-            if (severCount < 4) {
+            if (severCount < 8) {
               stroke(255);
             }
             else {
               stroke(0);
             }
             
-            fill(255-(eatCount%8),127-eatCount%16,eatCount%4,12);
-            ellipse(x, y, 128+(sizeOffset/2), 128+(sizeOffset));
-            fill(255-(eatCount%32),eatCount%8,192-eatCount%64,12);
-            ellipse(x, y, 128+(sizeOffset), 128+(sizeOffset/2));
+            // fill(255-(eatCount%8),127-eatCount%16,eatCount%4,12);
+            
+            fill(255,255,255,fade);
+            ellipse(x, y, 80+(sizeOffset/2), 80+(sizeOffset/2));
+            
+            // fill(255-(eatCount%32),eatCount%8,192-eatCount%64,12);
             
             if (energy <= 0) {
               disable.play();
@@ -267,32 +271,45 @@ class Boss {
       
       // boss tails
       if (stun == false) {
-      tailMod = frameCount / (64.0+eatCount*2);
+      tailMod = frameCount / (64.0+energy/2);
       }
       else {
       //  tailMod = frameCount / (64.0+eatCount*2);
 
       }
-      for (int i = 0; i < 4; i++) {
-        strokeWeight(4);
-        stroke((eatCount/2),(255-eatCount/4),0,127);
+      for (int i = 0; i < 8; i++) {
+        strokeWeight(5);
+        stroke((255-energy/2),(energy/4),(energy/12),fade*1.5);
         fill(255,0);
         int bx = x;
         int by = y;
         
-        // starting anchor coordinates
+        // 8 sets starting anchor coordinates, each offset to create a small circular (octagonal) shape
         if (i == 0){
-          bx = x-5; by = y-5;
+          bx = x; by = y-8;
         }
         if (i == 1){
-          bx = x+5; by = y-5;
+          bx = x+6; by = y-6;
         }
         if (i == 2){
-          bx = x-5; by = y+5;
+          bx = x+8; by = y;
         }
         if (i == 3){
-          bx = x+5; by = y+5;
+          bx = x+6; by = y+6;
         }
+        if (i == 4){
+          bx = x; by = y+8;
+        }
+        if (i == 5){
+          bx = x-6; by = y-6;
+        }
+        if (i == 6){
+          bx = x-8; by = y;
+        }
+        if (i == 7){
+          bx = x-6; by = y-6;
+        }
+        
         
         // mx & my (m for minion) are variables used to define both the ending anchor of the Boss's appendages...
         // ... and for the coordinates of the Minion objects
@@ -317,16 +334,38 @@ class Boss {
       fill (fed, fade);
     }
     strokeWeight(1);
-    stroke(127, 127, 127);
+    stroke(127, 127, 127, fade);
     ellipseMode(CENTER);
     
-    
-    if((stun == true)&&(severCount == 4)) {
-      fill(eatCount/2,127,0,fade);
-      ellipse(x, y, 160+(sizeOffset/2), 160+(sizeOffset/2));
+    if((stun == true)&&(severCount == 8)) {
+      fill(255,255,0,fade);
+      // ellipse(x, y, 160+(sizeOffset/2), 160+(sizeOffset/2));
     }
+    
+    // vibrates the boss if stunned:
+    // in this logic chain, the first two if statements are for when the stun is almost over...
+    // ...vibrating the boss with more intensity as a visual cue for when your stun is running out
+    if ((stun == true)&&(stunOffset == 1)&&(eatCount < 128)&&(stunTime<32)) {
+      ellipse(x+3, y+2, 160+(sizeOffset/2), 160+(sizeOffset/2));
+      stunOffset--;
+    }
+    else if ((stun == true)&&(stunOffset == 0)&&(eatCount < 128)&&(stunTime<32)) {
+      ellipse(x-3, y-2, 160+(sizeOffset/2), 160+(sizeOffset/2));
+      stunOffset++;
+    }
+    
+    // the next two if statements are for the normal stun (vibrates left and right; offset = 1 pixel)
+    else if ((stun == true)&&(stunOffset == 1)&&(eatCount < 128)) {
+      ellipse(x+2, y, 160+(sizeOffset/2), 160+(sizeOffset/2));
+      stunOffset--;
+    }
+    else if ((stun == true)&&(stunOffset == 0)&&(eatCount < 128)) {
+      ellipse(x-2, y, 160+(sizeOffset/2), 160+(sizeOffset/2));
+      stunOffset++;
+    }
+
     else {
-      fill((eatCount/2),(255-eatCount/2),0,fade);
+      fill((255-energy/2),(energy/4),(energy/12),fade*1.2);
       ellipse(x, y, 160+(sizeOffset/2), 160+(sizeOffset/2));
     }
   }

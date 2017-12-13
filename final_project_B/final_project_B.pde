@@ -75,7 +75,7 @@ SoundFile coda;
 Cell[] cells = new Cell[255];
 Parasite[] parasites = new Parasite[10];
 Antibody[] antibodies = new Antibody[40];
-Minion[] minions = new Minion[4];
+Minion[] minions = new Minion[8];
 
 
 // initializing boss
@@ -272,7 +272,7 @@ void draw() {
       }
     }
     if ((stunTime == 0) && (disableCount > 10)) {
-      for (int m = 0; m < 4; m++) {
+      for (int m = 0; m < 8; m++) {
         minions[m].stun = false;
       }
       boss.stun = false;
@@ -369,7 +369,7 @@ void draw() {
         boss = new Boss(width/2, height/2, 200);
 
         // and minions
-        for (int m=0; m<4; m++) {
+        for (int m=0; m<8; m++) {
           minions[m] = new Minion (boss.mx[m], boss.my[m], 16, m);
         }
       }
@@ -471,9 +471,17 @@ void keyPressed() {
   // quick way to skip to the boss for testing purposes
   if (key == 'b') {
     for (int b = 0; b < 10; b++) {
-
       parasites[b].eatCount = 65;
     }
+  }
+  
+  // sever all minions button ('s')
+  // quick way to skip phase 1 of the boss for testing purposes
+  if (key == 's') {
+    for (int s = 0; s < 8; s++) {
+      minions[s].eatCount = 129;
+    }
+    severCount = 8;
   }
 
   // reset button ('r')
@@ -663,7 +671,7 @@ void keyPressed() {
       // stun behaviour versus boss (stun is less effective)
       if ((stunTime >= 1)&&(disableCount>=10)) {
         stunTime = 72;
-        for (int m = 0; m < 4; m++) {
+        for (int m = 0; m < 8; m++) {
           boss.stun = true;
           minions[m].stun = true;
         }
