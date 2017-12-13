@@ -273,8 +273,8 @@ class Boss {
       if (stun == false) {
       tailMod = frameCount / (64.0+energy/2);
       }
-      else {
-      //  tailMod = frameCount / (64.0+eatCount*2);
+      else if ((stun == true)&&(severCount == 8)) {
+      tailMod = (energy*4) / (64.0+eatCount*4);
 
       }
       for (int i = 0; i < 8; i++) {
