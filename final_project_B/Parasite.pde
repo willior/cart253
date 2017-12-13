@@ -27,6 +27,7 @@ class Parasite {
   color fill;
   color fed = color(255,0,255);
   color stunned = color(0,255,255);
+  float fade = 96;
   
   // variable used to get stunned parasites to shake
   int stunOffset = 0;
@@ -47,7 +48,7 @@ class Parasite {
     fill = color(0, 0, 255);
     
     if (eatCount > 64) {
-      // nothing here
+      fade -= 0.3;
       return;
     }
 
@@ -244,15 +245,12 @@ class Parasite {
 
   void display() {
     if (eatCount <= 64) {
-      fill(fill, 96); 
-      
-      
-      
+      fill(fill, fade); 
     }
     else if (eatCount > 64) {
-      fill (fed, 96);
+      fill (fed, fade);
     }
-    stroke(127, 0, 127);
+    stroke(127, 0, 127, fade);
     ellipseMode(CENTER);
     
     // vibrates the parasite if stunned:
