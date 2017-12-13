@@ -27,7 +27,7 @@ class Parasite {
   color fill;
   color fed = color(255,0,255);
   color stunned = color(0,255,255);
-  float fade = 96;
+  float fade = 128;
   
   // variable used to get stunned parasites to shake
   int stunOffset = 0;

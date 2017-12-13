@@ -58,6 +58,7 @@ class Energy {
 
   // setting properties for the display of the energy eLevels
   void display() {
+    strokeWeight(1);
     stroke(energyStroke);
     fill(energyEmpty);
     rectMode(CORNER);

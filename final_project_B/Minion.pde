@@ -29,6 +29,7 @@ class Minion {
   color fill = color(0, 0, 255);
   color fed = color(255,0,255);
   color stunned = color(0,255,255);
+  float fade = 128;
   
   // variable used to get stunned minions to shake
   int stunOffset = 0;
@@ -47,7 +48,8 @@ class Minion {
     }
  
     if (eatCount > 64) {
-      
+      fade -= 0.3;
+      y += 0.3;
     }
 
     else if (stun == false) {
@@ -227,12 +229,12 @@ class Minion {
 
   void display() {
     if (eatCount <= 64) {
-      fill(fill, 96); 
+      fill(fill, fade); 
     }
     else if (eatCount > 64) {
-      fill (fed, 96);
+      fill(fed, fade);
     }
-    stroke(127, 0, 127);
+    stroke(127, 0, 127, fade);
     ellipseMode(CENTER);
     
     // vibrates the minion if stunned:
@@ -260,7 +262,7 @@ class Minion {
     // if the minion is not stunned, it is drawn normally
     else {
     strokeWeight(0);
-    fill((eatCount/2),(255-eatCount/4),0,127);
+    fill((eatCount/2),(255-eatCount/4),0,fade);
     ellipse(x, y, 40+(sizeOffset), 40+(sizeOffset));
     }
   }
