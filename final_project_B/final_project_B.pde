@@ -363,7 +363,7 @@ void draw() {
 
         // and minions
         for (int m=0; m<4; m++) {
-          minions[m] = new Minion (boss.mx[m], boss.my[m], 20);
+          minions[m] = new Minion (boss.mx[m], boss.my[m], 16, m);
         }
       }
 

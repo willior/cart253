@@ -14,6 +14,8 @@ class Minion {
   float speed = 8;
   float x;
   float y;
+  
+  int count;
 
   float killCount = 0;
   float sizeOffset;
@@ -31,10 +33,11 @@ class Minion {
   // variable used to get stunned minions to shake
   int stunOffset = 0;
 
-  Minion(float tempX, float tempY, int tempSize) {
+  Minion(float tempX, float tempY, int tempSize, int tempCount) {
     x = tempX;
     y = tempY;
     size = tempSize;
+    count = tempCount;
   }
 
   void update() {
@@ -52,16 +55,21 @@ class Minion {
       // created a new variable, sizeOffset, to modulate both the minion hitbox and size based off each minion's kill count
       sizeOffset = killCount/4;
       sizeOffset += eatCount*4;
-      for(int i =0;i<4;i++){
-      x = boss.mx[i];
-      y = boss.my[i];}
+      
+      // minion coordinates
+      // added 'count' to the Minion constructor to differentiate each instance of Minion...
+      // ... allowing each one to have their own set of XY coordinates
+      for(int m=0; m<4; m++){
+        x = boss.mx[count];
+        y = boss.my[count];
+      }
+      
     }
 
     else if (stun == true) {
       
       // changes minion colour while stunned
       fill = stunned;
-      
     }
   }
 
