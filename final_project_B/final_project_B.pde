@@ -357,10 +357,14 @@ void draw() {
         bossApproach = 256;
         bgm.stop();
         carlos.play();
-        
-      // instantiating boss - minions are instantiated within the Boss class
-      boss = new Boss(width/2, height/2, 200);     
-        
+
+        // instantiating boss
+        boss = new Boss(width/2, height/2, 200);
+
+        // and minions
+        for (int m=0; m<4; m++) {
+          minions[m] = new Minion (boss.mx[m], boss.my[m], 20);
+        }
       }
 
       // the intro screen itself
@@ -380,6 +384,17 @@ void draw() {
         boss.attack(cells[i]);
       }
       boss.display();
+      
+      // minion functions
+      for (int m = 0; m < minions.length; m++) {
+        minions[m].update();
+        for (int a = 0; a < cells.length; a++) {
+          if (a != m) {
+            minions[m].attack(cells[a]);
+          }
+        }
+        minions[m].display();
+      }
     }
 
     // parasite functions; only runs if all parasites are not disabled
@@ -395,17 +410,6 @@ void draw() {
       }
     }
 
-    // minion functions; only runs if all parasites are disabled
-    else if (disableCount > 10) {
-      for (int m = 0; m < minions.length; m++) {
-        for (int a = 0; a < cells.length; a++) {
-          if (a != m) {
-            minions[m].attack(cells[a]);
-          }
-        }
-      }
-    }
-
     // antibody functions
     for (int a = 0; a < antibodies.length; a++) {
       antibodies[a].update();
@@ -416,6 +420,7 @@ void draw() {
       }
       antibodies[a].display();
     }
+
 
     // drains energy when mouse is held
     // for some reason, this would not work when embedded into the Energy class's update() function, so it goes here
@@ -473,7 +478,7 @@ void keyPressed() {
     time = millis();
     loop();
   }
-  
+
   // pause button ('p')
   if (key == 'p') {
     run = false;

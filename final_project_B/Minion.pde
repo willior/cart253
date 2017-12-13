@@ -24,7 +24,7 @@ class Minion {
   boolean stun;
 
   // minion colours
-  color fill;
+  color fill = color(0, 0, 255);
   color fed = color(255,0,255);
   color stunned = color(0,255,255);
   
@@ -42,11 +42,8 @@ class Minion {
     if (bossApproach > 0){
       return;
     }
-    
-    
+ 
     if (eatCount > 64) {
-      
-      
       
     }
 
@@ -55,9 +52,9 @@ class Minion {
       // created a new variable, sizeOffset, to modulate both the minion hitbox and size based off each minion's kill count
       sizeOffset = killCount/4;
       sizeOffset += eatCount*4;
-
-      x = boss.mx;
-      y = boss.my;
+      for(int i =0;i<4;i++){
+      x = boss.mx[i];
+      y = boss.my[i];}
     }
 
     else if (stun == true) {
@@ -223,9 +220,6 @@ class Minion {
   void display() {
     if (eatCount <= 64) {
       fill(fill, 96); 
-      
-      
-      
     }
     else if (eatCount > 64) {
       fill (fed, 96);

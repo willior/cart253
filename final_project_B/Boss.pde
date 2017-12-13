@@ -2,11 +2,7 @@
 //
 // a class that defines the boss that appears when all parasites have been disabled
 class Boss {
-  
 
-
-  float mx;
-  float my;
 
   int drainEnergy = 64;
   int size;
@@ -18,6 +14,9 @@ class Boss {
   float speed = 8;
   int x;
   int y;
+  
+  float[] mx = new float[4];
+  float[] my = new float[4];
 
   float killCount = 0;
   float sizeOffset;
@@ -43,7 +42,7 @@ class Boss {
     if ((bossApproach > 0) || (disableCount < 10)) {
       return;
     }
-      
+    
     if (eatCount > 512) {
       
       // you win?
@@ -276,8 +275,8 @@ class Boss {
         
         // mx & my (m for minion) are variables used to define both the ending anchor of the Boss's appendages...
         // ... and for the coordinates of the Minion objects
-        mx = noise(3, i*4, tailMod)*width;
-        my = noise(5, i*4, tailMod)*height;
+        mx[i] = noise(3, i*4, tailMod)*width;
+        my[i] = noise(5, i*4, tailMod)*height;
         
         bezier(
         // starting anchor coordinates
@@ -290,10 +289,7 @@ class Boss {
         noise(2, i*4, tailMod)*width, noise(4, i*4, tailMod)*height, 
         
         // ending anchor coordinates
-        mx, my);
-        
-        minions[i] = new Minion ((noise(3, i*4, tailMod)*width), (noise(5, i*4, tailMod)*height), 20);
-        minions[i].display();
+        mx[i], my[i]);
       } 
     }
     else if (eatCount > 512) {
