@@ -120,6 +120,9 @@ int globalKillCount;
 // variable that keeps track of the amount of parasites disabled
 int disableCount;
 
+// variable that keeps track of the amount of minions severed
+int severCount;
+
 // variables for boss intro
 int bossApproach;
 int bossIntro;

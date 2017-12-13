@@ -47,9 +47,8 @@ class Parasite {
     fill = color(0, 0, 255);
     
     if (eatCount > 64) {
-      
-      
-      
+      // nothing here
+      return;
     }
 
     else if (stun == false) {
@@ -83,6 +82,9 @@ class Parasite {
     else if (stun == true) {
       
       // changes parasite colour while stunned
+      // created a new variable, sizeOffset, to modulate both the parasite hitbox and size based off each parasite's kill count
+      sizeOffset = killCount/4;
+      sizeOffset += eatCount*4;
       fill = stunned;
       
     }
