@@ -142,7 +142,11 @@ void setup() {
   bossApproach = 0;
   incoming = false;
 
-  disableCount= 0;
+  // resets number of parasites disabled to 0
+  disableCount = 0;
+  
+  // resets number of minions severed to 0
+  severCount = 0;
 
   bgm = new SoundFile(this, "bgm.mp3");
   carlos = new SoundFile(this, "carlos.mp3");

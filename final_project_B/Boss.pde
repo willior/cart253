@@ -4,7 +4,7 @@
 class Boss {
 
 
-  int drainEnergy = 64;
+  int drainEnergy = 192;
   int size;
   int energy;
 
@@ -48,7 +48,14 @@ class Boss {
       return;
     }
     
-    if (eatCount > 512) {
+    // tracking the boss's health
+    energy = 512;
+    if (severCount == 4) {
+      energy = energy - eatCount;
+    }
+    
+    // boss fades once dead
+    if (energy <= 0) {
       
       fade -= 0.4;
       
@@ -96,7 +103,7 @@ class Boss {
   void attack(Cell host) {
     
     // overrides attack function by returning if "fed"
-    if (eatCount > 512) {
+    if (energy <= 0) {
       return;
     }
 
@@ -120,13 +127,10 @@ class Boss {
           // for clarification, a cell whose energy = 0 at this point in the program flow is known [semantically] as "killed", ie. they die in the current cycle
           // cells whose energy level is LESS than 0 at any point are known [semantically] as "confirmed dead"
 
-          host.energy = constrain(energy, 0, 255);
+          host.energy = constrain(host.energy, 0, 255);
 
           if (host.energy == 0) {
             
-            // boss heals itself
-            // eatCount--;
-
             // picks a kill sound at random form the library
             killSFXseed = random(0, 9);
             if ((killSFXseed >= 0) && (killSFXseed <= 1)) {
@@ -168,7 +172,7 @@ class Boss {
       }
     }
     
-    // hitbox behaviour while boss stunned
+    // hitbox behaviour while boss stunned & all 4 minions severed
     else if (stun == true) {
       
       if ((x == host.x && y == host.y) || (x <= host.x + (10+(sizeOffset/4)) && y <= host.y + (10+(sizeOffset/4)) && (x >= host.x - (10+(sizeOffset/4)) && y >= host.y - (10+(sizeOffset/4))))) {
@@ -188,7 +192,7 @@ class Boss {
           // for clarification, a cell whose energy = 0 at this point in the program flow is known [semantically] as "killed", ie. they die in the current cycle
           // cells whose energy level is LESS than 0 at any point are known [semantically] as "confirmed dead"
 
-          host.energy = constrain(energy, 0, 255);
+          host.energy = constrain(host.energy, 0, 255);
 
           if (host.energy == 0) {
 
@@ -222,20 +226,27 @@ class Boss {
               kill9.play();
             }
 
-            // updates parasite eat count and plays appropriate sound effect
+            // updates parasite eat count
             eatCount++;
+            println(eatCount);
             
             // visual feedback
-            stroke(255);
+            if (severCount < 4) {
+              stroke(255);
+            }
+            else {
+              stroke(0);
+            }
+            
             fill(255-(eatCount%8),127-eatCount%16,eatCount%4,12);
             ellipse(x, y, 128+(sizeOffset/2), 128+(sizeOffset));
             fill(255-(eatCount%32),eatCount%8,192-eatCount%64,12);
             ellipse(x, y, 128+(sizeOffset), 128+(sizeOffset/2));
             
-            if (eatCount > 512) {
+            if (energy <= 0) {
               disable.play();
             }
-            else if (eatCount <= 512) {
+            else if (energy > 0) {
               // sound file went here
             }
 
@@ -252,7 +263,7 @@ class Boss {
   }
   
   void display() {
-    if (eatCount <= 512) {
+    if (energy > 0) {
       
       // boss tails
       if (stun == false) {
@@ -302,7 +313,7 @@ class Boss {
         mx[i], my[i]);
       } 
     }
-    else if (eatCount > 512) {
+    else if (energy <= 0) {
       fill (fed, fade);
     }
     strokeWeight(1);
@@ -310,13 +321,13 @@ class Boss {
     ellipseMode(CENTER);
     
     
-    if(stun == true) {
+    if((stun == true)&&(severCount == 4)) {
       fill(eatCount/2,127,0,fade);
-      ellipse(x, y, 128+(sizeOffset/2), 128+(sizeOffset/2));
+      ellipse(x, y, 160+(sizeOffset/2), 160+(sizeOffset/2));
     }
     else {
       fill((eatCount/2),(255-eatCount/2),0,fade);
-      ellipse(x, y, 128+(sizeOffset/2), 128+(sizeOffset/2));
+      ellipse(x, y, 160+(sizeOffset/2), 160+(sizeOffset/2));
     }
   }
 }

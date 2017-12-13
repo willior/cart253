@@ -249,7 +249,7 @@ class Parasite {
       fill(fill, fade); 
     }
     else if (eatCount > 64) {
-      fill (fed, fade);
+      fill (fed, fade/2);
     }
     stroke(127, 0, 127, fade);
     ellipseMode(CENTER);

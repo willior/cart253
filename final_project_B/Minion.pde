@@ -105,7 +105,8 @@ class Minion {
           host.energy -= drainEnergy;
 
           // constrains energy to not go below 0
-          // for clarification, a cell whose energy = 0 at this point in the program flow is known [semantically] as "killed", ie. they die in the current cycle
+          // for clarification, a cell whose energy = 0 at this point in the program flow is known [semantically] as "killed"
+          // ie. they die in the current cycle
           // cells whose energy level is LESS than 0 at any point are known [semantically] as "confirmed dead"
 
           host.energy = constrain(energy, 0, 255);
@@ -218,6 +219,8 @@ class Minion {
             // plays sound effect once disabled
             if (eatCount > 128) {
               disable.play();
+              severCount++;
+              println(severCount);
             }
             else if (eatCount <= 128) {
               // sound file went here
