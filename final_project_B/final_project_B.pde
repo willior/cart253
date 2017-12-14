@@ -133,21 +133,36 @@ int severCount;
 int bossApproach;
 int bossIntro;
 
+// boolean to determine intro splash screens
+boolean introRun;
+
+// variables for startup sequence
+int introCount;
+int fadeCount1;
+int fadeCount2;
+int fadeCount3;
+int fadeCount4;
+
+// boolean to determine menu screen
+boolean menu;
+
 // boolean to determine whether game should run or not (for splash screen)
 boolean run;
-
-// boolean to determine intro splash screens
-boolean intro;
-
-// boolean to detemrine menu screen
-boolean menu;
 
 // boolean to determine incoming boss
 boolean incoming;
 
 void setup() {
+  
+  introCount = 0;
+
+  fadeCount1 = 0;
+  fadeCount2 = 0;
+  fadeCount3 = 0;
+  fadeCount4 = 0;
 
   size(800, 600);
+  
   splash = loadImage("splash.png");
   intro1 = loadImage("intro1.png");
   intro2 = loadImage("intro2.png");
@@ -216,9 +231,14 @@ void setup() {
   // boolean to prevent the game from running on setup()
   // also used for the pause function ('p')
   run = false;
+  
+  // runs intro on setup
+  introRun = true;
+  
+  menu = false;
 
   // plays the background music in a loop
-  bgm.loop();
+  // bgm.loop();
 
   // player starts with 3 antibodies
   int stock = 3;
@@ -261,6 +281,32 @@ void setup() {
 // parasites/antibodies display
 
 void draw() {
+  
+  if (introRun == true) {
+    for (int i = 0; i < 600; i++) {
+      image(intro1, 0, 0);
+      println(i);
+    }
+    for (int i = 0; i < 600; i++) {
+      image(intro2, 0, 0);
+      println(i);
+    }
+    for (int i = 0; i < 600; i++) {
+      image(intro3, 0, 0);
+      println(i);
+    }
+    
+    introRun = false;
+    menu = true;  
+    
+  }
+  
+  if (menu == true) {
+    
+    // main menu goes here
+    
+  }
+  
   if (disableCount<10) {
     background(BG);
   }
@@ -272,7 +318,7 @@ void draw() {
     
     // splash screen goes here
     
-    image(splash, 0, 0);
+    image(mainmenu, 0, 0);
   }
 
   // changes the boolean run value to true value on mousePressed (starts the game)
