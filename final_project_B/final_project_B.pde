@@ -20,6 +20,14 @@
 // click on the splash screen to start the game.
 // have fun!!
 
+/* 
+
+ARTIST STATEMENT
+
+
+
+*/
+
 // image library
 PImage bossImage;
 PImage splash;
@@ -136,9 +144,9 @@ int bossApproach;
 int bossIntro;
 
 // boolean to determine intro splash screens
-int introRun;
+boolean introRun;
 
-// variables for startup sequence
+// variables for startup sequence (not used)
 int introCount;
 int fadeCount1;
 int fadeCount2;
@@ -146,8 +154,9 @@ int fadeCount3;
 int fadeCount4;
 
 // credits sequence
-int creditRollX = 0;
-int creditRollY = 600;
+int creditRollX;
+int creditRollY;
+float endFade;
 
 // boolean to determine menu screen
 boolean menu;
@@ -162,17 +171,19 @@ boolean incoming;
 
 void setup() {
 
-  introCount = 0;
-
-  fadeCount1 = 0;
-  fadeCount2 = 0;
-  fadeCount3 = 0;
-  fadeCount4 = 0;
+  //introCount = 0;
+  //fadeCount1 = 0;
+  //fadeCount2 = 0;
+  //fadeCount3 = 0;
+  //fadeCount4 = 0;
 
   size(800, 600);
 
   splash = loadImage("splash.png");
   intro1 = loadImage("intro1.png");
+  
+  intro1 = loadImage("copy.png");
+  
   intro1b = loadImage("intro1b.jpg");
   intro2 = loadImage("intro2.png");
   intro3 = loadImage("intro3.png");
@@ -243,9 +254,15 @@ void setup() {
   run = false;
 
   // runs intro on setup
-  introRun = 1;
+  introRun = true;
 
   menu = false;
+  
+  creditRollX = 0;
+  creditRollY = 600;
+  
+  endFade = 0;
+  
 
   // plays the background music in a loop
   // bgm.loop();
@@ -290,13 +307,20 @@ void setup() {
 // parasites/antibodies attack/heal (hitbox detection)
 // parasites/antibodies display
 
-void draw() {
-
-  if (introRun == 1) {
-    image(intro1b, 0, 0);
-
-    println(millis());
-
+// intro sequence
+// nont functioning: does not display the images at all
+// i wanted to fade in and out of each intro image (intro1.png, intro2.png, etc) ...
+// ... and into the main menu, but i cannot get it to work for the life of me
+// the for loops run, as you can tell in the console
+// but the images simply do not show up
+void intro() {
+  
+  coda.play();
+  
+  for (int i = 0; i < 600; i++) {
+      image(intro1, 0, 0);
+      println(i);
+    }
     for (int i = 0; i < 600; i++) {
       image(intro2, 0, 0);
       println(i);
@@ -305,14 +329,20 @@ void draw() {
       image(intro3, 0, 0);
       println(i);
     }
+  introRun = false;
+  menu = true;
+}
 
-    introRun = 0;
-    menu = true;
+void draw() {
+  
+  if (introRun == true) {
+    intro();
   }
 
   // main menu
   // button hover works but why does clicking anywhere on the screen start?
   if (menu == true) {
+    coda.stop();
     image(mainmenu, 0, 0);
     if ((mouseX > 610)&&(mouseY > 310)&&(mouseX < 750)&&(mouseY < 350)) {
       image(mainmenu_start, 0, 0);
@@ -332,6 +362,7 @@ void draw() {
     }
     return;
   }
+  
   if (menu == false) {
     run = true;
   }
@@ -348,7 +379,6 @@ void draw() {
     // pause screen goes here
     image(splash, 0, 0);
   }
-
 
   // changes the boolean run value to true value on mousePressed (starts the game)
   if ((mousePressed == true)&&(menu == false)) {
@@ -456,15 +486,20 @@ void draw() {
       if (boss.energy <= 0) {
 
         carlos.stop();
-
-        fill(0, 0, 0, 127);
-        rect(0, 0, width, height);
         image(intro3, 0, 0);
         image(credits, creditRollX, creditRollY);
-        creditRollY--;
+        creditRollY-=1;
         println(creditRollY);
         creditRollY = constrain(creditRollY, -932, 600);
         boss.display();
+        
+        // credits stop       
+        if (creditRollY == -932) {
+            fill(0,0,0,endFade);
+            noStroke();
+            rect(515,0,515,162);
+            endFade += 0.8;
+        }
         return;
       }
     }
@@ -585,7 +620,7 @@ void draw() {
 }
 
 void keyPressed() {
-  
+
   // kills boss instantly ('k')
   if (key == 'k') {
     boss.energy = 0;
