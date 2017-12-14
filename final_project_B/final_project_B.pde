@@ -147,6 +147,8 @@ int fadeCount4;
 // boolean to determine menu screen
 boolean menu;
 
+boolean howToPlay;
+
 // boolean to determine whether game should run or not (for splash screen)
 boolean run;
 
@@ -238,6 +240,7 @@ void setup() {
   introRun = 1;
 
   menu = false;
+  howToPlay = false;
 
   // plays the background music in a loop
   // bgm.loop();
@@ -306,11 +309,26 @@ void draw() {
   // button hover works but why does clicking anywhere on the screen start?
   if (menu == true) {
     image(mainmenu, 0, 0);
-    if (((mouseX > 610)&&(mouseY > 310))&&((mouseX < 750)&&(mouseY < 350))) {
+    if ((mouseX > 610)&&(mouseY > 310)&&(mouseX < 750)&&(mouseY < 350)) {
       image(mainmenu_start,0,0);
       if (mousePressed == true) {
         menu = false;
+        bgm.loop();
       }
+    }
+    if ((mouseX > 440)&&(mouseY > 430)&&(mouseX < 750)&&(mouseY < 490)) {
+      image(mainmenu_howto,0,0);
+      if (mousePressed == true) {
+        howToPlay = true;
+        if (howToPlay == true) {
+          while (howToPlay == true) {
+            image(splash,0,0);
+            if (mousePressed == true) {
+              howToPlay = false;
+            }
+          }
+        }
+      }      
     }
     else {
       if (mousePressed == true) {
@@ -321,6 +339,7 @@ void draw() {
   }
   if (menu == false) {
     run = true;
+    
   }
 
   if (disableCount<10) {
