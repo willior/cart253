@@ -8,7 +8,7 @@
 class Cell {
 
   int maxEnergy = 255;
-  float moveEnergy = -0.1;
+  float moveEnergy = 0.1;
   int collideEnergy = 16;
   int size;
   int energy;
@@ -113,7 +113,7 @@ class Cell {
     // collision detection logic
     if ((x == other.x && y == other.y) || (x <= other.x + 20 && y <= other.y + 20) && (x >= other.x - 20 && y >= other.y - 20)) {
       energy += collideEnergy;
-      energy = constrain(energy, 0, maxEnergy);
+      energy = constrain(energy, 0, 255);
     }
   }
 

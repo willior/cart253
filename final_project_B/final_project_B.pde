@@ -21,22 +21,22 @@
 // have fun!!
 
 /* 
-ARTIST STATEMENT
-
-I wanted to create a fast-paced, challenging-but-fair game with interesting visuals and musical audio feedback.
-There are so many interesting things in the coding I don't really know where to begin or what to focus on without going overboard.
-Notably, I'm glad I was able to incorporate the Boss element. Particularly the bezier tails and the Minions which exist on the end of them,
-as well as the fact that they must be severed before being able to damage the Boss.
-I would have liked to add more phases to the boss, changing sound effects and music as the boss evolves.
-In fact, I think an entire game could be made with this as the framework!
-I'm also quite happy with how the music/audio aspect worked out. Using abilities feels good, in part thanks to the sound effects.
-I placed a great emphasis on audiovisual feedback when attacking enemies and using abilities.
-This creates a stronger connection with the gameplay. It is very important when considering the feel of the game.
-I'm pleased with the transition from the parasite phase to the boss phase. It is a jarring, unexpected transition that startles the player.
-The audio for the boss phase came from a jam I was having with my friend a while back.
-
-
-*/
+ ARTIST STATEMENT
+ 
+ I wanted to create a fast-paced, challenging-but-fair game with interesting visuals and musical audio feedback.
+ There are so many interesting things in the coding I don't really know where to begin or what to focus on without going overboard.
+ Notably, I'm glad I was able to incorporate the Boss element. Particularly the bezier tails and the Minions which exist on the end of them,
+ as well as the fact that they must be severed before being able to damage the Boss.
+ I would have liked to add more phases to the boss, changing sound effects and music as the boss evolves.
+ In fact, I think an entire game could be made with this as the framework!
+ I'm also quite happy with how the music/audio aspect worked out. Using abilities feels good, in part thanks to the sound effects.
+ I placed a great emphasis on audiovisual feedback when attacking enemies and using abilities.
+ This creates a stronger connection with the gameplay. It is very important when considering the feel of the game.
+ I'm pleased with the transition from the parasite phase to the boss phase. It is a jarring, unexpected transition that startles the player.
+ The audio for the boss phase came from a jam I was having with my friend a while back.
+ 
+ 
+ */
 
 // image library
 PImage bossImage;
@@ -52,6 +52,9 @@ PImage credits;
 
 // sound library
 import processing.sound.*;
+
+SoundFile menu_bgm;
+SoundFile ending;
 SoundFile bgm;
 SoundFile carlos;
 
@@ -211,7 +214,8 @@ void setup() {
 
   // resets number of minions severed to 0
   severCount = 0;
-
+  menu_bgm = new SoundFile(this, "nerd.wav");
+  ending = new SoundFile(this, "gravity.wav");
   bgm = new SoundFile(this, "bgm.mp3");
   carlos = new SoundFile(this, "carlos.mp3");
 
@@ -265,15 +269,11 @@ void setup() {
   introRun = true;
 
   menu = false;
-  
+
   creditRollX = 0;
   creditRollY = 600;
-  
-  endFade = 0;
-  
 
-  // plays the background music in a loop
-  // bgm.loop();
+  endFade = 0;
 
   // player starts with 3 antibodies
   int stock = 3;
@@ -322,36 +322,41 @@ void setup() {
 // the for loops run, as you can tell in the console
 // but the images simply do not show up and i can't seem to figure out why
 void intro() {
-  
+
   coda.play();
-  
+
   for (int i = 0; i < 600; i++) {
-      image(intro1, 0, 0);
-      println(i);
-    }
-    for (int i = 0; i < 600; i++) {
-      image(intro2, 0, 0);
-      println(i);
-    }
-    for (int i = 0; i < 600; i++) {
-      image(intro3, 0, 0);
-      println(i);
-    }
+
+    image(intro1, 0, 0);
+    println(i);
+  }
+  for (int i = 0; i < 600; i++) {
+    image(intro2, 0, 0);
+    println(i);
+  }
+  for (int i = 0; i < 600; i++) {
+    fill(0);
+    rect(20, 20, 60, 60);
+    // image(intro3, 0, 0);
+    println(i);
+  }
   introRun = false;
   menu = true;
+  coda.stop();
+  menu_bgm.loop();
 }
 
 void draw() {
-  
+
   if (introRun == true) {
-    
+
     // intro not displaying images; why not?
     intro();
   }
 
   // main menu
   if (menu == true) {
-    coda.stop();
+
     image(mainmenu, 0, 0);
     if ((mouseX > 610)&&(mouseY > 310)&&(mouseX < 750)&&(mouseY < 350)) {
       image(mainmenu_start, 0, 0);
@@ -371,9 +376,10 @@ void draw() {
     }
     return;
   }
-  
+
   if (menu == false) {
     run = true;
+    menu_bgm.stop();
   }
 
   if (disableCount<10) {
@@ -494,20 +500,23 @@ void draw() {
     if (severCount == 8) {
       if (boss.energy <= 0) {
 
-        carlos.stop();        
+        carlos.stop();     
+        if (creditRollY == 600) {ending.play();}
         image(intro3, 0, 0);
         image(credits, creditRollX, creditRollY);
-        creditRollY-=0.8;
-        println(creditRollY);
+        creditRollY--;
         creditRollY = constrain(creditRollY, -932, 600);
         boss.display();
-        
+
         // credits stop       
         if (creditRollY == -932) {
-            fill(0,0,0,endFade);
-            noStroke();
-            rect(515,0,515,162);
-            endFade += 0.8;
+          fill(0, 0, 0, endFade);
+          noStroke();
+          rect(515, 0, 515, 162);
+          endFade += 0.8;
+        }
+        if (endFade >= 255) {
+          noLoop();
         }
         return;
       }
@@ -524,7 +533,7 @@ void draw() {
 
       // variable determining amount of time boss intro screen is;
       if (bossIntro == 1) {
-        bossApproach = 256;
+        bossApproach = 329;
 
         // stops phase 1 BGM, starts phase 2 BGM
         bgm.stop();
@@ -654,12 +663,25 @@ void keyPressed() {
 
   // reset button ('r')
   if (key == 'r') {
-    bgm.stop();
-    coda.stop(); 
-    carlos.stop();
-    setup();
-    time = millis();
-    loop();
+    if (disableCount < 10) {
+      bgm.stop();
+    }
+    if (globalKillCount == 255) {
+      coda.stop();
+    }
+    if (disableCount > 10) {
+      carlos.stop();
+    }
+    if (boss.energy <= 0) {
+      ending.stop();
+    }
+    if (menu == true) {
+      return;
+    } else {
+      setup();
+      time = millis();
+      loop();
+    }
   }
 
   // pause button ('p')

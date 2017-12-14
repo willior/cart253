@@ -334,8 +334,8 @@ class Boss {
       
       // death = death+sizeOffset/2;
       
-      fill (224+death, 32-death, 32-death, fade);
-      fade -= 0.08;
+      fill (224+death, 128+(-fade), 128+(-fade), 32+fade);
+      fade -= 0.12;
       
       strokeWeight(16);
     stroke(127, 127, 127, fade);
