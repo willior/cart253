@@ -3,12 +3,9 @@
 // a class that defines cell objects, which float around and can be influenced with mouse movement
 // they slowly lose energy over time and gain a small amount of energy when colliding with other cells
 // once killed, they can be resurrected by antibodies
-
-
+// while parasites are stunned ('3'), herd healthy cells over them to disable them
 
 class Cell {
-
-
 
   int maxEnergy = 255;
   float moveEnergy = -0.1;
@@ -116,7 +113,7 @@ class Cell {
     // collision detection logic
     if ((x == other.x && y == other.y) || (x <= other.x + 20 && y <= other.y + 20) && (x >= other.x - 20 && y >= other.y - 20)) {
       energy += collideEnergy;
-      // energy = constrain(energy, 0, maxEnergy);
+      energy = constrain(energy, 0, maxEnergy);
     }
   }
 

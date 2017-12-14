@@ -23,6 +23,12 @@
 // image library
 PImage bossImage;
 PImage splash;
+PImage intro1;
+PImage intro2;
+PImage intro3;
+PImage mainmenu;
+PImage mainmenu_start;
+PImage mainmenu_howto;
 
 // sound library
 import processing.sound.*;
@@ -130,14 +136,28 @@ int bossIntro;
 // boolean to determine whether game should run or not (for splash screen)
 boolean run;
 
+// boolean to determine intro splash screens
+boolean intro;
+
+// boolean to detemrine menu screen
+boolean menu;
+
+// boolean to determine incoming boss
 boolean incoming;
 
 void setup() {
 
   size(800, 600);
   splash = loadImage("splash.png");
-  // boss intro
+  intro1 = loadImage("intro1.png");
+  intro2 = loadImage("intro2.png");
+  intro3 = loadImage("intro3.png");
+  mainmenu = loadImage("mainmenu.png");
+  mainmenu_start = loadImage("mainmenu_start.png");
+  mainmenu_howto = loadImage("mainmenu_howto.png");
   bossImage = loadImage("boss.png");
+  
+  // boss intro 
   bossIntro = 1;
   bossApproach = 0;
   incoming = false;
@@ -247,9 +267,11 @@ void draw() {
   if (disableCount>10) {
     background(24);
   }
-  // background(255-globalKillCount);
-  // splash screen goes here
+  
   if (run == false) {
+    
+    // splash screen goes here
+    
     image(splash, 0, 0);
   }
 
@@ -303,7 +325,7 @@ void draw() {
         globalKillCount++;
       }
 
-      // checks to see if all 255 cells are dead; if so, the loop ends (reset with the 'r' key)
+      // game over: checks to see if all 255 cells are dead (parasite phase)
       if ((globalKillCount == 255)&&(disableCount<10)) {
         int score = (millis() - time);
         println("your score: ", score);
@@ -333,6 +355,14 @@ void draw() {
         run = false;
         noLoop();
       }
+      
+      // game over: checks to see if all 255 cells are dead (boss phase)
+      else if ((globalKillCount == 255)&&(disableCount>10)) {
+        
+        run = false;
+        noLoop();
+        
+      }
     }
 
     // resets variable storing disabled parasite information
@@ -345,12 +375,10 @@ void draw() {
       if (parasites[p].eatCount > 64) {
         disableCount++;
         disableCount = constrain(disableCount, 0, 11);
-        // println(disableCount);
       }
     }
 
     // boss intro screen runs after all parasites are disabled
-    // logic determining length and the variable that determines the pause of each class's update() function
     if (disableCount == 10) {
 
       // clause to escape from intro screen
@@ -359,13 +387,15 @@ void draw() {
         disableCount++;
       }
 
-      // variable determining amount of time boss intro screen is
+      // variable determining amount of time boss intro screen is;
       if (bossIntro == 1) {
         bossApproach = 256;
+        
+        // stops phase 1 BGM, starts phase 2 BGM
         bgm.stop();
         carlos.play();
 
-        // instantiating boss
+        // instantiating boss...
         boss = new Boss(width/2, height/2, 200);
 
         // and minions
@@ -451,15 +481,13 @@ void draw() {
     // regenerates energy over time, constrains their values, displays energy bar
     bar.eLevel += 0.8;
     bar.eLevel = constrain(bar.eLevel, 0, 110);
-
-    // println(bar.eLevel);
     bar.display();
 
     // displays ability stocks
     meter.display();
   }
 
-  // breaks out of draw() until mouseClicked
+  // breaks out of draw() until mouseClicked, changing run to true
   while (run == false) {
     return;
   }
@@ -550,7 +578,7 @@ void keyPressed() {
       // sound picker for antibody release (during boss)
       if (disableCount>10) {
         if (antibodySFXseed == 0) {
-          // bloom1.play();
+          // bloom1b.play();
 
           for (int a = 0; a < 10; a++) {
             int x = mouseX;
@@ -559,7 +587,7 @@ void keyPressed() {
           }
         }
         if (antibodySFXseed == 1) {
-          // bloom2.play();
+          // bloom2b.play();
 
           for (int a = 10; a < 20; a++) {
             int x = mouseX;
@@ -568,7 +596,7 @@ void keyPressed() {
           }
         }
         if (antibodySFXseed == 2) {
-          // bloom3.play();
+          // bloom3b.play();
 
           for (int a = 20; a < 30; a++) {
             int x = mouseX;
@@ -577,7 +605,7 @@ void keyPressed() {
           }
         }
         if (antibodySFXseed == 3) {
-          // bloom4.play();
+          // bloom4b.play();
 
           for (int a = 30; a < 40; a++) {
             int x = mouseX;
@@ -622,7 +650,7 @@ void keyPressed() {
         rechargeSFXseed = 0;
       }
 
-      // makes sure the harmonic tone for herding plays after rejuvinating herding energy if the mouse is already pressed
+      // makes sure the harmonic tone for herding plays after rejuvinating herding energy if the mouse is already held down
       if (mousePressed == true) {
 
         // prevents more than 1 instance of the tone from playing at once
@@ -668,7 +696,7 @@ void keyPressed() {
         }
       }
 
-      // stun behaviour versus boss (stun is less effective)
+      // stun behaviour versus boss (stun slightly less effective)
       if ((stunTime >= 1)&&(disableCount>=10)) {
         stunTime = 72;
         for (int m = 0; m < 8; m++) {
