@@ -24,6 +24,7 @@
 PImage bossImage;
 PImage splash;
 PImage intro1;
+PImage intro1b;
 PImage intro2;
 PImage intro3;
 PImage mainmenu;
@@ -165,6 +166,7 @@ void setup() {
 
   splash = loadImage("splash.png");
   intro1 = loadImage("intro1.png");
+  intro1b = loadImage("intro1b.jpg");
   intro2 = loadImage("intro2.png");
   intro3 = loadImage("intro3.png");
   mainmenu = loadImage("mainmenu.png");
@@ -282,8 +284,8 @@ void setup() {
 
 void draw() {
 
-  if (millis() < 3000) {
-    image(splash, 0, 0);
+  if (introRun == 1) {
+    image(intro1b, 0, 0);
   
       println(millis());
 
@@ -300,11 +302,25 @@ void draw() {
     menu = true;
   }
 
+  // main menu
+  // button hover works but why does clicking anywhere on the screen start?
   if (menu == true) {
     image(mainmenu, 0, 0);
-    if (mousePressed == true) {
-      run = true;
+    if (((mouseX > 610)&&(mouseY > 310))&&((mouseX < 750)&&(mouseY < 350))) {
+      image(mainmenu_start,0,0);
+      if (mousePressed == true) {
+        menu = false;
+      }
     }
+    else {
+      if (mousePressed == true) {
+        return;
+      }
+    }
+    return;
+  }
+  if (menu == false) {
+    run = true;
   }
 
   if (disableCount<10) {
@@ -323,8 +339,8 @@ void draw() {
 
 
   // changes the boolean run value to true value on mousePressed (starts the game)
-  if (mousePressed == true) {
-    run = true;
+  if ((mousePressed == true)&&(menu == false)) {
+
   }  
 
   // runs the main code in draw() on mousePressed
@@ -758,8 +774,7 @@ void keyPressed() {
 void mousePressed() {
 
   if (menu == true) {
-    run = true;
-    menu = false;
+
   }
 
   if (run == true) {
