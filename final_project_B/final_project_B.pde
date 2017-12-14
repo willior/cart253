@@ -282,11 +282,11 @@ void setup() {
 
 void draw() {
 
-  if (introRun == 1) {
-    image(intro1, 0, 0);
-    for (int i = 0; i < 600; i++) {    
-      println(i);
-    }
+  if (millis() < 3000) {
+    image(splash, 0, 0);
+  
+      println(millis());
+
     for (int i = 0; i < 600; i++) {
       image(intro2, 0, 0);
       println(i);
@@ -305,7 +305,6 @@ void draw() {
     if (mousePressed == true) {
       run = true;
     }
-    // main menu goes here
   }
 
   if (disableCount<10) {
