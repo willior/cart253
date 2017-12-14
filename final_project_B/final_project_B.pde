@@ -240,7 +240,6 @@ void setup() {
   introRun = 1;
 
   menu = false;
-  howToPlay = false;
 
   // plays the background music in a loop
   // bgm.loop();
@@ -289,8 +288,8 @@ void draw() {
 
   if (introRun == 1) {
     image(intro1b, 0, 0);
-  
-      println(millis());
+
+    println(millis());
 
     for (int i = 0; i < 600; i++) {
       image(intro2, 0, 0);
@@ -310,27 +309,22 @@ void draw() {
   if (menu == true) {
     image(mainmenu, 0, 0);
     if ((mouseX > 610)&&(mouseY > 310)&&(mouseX < 750)&&(mouseY < 350)) {
-      image(mainmenu_start,0,0);
+      image(mainmenu_start, 0, 0);
       if (mousePressed == true) {
         menu = false;
         bgm.loop();
       }
     }
     if ((mouseX > 440)&&(mouseY > 430)&&(mouseX < 750)&&(mouseY < 490)) {
-      image(mainmenu_howto,0,0);
+      image(mainmenu_howto, 0, 0);
       if (mousePressed == true) {
         howToPlay = true;
-        if (howToPlay == true) {
-          while (howToPlay == true) {
-            image(splash,0,0);
-            if (mousePressed == true) {
-              howToPlay = false;
-            }
-          }
-        }
-      }      
+      }
     }
-    else {
+
+    if (howToPlay == true) {
+      image(splash, 0, 0);
+    } else {
       if (mousePressed == true) {
         return;
       }
@@ -339,7 +333,6 @@ void draw() {
   }
   if (menu == false) {
     run = true;
-    
   }
 
   if (disableCount<10) {
@@ -359,7 +352,6 @@ void draw() {
 
   // changes the boolean run value to true value on mousePressed (starts the game)
   if ((mousePressed == true)&&(menu == false)) {
-
   }  
 
   // runs the main code in draw() on mousePressed
@@ -793,7 +785,10 @@ void keyPressed() {
 void mousePressed() {
 
   if (menu == true) {
+  }
 
+  if (howToPlay == true) {
+    howToPlay = false;
   }
 
   if (run == true) {
