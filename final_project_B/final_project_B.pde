@@ -315,18 +315,15 @@ void draw() {
         bgm.loop();
       }
     }
-    if ((mouseX > 440)&&(mouseY > 430)&&(mouseX < 750)&&(mouseY < 490)) {
+    
+    if (howToPlay == true) {
+      image(splash, 0, 0);
+    }
+    
+    else if ((mouseX > 440)&&(mouseY > 430)&&(mouseX < 750)&&(mouseY < 490)) {
       image(mainmenu_howto, 0, 0);
       if (mousePressed == true) {
         howToPlay = true;
-      }
-    }
-
-    if (howToPlay == true) {
-      image(splash, 0, 0);
-    } else {
-      if (mousePressed == true) {
-        return;
       }
     }
     return;
@@ -344,9 +341,9 @@ void draw() {
 
   if (run == false) {
 
-    // splash screen goes here
-
+    // pause screen goes here
     image(splash, 0, 0);
+    
   }
 
 
