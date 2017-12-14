@@ -29,15 +29,12 @@ Notably, I'm glad I was able to incorporate the Boss element. Particularly the b
 as well as the fact that they must be severed before being able to damage the Boss.
 I would have liked to add more phases to the boss, changing sound effects and music as the boss evolves.
 In fact, I think an entire game could be made with this as the framework!
-I'm also quite happy with how the music aspect worked out. Using abilities FEELS good, and that's mostly due to good audio implementation.
+I'm also quite happy with how the music/audio aspect worked out. Using abilities feels good, in part thanks to the sound effects.
+I placed a great emphasis on audiovisual feedback when attacking enemies and using abilities.
+This creates a stronger connection with the gameplay. It is very important when considering the feel of the game.
 I'm pleased with the transition from the parasite phase to the boss phase. It is a jarring, unexpected transition that startles the player.
 The audio for the boss phase came from a jam I was having with my friend a while back.
-We were making drone music and he just picked up a mic and started speaking nonsense.
-Coincidentally, it became part of the game's narrative!
-There are a ton of things I wanted to do. For example, I wanted an intro sequence, but I could not get images to load!
-Please check out this part of the code for me. It is the void intro() function; I have 0 clue why the images don't load.
-I would have liked more progression to the game; starting off slower and less hectic, gradually incorporating more & more action.
-Overall, I am pretty proud, having just started learning to code a couple of months ago.
+
 
 */
 
@@ -193,10 +190,8 @@ void setup() {
   size(800, 600);
 
   splash = loadImage("splash.png");
-  intro1 = loadImage("intro1.png");
-  
+  intro1 = loadImage("intro1.png"); 
   intro1 = loadImage("copy.png");
-  
   intro1b = loadImage("intro1b.jpg");
   intro2 = loadImage("intro2.png");
   intro3 = loadImage("intro3.png");
@@ -321,11 +316,11 @@ void setup() {
 // parasites/antibodies display
 
 // intro sequence
-// nont functioning: does not display the images at all
+// not functioning: does not display the images at all
 // i wanted to fade in and out of each intro image (intro1.png, intro2.png, etc) ...
 // ... and into the main menu, but i cannot get it to work for the life of me
 // the for loops run, as you can tell in the console
-// but the images simply do not show up
+// but the images simply do not show up and i can't seem to figure out why
 void intro() {
   
   coda.play();
@@ -349,11 +344,12 @@ void intro() {
 void draw() {
   
   if (introRun == true) {
+    
+    // intro not displaying images; why not?
     intro();
   }
 
   // main menu
-  // button hover works but why does clicking anywhere on the screen start?
   if (menu == true) {
     coda.stop();
     image(mainmenu, 0, 0);
@@ -393,9 +389,9 @@ void draw() {
     image(splash, 0, 0);
   }
 
-  // changes the boolean run value to true value on mousePressed (starts the game)
-  if ((mousePressed == true)&&(menu == false)) {
-  }  
+  // used to start the game, now does nothing
+  // if ((mousePressed == true)&&(menu == false)) {
+  // }  
 
   // runs the main code in draw() on mousePressed
   if (run == true) {
@@ -498,10 +494,10 @@ void draw() {
     if (severCount == 8) {
       if (boss.energy <= 0) {
 
-        carlos.stop();
+        carlos.stop();        
         image(intro3, 0, 0);
         image(credits, creditRollX, creditRollY);
-        creditRollY-=1;
+        creditRollY-=0.8;
         println(creditRollY);
         creditRollY = constrain(creditRollY, -932, 600);
         boss.display();

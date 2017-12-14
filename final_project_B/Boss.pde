@@ -334,14 +334,14 @@ class Boss {
       
       // death = death+sizeOffset/2;
       
-      fill (fed, fade);
-      fade -= 0.3;
+      fill (224+death, 32-death, 32-death, fade);
+      fade -= 0.08;
       
-      strokeWeight(1);
+      strokeWeight(16);
     stroke(127, 127, 127, fade);
     ellipseMode(CENTER);
     ellipse(x,y,death+sizeOffset/2,death+sizeOffset/2);
-    death -= 0.2;
+    death += 0.64;
     
     return; 
     
