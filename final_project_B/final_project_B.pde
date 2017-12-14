@@ -21,10 +21,23 @@
 // have fun!!
 
 /* 
-
 ARTIST STATEMENT
 
-
+I wanted to create a fast-paced, challenging-but-fair game with interesting visuals and musical audio feedback.
+There are so many interesting things in the coding I don't really know where to begin or what to focus on without going overboard.
+Notably, I'm glad I was able to incorporate the Boss element. Particularly the bezier tails and the Minions which exist on the end of them,
+as well as the fact that they must be severed before being able to damage the Boss.
+I would have liked to add more phases to the boss, changing sound effects and music as the boss evolves.
+In fact, I think an entire game could be made with this as the framework!
+I'm also quite happy with how the music aspect worked out. Using abilities FEELS good, and that's mostly due to good audio implementation.
+I'm pleased with the transition from the parasite phase to the boss phase. It is a jarring, unexpected transition that startles the player.
+The audio for the boss phase came from a jam I was having with my friend a while back.
+We were making drone music and he just picked up a mic and started speaking nonsense.
+Coincidentally, it became part of the game's narrative!
+There are a ton of things I wanted to do. For example, I wanted an intro sequence, but I could not get images to load!
+Please check out this part of the code for me. It is the void intro() function; I have 0 clue why the images don't load.
+I would have liked more progression to the game; starting off slower and less hectic, gradually incorporating more & more action.
+Overall, I am pretty proud, having just started learning to code a couple of months ago.
 
 */
 
