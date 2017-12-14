@@ -134,7 +134,7 @@ int bossApproach;
 int bossIntro;
 
 // boolean to determine intro splash screens
-boolean introRun;
+int introRun;
 
 // variables for startup sequence
 int introCount;
@@ -153,7 +153,7 @@ boolean run;
 boolean incoming;
 
 void setup() {
-  
+
   introCount = 0;
 
   fadeCount1 = 0;
@@ -162,7 +162,7 @@ void setup() {
   fadeCount4 = 0;
 
   size(800, 600);
-  
+
   splash = loadImage("splash.png");
   intro1 = loadImage("intro1.png");
   intro2 = loadImage("intro2.png");
@@ -171,7 +171,7 @@ void setup() {
   mainmenu_start = loadImage("mainmenu_start.png");
   mainmenu_howto = loadImage("mainmenu_howto.png");
   bossImage = loadImage("boss.png");
-  
+
   // boss intro 
   bossIntro = 1;
   bossApproach = 0;
@@ -179,7 +179,7 @@ void setup() {
 
   // resets number of parasites disabled to 0
   disableCount = 0;
-  
+
   // resets number of minions severed to 0
   severCount = 0;
 
@@ -231,10 +231,10 @@ void setup() {
   // boolean to prevent the game from running on setup()
   // also used for the pause function ('p')
   run = false;
-  
+
   // runs intro on setup
-  introRun = true;
-  
+  introRun = 1;
+
   menu = false;
 
   // plays the background music in a loop
@@ -281,10 +281,10 @@ void setup() {
 // parasites/antibodies display
 
 void draw() {
-  
-  if (introRun == true) {
-    for (int i = 0; i < 600; i++) {
-      image(intro1, 0, 0);
+
+  if (introRun == 1) {
+    image(intro1, 0, 0);
+    for (int i = 0; i < 600; i++) {    
       println(i);
     }
     for (int i = 0; i < 600; i++) {
@@ -295,31 +295,33 @@ void draw() {
       image(intro3, 0, 0);
       println(i);
     }
-    
-    introRun = false;
-    menu = true;  
-    
+
+    introRun = 0;
+    menu = true;
   }
-  
+
   if (menu == true) {
-    
+    image(mainmenu, 0, 0);
+    if (mousePressed == true) {
+      run = true;
+    }
     // main menu goes here
-    
   }
-  
+
   if (disableCount<10) {
     background(BG);
   }
   if (disableCount>10) {
     background(24);
   }
-  
+
   if (run == false) {
-    
+
     // splash screen goes here
-    
-    image(mainmenu, 0, 0);
+
+    image(splash, 0, 0);
   }
+
 
   // changes the boolean run value to true value on mousePressed (starts the game)
   if (mousePressed == true) {
@@ -401,13 +403,12 @@ void draw() {
         run = false;
         noLoop();
       }
-      
+
       // game over: checks to see if all 255 cells are dead (boss phase)
       else if ((globalKillCount == 255)&&(disableCount>10)) {
-        
+
         run = false;
         noLoop();
-        
       }
     }
 
@@ -436,7 +437,7 @@ void draw() {
       // variable determining amount of time boss intro screen is;
       if (bossIntro == 1) {
         bossApproach = 256;
-        
+
         // stops phase 1 BGM, starts phase 2 BGM
         bgm.stop();
         carlos.play();
@@ -467,7 +468,7 @@ void draw() {
         boss.attack(cells[i]);
       }
       boss.display();
-      
+
       // minion functions
       for (int m = 0; m < minions.length; m++) {
         minions[m].update();
@@ -548,7 +549,7 @@ void keyPressed() {
       parasites[b].eatCount = 65;
     }
   }
-  
+
   // sever all minions button ('s')
   // quick way to skip phase 1 of the boss for testing purposes
   if (key == 's') {
@@ -757,16 +758,25 @@ void keyPressed() {
 // mouse clicked function
 void mousePressed() {
 
-  // plays a harmonic tone
-  herd.loop();
-  // plays non-harmonic noise
-  empty.loop();
+  if (menu == true) {
+    run = true;
+    menu = false;
+  }
+
+  if (run == true) {
+    // plays a harmonic tone
+    herd.loop();
+    // plays non-harmonic noise
+    empty.loop();
+  }
 }
 
 // mouse released function
 void mouseReleased() {
 
-  // stops both harmonic tone and non-harmonic noise
-  herd.stop();
-  empty.stop();
+  if (run == true) {
+    // stops both harmonic tone and non-harmonic noise
+    herd.stop();
+    empty.stop();
+  }
 }
