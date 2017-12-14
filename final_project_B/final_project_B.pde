@@ -30,6 +30,7 @@ PImage intro3;
 PImage mainmenu;
 PImage mainmenu_start;
 PImage mainmenu_howto;
+PImage credits;
 
 // sound library
 import processing.sound.*;
@@ -144,6 +145,10 @@ int fadeCount2;
 int fadeCount3;
 int fadeCount4;
 
+// credits sequence
+int creditRollX = 0;
+int creditRollY = 600;
+
 // boolean to determine menu screen
 boolean menu;
 
@@ -175,6 +180,7 @@ void setup() {
   mainmenu_start = loadImage("mainmenu_start.png");
   mainmenu_howto = loadImage("mainmenu_howto.png");
   bossImage = loadImage("boss.png");
+  credits = loadImage("credits.png");
 
   // boss intro 
   bossIntro = 1;
@@ -315,12 +321,10 @@ void draw() {
         bgm.loop();
       }
     }
-    
+
     if (howToPlay == true) {
       image(splash, 0, 0);
-    }
-    
-    else if ((mouseX > 440)&&(mouseY > 430)&&(mouseX < 750)&&(mouseY < 490)) {
+    } else if ((mouseX > 440)&&(mouseY > 430)&&(mouseX < 750)&&(mouseY < 490)) {
       image(mainmenu_howto, 0, 0);
       if (mousePressed == true) {
         howToPlay = true;
@@ -343,7 +347,6 @@ void draw() {
 
     // pause screen goes here
     image(splash, 0, 0);
-    
   }
 
 
@@ -448,6 +451,24 @@ void draw() {
       }
     }
 
+    // end state
+    if (severCount == 8) {
+      if (boss.energy <= 0) {
+
+        carlos.stop();
+
+        fill(0, 0, 0, 127);
+        rect(0, 0, width, height);
+        image(intro3, 0, 0);
+        image(credits, creditRollX, creditRollY);
+        creditRollY--;
+        println(creditRollY);
+        creditRollY = constrain(creditRollY, -932, 600);
+        boss.display();
+        return;
+      }
+    }
+
     // boss intro screen runs after all parasites are disabled
     if (disableCount == 10) {
 
@@ -474,7 +495,7 @@ void draw() {
         }
       }
 
-      // the intro screen itself
+      // the boss intro screen itself
       if (bossApproach > 0) {
         image(bossImage, 0, 0);
         bossIntro = 0;
@@ -564,6 +585,11 @@ void draw() {
 }
 
 void keyPressed() {
+  
+  // kills boss instantly ('k')
+  if (key == 'k') {
+    boss.energy = 0;
+  }
 
   // disable all parasites button ('b')
   // quick way to skip to the boss for testing purposes

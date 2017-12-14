@@ -3,7 +3,6 @@
 // a class that defines the boss that appears when all parasites have been disabled
 class Boss {
 
-
   int drainEnergy = 192;
   int size;
   int energy;
@@ -34,6 +33,7 @@ class Boss {
   color fill = color(0, 0, 255);
   color fed = color(255,0,255);
   float fade = 128;
+  float death = 127;
 
   Boss(int tempX, int tempY, int tempSize) {
     x = tempX;
@@ -331,7 +331,20 @@ class Boss {
       } 
     }
     else if (energy <= 0) {
+      
+      // death = death+sizeOffset/2;
+      
       fill (fed, fade);
+      fade -= 0.3;
+      
+      strokeWeight(1);
+    stroke(127, 127, 127, fade);
+    ellipseMode(CENTER);
+    ellipse(x,y,death+sizeOffset/2,death+sizeOffset/2);
+    death -= 0.2;
+    
+    return; 
+    
     }
     strokeWeight(1);
     stroke(127, 127, 127, fade);
