@@ -45,6 +45,7 @@ void intro() {
   delay(1000);
   if (introOne == true) {
     image(intro1, 0, 0);
+    println("intro 1:");
     delay(1000);
     //for (int i = 0; i < 1000; i++) {
       
@@ -55,6 +56,7 @@ void intro() {
 
   if (introTwo == true) {
     image(intro2, 0, 0);
+    println("intro 2:");
     delay(1000);
     //for (int i = 0; i <1000; i++) {
       
@@ -65,6 +67,7 @@ void intro() {
 
   if (introThree == true) {
     image(intro3, 0, 0);
+    println("intro 3:");
     delay(1000);
     //for (int i = 0; i < 1000; i++) {
       
