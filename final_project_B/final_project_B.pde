@@ -13,11 +13,16 @@
 // press '2' to instantly recharge your herding energy (expends one hyper stock).
 // press '3' to stun the parasites for a short amount of time (expends one hyper stock).
 // disable parasites by feeding them cells while they are stunned.
-// overlapping cells heal each other slowly. the more overlapping, the faster the healing.
 // noise() function regulates objects' movement, among other factors.
 // which quadrant of the screen your cursor is in determines wind direction, influence cell movement.
-// used a timer to track "score"; the timer resets when the game is reset by pressing 'R'.
-// click on the splash screen to start the game.
+// you can reset the game by pressing 'r'.
+// hint: the boss's appendages must be disabled before you can damage its main body.
+// try using your abilities in combination with each other.
+// don't spam abilities. try to gain a few hyper stocks and use them in a rhythm.
+// CHEAT CODES:
+// you can disable all the parasites in the 1st phase and skip to the boss by pressing 'b'.
+// you can sever all of the boss's minions by pressing 's' (warning: may freeze the game if used outside the boss battle)
+// you can instantly kill the boss by pressing 'k'.
 // have fun!!
 
 /* 
@@ -182,6 +187,9 @@ boolean run;
 // boolean to determine incoming boss
 boolean incoming;
 
+// bullshit
+boolean bullshit;
+
 void setup() {
 
   //introCount = 0;
@@ -270,6 +278,8 @@ void setup() {
 
   menu = false;
 
+  bullshit = true;
+
   creditRollX = 0;
   creditRollY = 600;
 
@@ -325,21 +335,31 @@ void intro() {
 
   coda.play();
 
+  delay(6000);
+
+  image(intro1, 0, 0);
+
   for (int i = 0; i < 600; i++) {
 
     image(intro1, 0, 0);
     println(i);
   }
+
+
   for (int i = 0; i < 600; i++) {
-    image(intro2, 0, 0);
+    image(intro2, 0, 0); 
     println(i);
   }
+
+
   for (int i = 0; i < 600; i++) {
     fill(0);
     rect(20, 20, 60, 60);
     // image(intro3, 0, 0);
     println(i);
   }
+
+
   introRun = false;
   menu = true;
   coda.stop();
@@ -347,6 +367,18 @@ void intro() {
 }
 
 void draw() {
+
+  fill(0);
+  rect(0, 0, width, height);
+
+  // added a bullshit step to see if it did anything
+  // it didn't
+  if (bullshit == true) {
+    for (int i = 0; i < 1; i++) {
+      println("i am going insane");
+    }
+    bullshit = false;
+  }
 
   if (introRun == true) {
 
@@ -501,7 +533,9 @@ void draw() {
       if (boss.energy <= 0) {
 
         carlos.stop();     
-        if (creditRollY == 600) {ending.play();}
+        if (creditRollY == 600) {
+          ending.play();
+        }
         image(intro3, 0, 0);
         image(credits, creditRollX, creditRollY);
         creditRollY--;
@@ -672,8 +706,13 @@ void keyPressed() {
     if (disableCount > 10) {
       carlos.stop();
     }
-    if (boss.energy <= 0) {
-      ending.stop();
+
+    // checking for boss.energy needs to be embedded after checking disableCount
+    // it crashes otherwise since the boss doesn't get created until after the parasites are disabled
+    if (disableCount > 10) {
+      if (boss.energy <= 0) {
+        ending.stop();
+      }
     }
     if (menu == true) {
       return;
@@ -885,6 +924,8 @@ void mousePressed() {
     herd.loop();
     // plays non-harmonic noise
     empty.loop();
+  } else if (run == false) {
+    run = true;
   }
 }
 
