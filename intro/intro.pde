@@ -35,14 +35,11 @@ void setup() {
 
 void intro() {
   
-  introRun = true;
-  introOne = true;
-  introTwo = true;
-  introThree = true;
   fill(0);
   rect(0,0,50,50);
+  
   background(0);
-  delay(1000);
+  
   if (introOne == true) {
     image(intro1, 0, 0);
     println("intro 1:");
@@ -51,7 +48,7 @@ void intro() {
       
     //  println("intro 1:", i);
     //}
-    introOne = false;
+    // introOne = false;
   }
 
   if (introTwo == true) {
@@ -62,21 +59,21 @@ void intro() {
       
     //  println("intro 2:", i);
     //}
-    introTwo = false;
+    // introTwo = false;
   }
 
   if (introThree == true) {
-    image(intro3, 0, 0);
+    // image(intro3, 0, 0);
     println("intro 3:");
     delay(1000);
     //for (int i = 0; i < 1000; i++) {
       
     //  println("intro 3:", i);
     //}
-    introThree = false;
+    // introThree = false;
   }
  
-  introRun = false;
+  // introRun = false;
   
   //menu = true;
   //coda.stop();

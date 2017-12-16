@@ -335,8 +335,6 @@ void intro() {
 
   coda.play();
 
-  delay(6000);
-
   image(intro1, 0, 0);
 
   for (int i = 0; i < 600; i++) {
@@ -372,7 +370,7 @@ void draw() {
   rect(0, 0, width, height);
 
   // added a bullshit step to see if it did anything
-  // it didn't
+  // it didn'tr
   if (bullshit == true) {
     for (int i = 0; i < 1; i++) {
       println("i am going insane");
