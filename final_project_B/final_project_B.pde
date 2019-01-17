@@ -202,7 +202,6 @@ void setup() {
 
   splash = loadImage("splash.png");
   intro1 = loadImage("intro1.png"); 
-  intro1 = loadImage("copy.png");
   intro1b = loadImage("intro1b.jpg");
   intro2 = loadImage("intro2.png");
   intro3 = loadImage("intro3.png");
@@ -335,27 +334,16 @@ void intro() {
 
   coda.play();
 
+  // why doen't the images display?
+  println("intro1.png");
   image(intro1, 0, 0);
-
-  for (int i = 0; i < 600; i++) {
-
-    image(intro1, 0, 0);
-    println(i);
-  }
-
-
-  for (int i = 0; i < 600; i++) {
-    image(intro2, 0, 0); 
-    println(i);
-  }
-
-
-  for (int i = 0; i < 600; i++) {
-    fill(0);
-    rect(20, 20, 60, 60);
-    // image(intro3, 0, 0);
-    println(i);
-  }
+  delay(1000);
+  println("intro2.png");
+  image(intro2, 0, 0);
+  delay(1000);
+  println("intro3.png");
+  image(intro3, 0, 0);
+  delay(1000);
 
 
   introRun = false;
@@ -370,19 +358,22 @@ void draw() {
   rect(0, 0, width, height);
 
   // added a bullshit step to see if it did anything
-  // it didn'tr
+  // it didn't
   if (bullshit == true) {
     for (int i = 0; i < 1; i++) {
       println("i am going insane");
     }
+
+    if (introRun == true) {
+
+      // intro not displaying images; why not?
+      intro();
+    }
+
     bullshit = false;
   }
 
-  if (introRun == true) {
 
-    // intro not displaying images; why not?
-    intro();
-  }
 
   // main menu
   if (menu == true) {
@@ -452,7 +443,7 @@ void draw() {
     // resets variable to store the amount of dead cells
     globalKillCount = 0;
 
-    // dirty way of giving the player a stock every 1.5 seconds
+    // dirty way of giving the player a stock every 1.1 seconds
     if (millis() % 1100 <= 20) {
       meter.stock++;
     }
